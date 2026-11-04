@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import BookingWidget from '../../components/BookingWidget.astro';
+import { flagship as p } from '../../data/properties/index.mjs';
+const img = (f, s = '') => `${p.images.dir}/${f}${s ? `-${s}w` : ''}.webp`;
+const desk = p.images.gallery.find((g) => g.file.includes('desk'));
+---
+<Base locale="en" pageKey="work" enOnly={true}
+  title="Work From Aruba — Monthly Stays with Measured Wi-Fi | Casa Playa 204, Oranjestad"
+  description="A desk, Wi-Fi measured at 100+ Mbps, a gym and a harbour-view pool, by the month. US citizens stay 90 days visa-free, extendable to 180. Monthly rate from $139/night.">
+  <section class="section" style="padding-bottom:24px">
+    <div class="container">
+      <p class="kicker">Monthly stays · Sep–Nov sweet spot</p>
+      <h1>Work from Aruba</h1>
+      <p style="max-width:62ch;font-size:1.15rem">A real desk, Wi-Fi measured at 100+ Mbps, a gym downstairs and a pool over the harbour — in the one Caribbean time zone that overlaps the full US East Coast working day (Atlantic Standard Time, no daylight saving).</p>
+    </div>
+  </section>
+  <section class="container" style="padding-bottom:40px">
+    <div class="arch-img" style="aspect-ratio:16/8;max-height:420px">
+      <img src={img(desk.file, 800)} alt={desk.alt.en} width="800" height="533" style="height:100%" />
+    </div>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="container" style="max-width:760px">
+      <h2>The facts, stated plainly</h2>
+      <ul class="amen-list" style="grid-template-columns:1fr;max-width:640px">
+        <li>US citizens can stay in Aruba 90 days visa-free, extendable to 180 days — the island runs the One Happy Workation program for exactly this.</li>
+        <li>The Wi-Fi here is measured, not promised: 100+ Mbps down. The desk is a real desk with a task lamp, not a corner of a dining table.</li>
+        <li>The monthly rate is ${p.pricing.monthlyNightly}/night for stays of {p.pricing.monthlyMinNights}+ nights — about 30% under the nightly rate, with a mid-stay clean available.</li>
+        <li>Aruba prices in US dollars and the island sits outside the hurricane belt, so a September–November stay carries none of the usual Caribbean caveats.</li>
+        <li>Everything is on foot: supermarket, gym (in the building), dinner, the tram, the waterfront morning run.</li>
+      </ul>
+      <h2 style="margin-top:36px">A workday here</h2>
+      <p>Coffee from the espresso station, two calls before lunch at the desk by the window, a swim in the third-floor pool between meetings, and a walk to dinner when the US day ends. The building's 24/7 security and valet parking mean the practicalities disappear.</p>
+      <p><a href="/guide/">More in the Aruba guide →</a></p>
+    </div>
+  </section>
+  <div class="tile-divider" role="presentation"></div>
+  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale="en" property={p} mode="hero" /></div></section>
+</Base>

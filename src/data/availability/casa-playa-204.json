@@ -1,0 +1,4 @@
+{
+  "comment": "Blocked dates (YYYY-MM-DD, each night that is NOT bookable). Update manually for now; replace with OwnerRez iCal sync in Wave 2 — see SETUP.md.",
+  "blocked": []
+}

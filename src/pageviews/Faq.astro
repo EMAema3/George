@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import { t, dict } from '../i18n/index.mjs';
+import { flagship as p } from '../data/properties/index.mjs';
+import { faqSchema } from '../lib/schema.mjs';
+
+const { locale = 'en' } = Astro.props;
+const tr = t(locale);
+const items = (dict[locale] ?? dict.en).faq.items;
+---
+<Base locale={locale} pageKey="faq" schema={[faqSchema(items)]}>
+  <section class="section" style="padding-bottom:24px">
+    <div class="container"><h1>{tr('faq.title')}</h1></div>
+  </section>
+  <section class="container section" style="padding-top:0;max-width:820px">
+    {items.map((i, idx) => (
+      <details class="faq-item" open={idx === 0}>
+        <summary>{i.q}</summary>
+        <div class="faq-a"><p style="margin:0">{i.a}</p></div>
+      </details>
+    ))}
+  </section>
+  <div class="tile-divider" role="presentation"></div>
+  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale={locale} property={p} mode="hero" /></div></section>
+</Base>

@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+const articles = [
+  { slug: 'where-to-stay-night-before-aruba-cruise', title: 'Where to stay the night before an Aruba cruise', blurb: 'The case for sleeping 400 m from the terminal, and how embarkation morning actually works.' },
+  { slug: 'can-you-walk-to-a-beach-from-downtown-oranjestad', title: 'Can you walk to a beach from downtown Oranjestad?', blurb: 'Yes — here is the honest version, with minutes and metres.' },
+  { slug: 'aruba-carnival-2027-dates-parade-routes', title: 'Aruba Carnival 2027: dates, parades and where to watch', blurb: 'The season, the Grand Parade, and how to be standing in the right place.' },
+  { slug: 'three-days-in-oranjestad-on-foot', title: 'Three days in Oranjestad, on foot', blurb: 'The flagship itinerary: eat, swim, wander — without starting a car.' },
+];
+---
+<Base locale="en" pageKey="guide" enOnly={true}
+  title="The Aruba Guide — Complete Answers from Oranjestad | Casa Playa 204"
+  description="Factual, complete guides to Aruba from a front door on the Oranjestad waterfront: cruise nights, beach walks, Carnival 2027, levies and fees, and a three-day walking itinerary.">
+  <section class="section" style="padding-bottom:24px">
+    <div class="container">
+      <h1>The Aruba guide</h1>
+      <p style="max-width:62ch;font-size:1.1rem">Complete answers with real numbers, written from a front door on the waterfront. We don't hold anything back to force a booking — a useful page is the whole point.</p>
+    </div>
+  </section>
+  <section class="container section" style="padding-top:0">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="guide-grid">
+      {articles.map((a) => (
+        <a class="card" href={`/guide/${a.slug}/`}>
+          <div class="card-body">
+            <h3>{a.title}</h3>
+            <p class="card-promise">{a.blurb}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+    <p style="color:var(--ink-soft);margin-top:20px;font-size:0.95rem">More guides are on the way — the tourist levy explained, eating within a 10-minute walk of the port, the 90-day remote-work rule, airport-to-downtown, and Oranjestad vs Palm Beach.</p>
+  </section>
+  <style>@media (max-width:700px){ .guide-grid{ grid-template-columns:1fr !important } }</style>
+</Base>

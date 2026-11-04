@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import site from '../../data/site.json';
+import { flagship as p } from '../../data/properties/index.mjs';
+---
+<Base locale="en" pageKey="about" enOnly={true}
+  title="About — Who Operates Casa Playa 204 | Latitude 28, Oranjestad, Aruba"
+  description="Casa Playa 204 is operated by Latitude 28, a small managed portfolio of residences in Oranjestad, Aruba. Who we are, where the apartment is, and how to reach a real person.">
+  <section class="section">
+    <div class="container" style="max-width:720px">
+      <h1>About</h1>
+      <p style="font-size:1.15rem">{site.operatorBlurb}</p>
+      <p>The apartment is <strong>{p.name}</strong>, a {p.specs.sizeM2} m² one-bedroom residence on the second floor of {p.building}, at {p.address.street}, {p.address.city}, {p.address.country}. The building converted to 62 private residences in 2024 and operates with 24/7 security, a resident pool, gym and valet parking.</p>
+      <p>You always deal with a person, not a portal: email <a href={`mailto:${site.email}`}>{site.email}</a> or WhatsApp <a href={`https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}`}>{site.whatsappDisplay}</a>. We answer in English, Spanish, Dutch, Portuguese and German.</p>
+      <p>This portfolio will grow to six Oranjestad residences; Casa Playa 204 is the first. Booking is always direct — card payment by Stripe, instant confirmation, no account and no platform fees.</p>
+    </div>
+  </section>
+</Base>

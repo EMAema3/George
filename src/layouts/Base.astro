@@ -1,0 +1,184 @@
+---
+import { t, urlFor, alternatesFor, localeNames, locales, routes, enOnlyRoutes } from '../i18n/index.mjs';
+import site from '../data/site.json';
+import { flagship } from '../data/properties/index.mjs';
+import '../styles/global.css';
+
+const {
+  locale = 'en',
+  pageKey = 'home',
+  title,
+  description,
+  heroPreload,       // image path to preload (homepage hero)
+  schema = [],       // extra JSON-LD objects
+  enOnly = false,    // page exists in English only (hreflang self-reference only)
+} = Astro.props;
+
+const tr = t(locale);
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonical = enOnly
+  ? `${siteUrl}/${enOnlyRoutes[pageKey] ?? pageKey}/`
+  : `${siteUrl}${urlFor(pageKey, locale)}`;
+const alternates = enOnly ? [] : alternatesFor(pageKey);
+const pageTitle = title ?? tr(`seo.${pageKey}.title`);
+const pageDesc = description ?? tr(`seo.${pageKey}.desc`);
+const ogImage = `${siteUrl}${flagship.images.dir}/${flagship.images.hero}.webp`;
+const waLink = `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}`;
+
+// Breadcrumb JSON-LD (sitewide)
+const crumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}${urlFor('home', enOnly ? 'en' : locale)}` },
+    ...(pageKey !== 'home' ? [{ '@type': 'ListItem', position: 2, name: pageTitle, item: canonical }] : []),
+  ],
+};
+const allSchema = [crumbs, ...schema];
+const navKeys = ['apartment', 'building', 'location', 'reviews', 'faq'];
+---
+<!doctype html>
+<html lang={locale}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDesc} />
+  <link rel="canonical" href={canonical} />
+  {alternates.map((a) => <link rel="alternate" hreflang={a.locale} href={`${siteUrl}${a.url}`} />)}
+  {!enOnly && <link rel="alternate" hreflang="x-default" href={`${siteUrl}${urlFor(pageKey, 'en')}`} />}
+  {enOnly && <link rel="alternate" hreflang="en" href={canonical} />}
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDesc} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  {heroPreload && <link rel="preload" as="image" href={heroPreload} fetchpriority="high" />}
+  {allSchema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+</head>
+<body>
+  <div class="lang-offer" id="langOffer" hidden>
+    <span id="langOfferText"></span>
+    <a id="langOfferLink" href="/">→</a>
+    <button id="langOfferClose" aria-label={tr('common.dismiss')}>✕</button>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href={enOnly ? '/' : urlFor('home', locale)} aria-label={site.brand}>
+        <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M2 24 V13 A11 11 0 0 1 24 13 V24 H18.5 V13 A5.5 5.5 0 0 0 7.5 13 V24 Z" fill="#1d6a50"/></svg>
+        Casa Playa <span style="color:var(--terracotta)">204</span>
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="Main">
+        {navKeys.map((k) => (
+          <a href={urlFor(k, enOnly ? 'en' : locale)} aria-current={pageKey === k ? 'page' : undefined}>{tr(`nav.${k}`)}</a>
+        ))}
+        <a href="/guide/">{tr('nav.guide')}</a>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <details class="lang-switch">
+          <summary aria-label="Language">{localeNames[locale]} <span aria-hidden="true">▾</span></summary>
+          <div class="lang-menu">
+            {(enOnly
+              ? locales.map((l) => ({ locale: l, name: localeNames[l], url: urlFor('home', l) }))
+              : alternates
+            ).map((a) => <a href={a.url} aria-current={a.locale === locale ? 'true' : undefined} lang={a.locale}>{a.name}</a>)}
+          </div>
+        </details>
+        <a class="btn btn-primary header-cta" href={urlFor('book', enOnly ? 'en' : locale)}>{tr('common.bookNow')}</a>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Menu">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#124a37" stroke-width="2.4" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <div class="tile-divider" role="presentation"></div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Casa Playa 204</h3>
+          <p>{flagship.address.street}, {flagship.address.city}, {flagship.address.country}</p>
+          <p style="font-size:0.9rem">{tr('footer.operated')}</p>
+          {site.registrationNumber && <p style="font-size:0.85rem">{tr('footer.regNumber')} {site.registrationNumber}</p>}
+        </div>
+        <div>
+          <h3>{tr('footer.contact')}</h3>
+          <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+          <p><a href={waLink} rel="noopener">WhatsApp {site.whatsappDisplay}</a></p>
+          <p><a href="/about/">{tr('footer.about')}</a> · <a href="/privacy/">{tr('footer.privacy')}</a></p>
+        </div>
+        <div>
+          <h3>{tr('footer.languages')}</h3>
+          {locales.map((l) => <p style="margin:0 0 6px"><a href={enOnly ? urlFor('home', l) : urlFor(pageKey, l)} lang={l}>{localeNames[l]}</a></p>)}
+        </div>
+      </div>
+      <div class="footer-small">
+        <p style="margin:0">{tr('footer.levyDisclosure')}</p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href={waLink} rel="noopener" aria-label={tr('common.whatsapp')}>
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.1-1.7 1.2-.4 0-1 .1-1.6-.1a13 13 0 0 1-1.5-.5 11.5 11.5 0 0 1-4.4-3.9 5 5 0 0 1-1-2.6c0-1.3.6-1.9.9-2.1a1 1 0 0 1 .7-.3h.5c.1 0 .3 0 .5.4l.7 1.7c0 .2.1.3 0 .5l-.3.4-.4.5c-.1.1-.3.3-.1.5s.7 1.1 1.5 1.8c1 .9 1.9 1.2 2.2 1.3.3.2.4.1.6 0l.8-1c.2-.3.4-.2.6-.1l1.6.7c.2.1.4.2.4.3 0 .2 0 .7-.2 1.3Z"/></svg>
+  </a>
+
+  <div class="sticky-book" id="stickyBook">
+    <div class="rate">
+      <strong>${flagship.pricing.baseNightly}<span style="font-size:0.85rem;font-weight:500"> {tr('common.perNight')}</span></strong>
+    </div>
+    <a class="btn btn-terracotta" href={urlFor('book', enOnly ? 'en' : locale)}>{tr('common.checkDates')}</a>
+  </div>
+
+  <script define:vars={{ locale, pageKey, enOnly, routesMap: routes, localeNames, offers: { en: 'View in English', es: 'Ver en español', nl: 'Bekijk in het Nederlands', pt: 'Ver em português', de: 'Auf Deutsch ansehen' } }}>
+    // Mobile nav
+    const nt = document.getElementById('navToggle');
+    nt?.addEventListener('click', () => {
+      const nav = document.getElementById('mainNav');
+      const open = nav.classList.toggle('open');
+      nt.setAttribute('aria-expanded', String(open));
+    });
+
+    // Language detect-and-offer: a dismissible bar. Never auto-redirect; remember the choice.
+    try {
+      const KEY = 'cp_lang';
+      const stored = localStorage.getItem(KEY);
+      if (!stored) {
+        const want = (navigator.language || 'en').slice(0, 2);
+        if (want !== locale && offers[want] && !enOnly) {
+          const slug = routesMap[pageKey]?.[want];
+          if (slug !== undefined) {
+            const url = (want === 'en' ? '' : '/' + want) + (slug ? '/' + slug : '') + '/';
+            const bar = document.getElementById('langOffer');
+            document.getElementById('langOfferText').textContent = offers[want];
+            const link = document.getElementById('langOfferLink');
+            link.href = url || '/';
+            link.textContent = localeNames[want] + ' →';
+            link.addEventListener('click', () => { try { localStorage.setItem(KEY, want); } catch {} });
+            bar.hidden = false; bar.style.display = 'flex';
+            document.getElementById('langOfferClose').addEventListener('click', () => {
+              bar.style.display = 'none';
+              try { localStorage.setItem(KEY, locale); } catch {}
+            });
+          }
+        }
+      }
+      // Any explicit language-switcher click remembers the choice
+      document.querySelectorAll('.lang-menu a, .footer-grid a[lang]').forEach((a) => {
+        a.addEventListener('click', () => { try { localStorage.setItem(KEY, a.getAttribute('lang')); } catch {} });
+      });
+    } catch (e) { /* storage unavailable — fine */ }
+  </script>
+</body>
+</html>

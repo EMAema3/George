@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, urlFor } from '../i18n/index.mjs';
+
+const { locale = 'en' } = Astro.props;
+const tr = t(locale);
+---
+<Base locale={locale} pageKey="confirmed">
+  <section class="section" style="min-height:60vh">
+    <div class="container" style="max-width:660px;text-align:center">
+      <div class="tile-spinner" style="animation:none;width:52px;height:52px;border-radius:12px"></div>
+      <h1 style="margin-top:20px">{tr('confirmed.title')}</h1>
+      <p style="font-size:1.1rem">{tr('confirmed.sub')}</p>
+      <div style="text-align:left;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-card);padding:26px;margin-top:24px">
+        <h3>{tr('confirmed.next')}</h3>
+        <ol style="margin:0;padding-left:20px;display:grid;gap:8px">
+          <li>{tr('confirmed.step1')}</li>
+          <li>{tr('confirmed.step2')}</li>
+          <li>{tr('confirmed.step3')}</li>
+        </ol>
+      </div>
+      <p style="margin-top:28px"><a class="btn btn-outline" href={urlFor('home', locale)}>{tr('common.backHome')}</a></p>
+    </div>
+  </section>
+</Base>

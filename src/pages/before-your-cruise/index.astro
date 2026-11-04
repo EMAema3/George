@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import BookingWidget from '../../components/BookingWidget.astro';
+import { flagship as p } from '../../data/properties/index.mjs';
+const img = (f, s = '') => `${p.images.dir}/${f}${s ? `-${s}w` : ''}.webp`;
+const view = p.images.gallery.find((g) => g.file.includes('harbor'));
+---
+<Base locale="en" pageKey="cruise" enOnly={true}
+  title="Hotel Before Your Aruba Cruise — 5 Minutes from the Terminal | Casa Playa 204"
+  description="Sleep 400 m from the Oranjestad cruise terminal. You can see the ships from the corner. Full apartment, 24/7 security, early check-in and late checkout for cruise days.">
+  <section class="section" style="padding-bottom:24px">
+    <div class="container">
+      <p class="kicker">Cruise-eve stays · Oranjestad terminal</p>
+      <h1>Before your cruise</h1>
+      <p style="max-width:62ch;font-size:1.15rem">The Oranjestad cruise terminal is 400 metres from the front door — a 5-minute walk with luggage. You can see the ships in port from the corner of the building.</p>
+    </div>
+  </section>
+  <section class="container" style="padding-bottom:40px">
+    <div class="arch-img" style="aspect-ratio:16/8;max-height:420px">
+      <img src={img(view.file, 800)} alt={view.alt.en} width="800" height="533" style="height:100%" />
+    </div>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="container" style="max-width:760px">
+      <h2>Why cruisers sleep here the night before</h2>
+      <ul class="amen-list" style="grid-template-columns:1fr;max-width:660px">
+        <li>No morning transfer gamble: you wake up, have coffee on the balcony, and walk to the ship in 5 minutes.</li>
+        <li>A full apartment, not a hotel room — unpack properly, do a load of laundry before 10 days at sea, stock nothing you don't need.</li>
+        <li>Late checkout ($45) covers a ship that sails in the evening; early check-in covers a dawn flight in.</li>
+        <li>Dinner is a short walk in any direction — Oranjestad's restaurant district starts at the door.</li>
+        <li>Flying home through Aruba? Queen Beatrix airport has US preclearance: you clear US customs here and land as a domestic passenger.</li>
+      </ul>
+      <p style="margin-top:24px">Read the full guide: <a href="/guide/where-to-stay-night-before-aruba-cruise/">Where to stay the night before an Aruba cruise →</a></p>
+    </div>
+  </section>
+  <div class="tile-divider" role="presentation"></div>
+  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale="en" property={p} mode="hero" /></div></section>
+</Base>

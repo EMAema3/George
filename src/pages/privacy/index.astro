@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import site from '../../data/site.json';
+---
+<Base locale="en" pageKey="privacy" enOnly={true}
+  title="Privacy Policy — Casa Playa 204"
+  description="How Casa Playa 204 handles your data: what we collect at booking, how payments are processed by Stripe, cookies and analytics, and your rights under GDPR.">
+  <section class="section">
+    <div class="container" style="max-width:720px">
+      <h1>Privacy</h1>
+      <p><strong>What we collect.</strong> When you book: your name, email, phone number and stay dates. When you request a quote or the itinerary: your email. That's the list.</p>
+      <p><strong>Payments.</strong> Card payments are processed entirely by Stripe. Your card number never touches our systems and we never see it.</p>
+      <p><strong>What we do with it.</strong> We use your details to run your booking and send stay-related email (confirmation, pre-arrival information). If you asked for the itinerary, we send occasional Aruba guides; every email has one-click unsubscribe.</p>
+      <p><strong>Analytics.</strong> We use privacy-respecting analytics to understand site usage. Where analytics or advertising cookies are used, you'll be asked for consent first if you're visiting from a region that requires it (EU/UK).</p>
+      <p><strong>Your rights.</strong> You can ask what we hold about you, ask us to correct it, or ask us to delete it: <a href={`mailto:${site.email}`}>{site.email}</a>. We answer within 30 days.</p>
+      <p><strong>Who we are.</strong> The site is operated by {site.operator}, Oranjestad, Aruba.</p>
+    </div>
+  </section>
+</Base>

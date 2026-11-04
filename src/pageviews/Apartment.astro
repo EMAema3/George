@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import { t } from '../i18n/index.mjs';
+import { flagship as p } from '../data/properties/index.mjs';
+import { vacationRentalSchema } from '../lib/schema.mjs';
+
+const { locale = 'en' } = Astro.props;
+const tr = t(locale);
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const img = (f, s = '') => `${p.images.dir}/${f}${s ? `-${s}w` : ''}.webp`;
+const alt = (g) => g.alt[locale] ?? g.alt.en;
+---
+<Base locale={locale} pageKey="apartment" schema={[vacationRentalSchema(p, siteUrl, locale)]}>
+  <section class="section" style="padding-bottom:28px">
+    <div class="container">
+      <p class="kicker">{p.name} · {p.specs.sizeM2} m²</p>
+      <h1>{tr('apartment.title')}</h1>
+      <p style="max-width:66ch;font-size:1.1rem">{tr('apartment.intro')}</p>
+    </div>
+  </section>
+
+  <section class="container" style="padding-bottom:40px">
+    <div class="gallery-grid">
+      {p.images.gallery.map((g, i) => (
+        <a href={img(g.file)} aria-label={alt(g)}>
+          <img src={img(g.file, i === 0 ? 800 : 480)} alt={alt(g)} loading={i < 2 ? 'eager' : 'lazy'} width="800" height="533" />
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <div class="tile-divider" role="presentation"></div>
+
+  <section class="section">
+    <div class="container" style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start">
+      <div>
+        <h2>{tr('apartment.amenitiesTitle')}</h2>
+        <ul class="amen-list">
+          {p.amenities.map((a) => <li>{tr(`apartment.amenities.${a}`)}</li>)}
+        </ul>
+        <h2 style="margin-top:40px">{tr('apartment.sleepsTitle')}</h2>
+        <p style="max-width:52ch">{tr('apartment.sleepsText')}</p>
+        <p style="max-width:70ch;font-size:1.05rem;border-left:5px solid var(--terracotta);padding-left:20px;margin-top:28px">{tr('home.beachHonest')}</p>
+      </div>
+      <div style="position:sticky;top:90px">
+        <BookingWidget locale={locale} property={p} mode="hero" />
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 900px) {
+      .section .container[style*="grid-template-columns"] { display: block !important; }
+      .section div[style*="sticky"] { position: static !important; margin-top: 32px; }
+    }
+  </style>
+</Base>

@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import { t } from '../i18n/index.mjs';
+import { flagship as p } from '../data/properties/index.mjs';
+
+const { locale = 'en' } = Astro.props;
+const tr = t(locale);
+const img = (f, s = '') => `${p.images.dir}/${f}${s ? `-${s}w` : ''}.webp`;
+const hero = p.images.gallery[0];
+---
+<Base locale={locale} pageKey="book">
+  <section class="section" style="padding-bottom:20px">
+    <div class="container">
+      <h1>{tr('booking.title')}</h1>
+      <p style="max-width:58ch;font-size:1.05rem">{tr('booking.sub')}</p>
+    </div>
+  </section>
+  <section class="container" style="display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:start;padding-bottom:64px">
+    <BookingWidget locale={locale} property={p} mode="full" />
+    <aside>
+      <div class="arch-img" style="aspect-ratio:3/4;max-height:380px"><img src={img(hero.file, 800)} alt={hero.alt[locale] ?? hero.alt.en} width="800" height="533" style="height:100%" /></div>
+      <div style="background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-card);padding:22px;margin-top:18px">
+        <h3>{tr('booking.cancellationTitle')}</h3>
+        <p style="font-size:0.95rem;margin:0">{tr('booking.cancellationText')}</p>
+      </div>
+    </aside>
+  </section>
+  <style>@media (max-width:900px){ section[style*="grid-template-columns"]{ display:block !important } aside{ margin-top:28px } }</style>
+</Base>

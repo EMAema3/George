@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import { flagship as p } from '../data/properties/index.mjs';
+import { articleSchema, faqSchema } from '../lib/schema.mjs';
+
+const { slug, title, metaTitle, description, kicker, faq = [], published = '2026-11-03' } = Astro.props;
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const url = `${siteUrl}/guide/${slug}/`;
+const schema = [articleSchema({ title, description, url, datePublished: published, siteUrl })];
+if (faq.length) schema.push(faqSchema(faq));
+---
+<Base locale="en" pageKey={`guide/${slug}`} enOnly={true} title={metaTitle ?? title} description={description} schema={schema}>
+  <article>
+    <section class="section" style="padding-bottom:20px">
+      <div class="container" style="max-width:760px">
+        <p class="kicker">{kicker ?? 'Aruba guide'}</p>
+        <h1>{title}</h1>
+      </div>
+    </section>
+    <section class="container section guide-body" style="padding-top:0;max-width:760px">
+      <slot />
+      <div style="background:var(--tile-green-soft);border-radius:var(--radius);padding:24px;margin-top:36px">
+        <h3 style="margin-bottom:6px">Three days in Oranjestad, on foot</h3>
+        <p style="font-size:0.95rem;margin-bottom:14px">Every article here ends the same way: with our full walking itinerary, free by email.</p>
+        <form name="itinerary-lead" method="POST" data-netlify="true" style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="hidden" name="form-name" value="itinerary-lead" />
+          <input type="hidden" name="locale" value="en" />
+          <input type="email" name="email" required placeholder="you@email.com" style="flex:1;min-width:200px;font:inherit;padding:11px;border:1.5px solid rgba(29,106,80,0.35);border-radius:8px" aria-label="Email" />
+          <button class="btn btn-primary" type="submit">Send it to me</button>
+        </form>
+      </div>
+    </section>
+  </article>
+  <div class="tile-divider" role="presentation"></div>
+  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale="en" property={p} mode="hero" /></div></section>
+  <style is:global>
+    .guide-body h2 { margin-top: 1.6em; }
+    .guide-body ul { padding-left: 20px; }
+    .guide-body li { margin-bottom: 6px; }
+  </style>
+</Base>

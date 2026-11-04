@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import { t } from '../i18n/index.mjs';
+import { flagship as p } from '../data/properties/index.mjs';
+
+const { locale = 'en' } = Astro.props;
+const tr = t(locale);
+const img = (f, s = '') => `${p.images.dir}/${f}${s ? `-${s}w` : ''}.webp`;
+const alt = (g) => g.alt[locale] ?? g.alt.en;
+const arcade = p.images.gallery.find((g) => g.file.includes('royal-plaza-arcade')) ?? p.images.gallery[0];
+const courtyard = p.images.gallery.find((g) => g.file.includes('courtyard')) ?? p.images.gallery[4];
+const amens = ['pool', 'gym', 'library', 'valet-parking', 'security-24-7'];
+---
+<Base locale={locale} pageKey="building">
+  <section class="section" style="padding-bottom:24px">
+    <div class="container">
+      <p class="kicker">Royal Plaza · Oranjestad</p>
+      <h1>{tr('building.title')}</h1>
+    </div>
+  </section>
+
+  <section class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div class="arch-img" style="aspect-ratio:4/3"><img src={img(arcade.file, 800)} alt={alt(arcade)} width="800" height="533" /></div>
+    <div class="arch-img" style="aspect-ratio:4/3"><img src={img(courtyard.file, 800)} alt={alt(courtyard)} loading="lazy" width="800" height="533" /></div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:760px">
+      <p style="font-size:1.15rem">{tr('building.p1')}</p>
+      <p style="font-size:1.05rem">{tr('building.p2')}</p>
+      <p style="font-size:1.05rem">{tr('building.p3')}</p>
+      <h2 style="margin-top:36px">{tr('building.amenHeading')}</h2>
+      <ul class="amen-list" style="grid-template-columns:1fr">
+        {amens.map((a) => <li>{tr(`apartment.amenities.${a}`)}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <div class="tile-divider" role="presentation"></div>
+  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale={locale} property={p} mode="hero" /></div></section>
+  <style>@media (max-width:800px){ section[style*="grid-template-columns"]{ display:block !important } section[style*="grid-template-columns"] > div{ margin-bottom:16px } }</style>
+</Base>

@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import BookingWidget from '../../components/BookingWidget.astro';
+import { flagship as p } from '../../data/properties/index.mjs';
+const monthly28 = p.pricing.monthlyNightly * 28;
+const levy = Math.round((monthly28 + p.pricing.cleaningFee) * p.pricing.touristLevyPct) / 100;
+const env = 28 * p.pricing.environmentalLevyPerNight;
+const total = monthly28 + p.pricing.cleaningFee + levy + env;
+---
+<Base locale="en" pageKey="monthly" enOnly={true}
+  title="Monthly Stays in Aruba — 28-Night Rate, All-In Cost | Casa Playa 204, Oranjestad"
+  description={`A month in Oranjestad: $${p.pricing.monthlyNightly}/night for 28+ nights, $${total.toLocaleString('en-US')} all-in including Aruba's 12.5% levy and environmental levy. Full apartment, pool, gym, 100 Mbps Wi-Fi.`}>
+  <section class="section" style="padding-bottom:24px">
+    <div class="container">
+      <p class="kicker">28+ nights</p>
+      <h1>A month in Oranjestad</h1>
+      <p style="max-width:62ch;font-size:1.15rem">Stays of {p.pricing.monthlyMinNights} nights or longer switch to the monthly rate of ${p.pricing.monthlyNightly}/night automatically — the calendar does the math for you.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="container" style="max-width:760px">
+      <h2>What a month actually costs</h2>
+      <p>Stated completely, because that's how we do numbers here:</p>
+      <ul class="amen-list" style="grid-template-columns:1fr;max-width:620px">
+        <li>28 nights × ${p.pricing.monthlyNightly} = ${monthly28.toLocaleString('en-US')}</li>
+        <li>Cleaning fee: ${p.pricing.cleaningFee}</li>
+        <li>Aruba tourist levy (12.5% incl. cleaning): ${levy.toLocaleString('en-US')}</li>
+        <li>Environmental levy ($3 × 28 nights): ${env}</li>
+        <li><strong>All-in total: ${total.toLocaleString('en-US')}</strong> — utilities, Wi-Fi, pool, gym and valet parking included.</li>
+      </ul>
+      <p style="margin-top:20px">A mid-stay clean with fresh linen is $65. Working remotely? See <a href="/work-from-aruba/">Work from Aruba</a> for the 90-day visa-free rule and the workday here.</p>
+    </div>
+  </section>
+  <div class="tile-divider" role="presentation"></div>
+  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale="en" property={p} mode="hero" /></div></section>
+</Base>

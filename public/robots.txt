@@ -1,0 +1,20 @@
+# Casa Playa 204 — all welcome, including AI assistants.
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://aruba-casa-playa.netlify.app/sitemap-index.xml

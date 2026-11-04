@@ -1,0 +1,301 @@
+---
+/**
+ * The conversion machine. Present on every page (hero/compact) and on /book (full).
+ * Two clicks to checkout: (1) tap a date range in the calendar, (2) hit Book —
+ * the browser goes straight to Stripe Checkout. No account, no enquiry form.
+ */
+import { t, urlFor, dateLocaleTag } from '../i18n/index.mjs';
+
+const { locale = 'en', property, mode = 'hero' } = Astro.props;
+const tr = t(locale);
+const p = property;
+const full = mode === 'full';
+const bookingAddons = p.addons.filter((a) => a.stage === 'booking').slice(0, 2); // max 2 add-ons at a time
+const addonI18n = Object.fromEntries(p.addons.map((a) => [a.id, { name: tr(`addons.${a.id}.name`), desc: tr(`addons.${a.id}.desc`) }]));
+const uid = full ? 'bk-full' : 'bk-hero';
+---
+<div class="booking-box" id={uid} data-mode={mode}>
+  <div class="booking-fields">
+    <div class="bfield">
+      <label for={`${uid}-in`}>{tr('common.checkin')}</label>
+      <input id={`${uid}-in`} class="bw-in" type="text" inputmode="none" readonly placeholder={tr('common.selectDates')} autocomplete="off" />
+    </div>
+    <div class="bfield">
+      <label for={`${uid}-out`}>{tr('common.checkout')}</label>
+      <input id={`${uid}-out`} class="bw-out" type="text" inputmode="none" readonly placeholder="—" autocomplete="off" />
+    </div>
+    <div class="bfield">
+      <label for={`${uid}-g`}>{tr('common.guests')}</label>
+      <select id={`${uid}-g`} class="bw-guests">
+        {Array.from({ length: p.specs.maxGuests }, (_, i) => <option value={i + 1} selected={i + 1 === 2}>{i + 1}</option>)}
+      </select>
+    </div>
+    <div class="bfield bfield-btn">
+      <button class="btn btn-terracotta btn-lg bw-book" type="button">{full ? tr('booking.payNow') : tr('common.bookNow')}</button>
+    </div>
+  </div>
+
+  <div class="bw-cal" hidden style="position:relative"><div class="cal-pop" style="position:absolute;top:4px;left:0;z-index:90"></div></div>
+
+  {full ? (
+    <div class="bw-lines" style="display:grid;gap:6px;font-size:0.98rem">
+      <p class="bw-hint" style="margin:0;color:var(--ink-soft)">{tr('booking.selectDatesFirst')}</p>
+      <div class="bw-breakdown" hidden>
+        <div style="display:flex;justify-content:space-between"><span class="bw-l-nights"></span><span class="bw-v-acc"></span></div>
+        <div style="display:flex;justify-content:space-between"><span>{tr('booking.cleaningFee')}</span><span class="bw-v-clean"></span></div>
+        <div style="display:flex;justify-content:space-between"><span>{tr('booking.touristLevy')}</span><span class="bw-v-levy"></span></div>
+        <div style="display:flex;justify-content:space-between"><span>{tr('booking.envLevy')}</span><span class="bw-v-env"></span></div>
+        <div class="bw-addon-lines"></div>
+        <div style="display:flex;justify-content:space-between;border-top:2px solid var(--tile-green);padding-top:8px;margin-top:4px;font-weight:700;font-size:1.15rem"><span>{tr('booking.total')}</span><span class="bw-v-total"></span></div>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0 0">{tr('booking.totalNote')}</p>
+      </div>
+    </div>
+  ) : (
+    <div class="booking-total">
+      <span>{tr('common.from')} <strong>${p.pricing.baseNightly}</strong> {tr('common.perNight')}</span>
+      <span class="bw-mini-total" style="font-weight:700;color:var(--tile-green-deep)"></span>
+    </div>
+  )}
+
+  {full && bookingAddons.length > 0 && (
+    <div>
+      <h3 style="margin-bottom:4px">{tr('booking.addonsTitle')}</h3>
+      <p style="font-size:0.9rem;color:var(--ink-soft);margin-bottom:12px">{tr('booking.addonsHint')}</p>
+      <div class="addon-grid">
+        {bookingAddons.map((a) => (
+          <label class="addon">
+            <input type="checkbox" class="bw-addon" value={a.id} data-price={a.price} data-unit={a.unit} />
+            <img src={a.image} alt="" width="72" height="72" loading="lazy" />
+            <span style="flex:1">
+              <span class="a-name">{addonI18n[a.id].name}</span><br />
+              <span class="a-desc">{addonI18n[a.id].desc}</span>
+            </span>
+            <span class="a-price">${a.price}{a.unit === 'per_person' ? ` ${tr('booking.perPerson')}` : a.unit === 'each_way' ? ` ${tr('booking.eachWay')}` : ''}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {full && (
+    <form class="bw-quote" name="abandoned-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden style="background:var(--caribbean-soft);border-radius:var(--radius);padding:18px">
+      <input type="hidden" name="form-name" value="abandoned-quote" />
+      <p style="display:none"><input name="bot-field" /></p>
+      <input type="hidden" name="property" value={p.slug} />
+      <input type="hidden" name="checkin" class="bw-q-in" />
+      <input type="hidden" name="checkout" class="bw-q-out" />
+      <input type="hidden" name="total" class="bw-q-total" />
+      <strong>{tr('booking.emailQuoteTitle')}</strong>
+      <p style="font-size:0.9rem;margin:4px 0 10px">{tr('booking.emailQuoteSub')}</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input type="email" name="email" required placeholder={tr('booking.emailPlaceholder')} style="flex:1;min-width:200px;font:inherit;padding:11px;border:1.5px solid rgba(24,121,168,0.4);border-radius:8px" />
+        <button class="btn btn-outline" type="submit">{tr('booking.emailBtn')}</button>
+      </div>
+      <p class="bw-quote-ok" hidden style="color:var(--tile-green-deep);font-weight:600;margin:8px 0 0">{tr('booking.emailOk')}</p>
+    </form>
+  )}
+
+  <p style="font-size:0.85rem;color:var(--ink-soft);margin:0;display:flex;gap:6px;align-items:center">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+    {tr('common.securePayment')} · {tr('common.instantConfirmation')}
+  </p>
+  <p class="bw-err" role="alert" hidden style="color:var(--terracotta);font-weight:600;margin:0"></p>
+</div>
+
+<script define:vars={{
+  uid, locale,
+  slug: p.slug,
+  pricing: p.pricing,
+  dateTag: dateLocaleTag[locale] || 'en-US',
+  bookUrl: urlFor('book', locale),
+  isFull: full,
+  msgs: {
+    unavailable: tr('booking.datesUnavailable'),
+    minStay: tr('common.minStay').replace('{n}', String(p.pricing.minNights)),
+    nights: tr('common.nights'),
+    accommodation: tr('booking.accommodation'),
+    redirect: tr('booking.payRedirect'),
+    perPerson: tr('booking.perPerson'),
+  },
+  addonNames: Object.fromEntries(p.addons.map((a) => [a.id, tr(`addons.${a.id}.name`)])),
+}}>
+(() => {
+  const root = document.getElementById(uid);
+  if (!root) return;
+  const $ = (s) => root.querySelector(s);
+  const inEl = $('.bw-in'), outEl = $('.bw-out'), gEl = $('.bw-guests'), bookBtn = $('.bw-book');
+  const calWrap = $('.bw-cal'), calPop = $('.cal-pop'), errEl = $('.bw-err');
+  const fmt = new Intl.DateTimeFormat(dateTag, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  const iso = (d) => d.toISOString().slice(0, 10);
+  const money = (n) => '$' + n.toLocaleString(dateTag, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  let blocked = new Set();
+  fetch('/availability.json').then((r) => r.json()).then((d) => {
+    blocked = new Set(d[slug] || d.blocked || []);
+    render();
+  }).catch(() => {});
+
+  // --- pricing (mirrored server-side in the Stripe function) ---
+  function inSeason(mmdd, from, to) { return from <= to ? (mmdd >= from && mmdd <= to) : (mmdd >= from || mmdd <= to); }
+  function nightlyFor(d) {
+    const mmdd = iso(d).slice(5);
+    let rate = pricing.baseNightly;
+    for (const s of pricing.seasons || []) if (inSeason(mmdd, s.from, s.to)) rate = s.nightly;
+    return rate;
+  }
+  function quote(start, end, guests, addons) {
+    const nights = Math.round((end - start) / 86400000);
+    let acc = 0;
+    for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) acc += nightlyFor(d);
+    if (nights >= (pricing.monthlyMinNights || 9999)) acc = nights * pricing.monthlyNightly;
+    const cleaning = pricing.cleaningFee;
+    const levy = (acc + cleaning) * pricing.touristLevyPct / 100;
+    const env = nights * pricing.environmentalLevyPerNight;
+    let addonTotal = 0; const addonLines = [];
+    for (const a of addons) {
+      const amt = a.unit === 'per_person' ? a.price * guests : a.price;
+      addonTotal += amt; addonLines.push({ id: a.id, amt });
+    }
+    return { nights, acc, cleaning, levy, env, addonTotal, addonLines, total: acc + cleaning + levy + env + addonTotal };
+  }
+
+  // --- state ---
+  let start = null, end = null;
+  const params = new URLSearchParams(location.search);
+  if (params.get('checkin') && params.get('checkout')) {
+    const s = new Date(params.get('checkin') + 'T00:00:00Z'), e = new Date(params.get('checkout') + 'T00:00:00Z');
+    if (!isNaN(s) && !isNaN(e) && e > s) { start = s; end = e; }
+    if (params.get('guests')) gEl.value = params.get('guests');
+  }
+
+  // --- calendar: two taps to a date range ---
+  let viewY, viewM;
+  const today = new Date(); today.setUTCHours(0, 0, 0, 0);
+  function openCal() {
+    const base = start || today;
+    viewY = base.getUTCFullYear(); viewM = base.getUTCMonth();
+    calWrap.hidden = false; drawCal();
+  }
+  function closeCal() { calWrap.hidden = true; }
+  function drawCal() {
+    const first = new Date(Date.UTC(viewY, viewM, 1));
+    const monthName = first.toLocaleDateString(dateTag, { month: 'long', year: 'numeric', timeZone: 'UTC' });
+    const dows = [...Array(7)].map((_, i) => new Date(Date.UTC(2024, 0, i + 1)).toLocaleDateString(dateTag, { weekday: 'narrow', timeZone: 'UTC' }));
+    let html = `<div class="cal-head"><button type="button" data-nav="-1" aria-label="Previous month">‹</button><span>${monthName}</span><button type="button" data-nav="1" aria-label="Next month">›</button></div><div class="cal-grid">`;
+    html += dows.map((d) => `<span class="dow">${d}</span>`).join('');
+    const offset = (first.getUTCDay() + 6) % 7;
+    html += '<span></span>'.repeat(offset);
+    const days = new Date(Date.UTC(viewY, viewM + 1, 0)).getUTCDate();
+    for (let d = 1; d <= days; d++) {
+      const dt = new Date(Date.UTC(viewY, viewM, d));
+      const id = iso(dt);
+      const isPast = dt < today;
+      const isBlocked = blocked.has(id);
+      let cls = 'cal-day';
+      if (start && iso(start) === id) cls += ' sel';
+      if (end && iso(end) === id) cls += ' sel';
+      if (start && end && dt > start && dt < end) cls += ' in-range';
+      html += `<button type="button" class="${cls}" data-d="${id}" ${isPast || isBlocked ? 'disabled' : ''} aria-label="${fmt.format(dt)}">${d}</button>`;
+    }
+    html += '</div>';
+    calPop.innerHTML = html;
+    calPop.querySelectorAll('[data-nav]').forEach((b) => b.addEventListener('click', (e) => {
+      e.stopPropagation(); viewM += Number(b.dataset.nav);
+      if (viewM < 0) { viewM = 11; viewY--; } if (viewM > 11) { viewM = 0; viewY++; }
+      drawCal();
+    }));
+    calPop.querySelectorAll('.cal-day:not(:disabled)').forEach((b) => b.addEventListener('click', () => pick(new Date(b.dataset.d + 'T00:00:00Z'))));
+  }
+  function rangeClear(s, e) { for (let d = new Date(s); d < e; d.setDate(d.getDate() + 1)) if (blocked.has(iso(d))) return false; return true; }
+  function pick(dt) {
+    err('');
+    if (!start || (start && end)) { start = dt; end = null; drawCal(); render(); return; }
+    if (dt <= start) { start = dt; end = null; drawCal(); render(); return; }
+    const nights = Math.round((dt - start) / 86400000);
+    if (nights < pricing.minNights) { err(msgs.minStay); drawCal(); return; }
+    if (!rangeClear(start, dt)) { err(msgs.unavailable); start = null; end = null; drawCal(); render(); return; }
+    end = dt; drawCal(); render(); closeCal();
+  }
+  [inEl, outEl].forEach((el) => el.addEventListener('click', openCal));
+  document.addEventListener('click', (e) => {
+    // A tapped calendar day is re-rendered (removed from the DOM) before this bubbles up —
+    // a disconnected target means the click was inside the widget, so don't close.
+    if (e.target instanceof Node && !e.target.isConnected) return;
+    if (!root.contains(e.target)) closeCal();
+  });
+
+  function err(m) { errEl.textContent = m; errEl.hidden = !m; }
+
+  function selectedAddons() {
+    return [...root.querySelectorAll('.bw-addon:checked')].map((c) => ({ id: c.value, price: Number(c.dataset.price), unit: c.dataset.unit }));
+  }
+
+  function render() {
+    inEl.value = start ? fmt.format(start) : '';
+    outEl.value = end ? fmt.format(end) : '';
+    if (!(start && end)) return;
+    const q = quote(start, end, Number(gEl.value), selectedAddons());
+    if (isFull) {
+      $('.bw-hint').hidden = true;
+      const bd = $('.bw-breakdown'); bd.hidden = false;
+      $('.bw-l-nights').textContent = `${msgs.accommodation} · ${q.nights} ${msgs.nights}`;
+      $('.bw-v-acc').textContent = money(q.acc);
+      $('.bw-v-clean').textContent = money(q.cleaning);
+      $('.bw-v-levy').textContent = money(q.levy);
+      $('.bw-v-env').textContent = money(q.env);
+      $('.bw-addon-lines').innerHTML = q.addonLines.map((l) => `<div style="display:flex;justify-content:space-between"><span>${addonNames[l.id]}</span><span>${money(l.amt)}</span></div>`).join('');
+      $('.bw-v-total').textContent = money(q.total);
+      const qf = $('.bw-quote');
+      if (qf) {
+        qf.hidden = false;
+        $('.bw-q-in').value = iso(start); $('.bw-q-out').value = iso(end); $('.bw-q-total').value = money(q.total);
+      }
+    } else {
+      const mini = $('.bw-mini-total');
+      if (mini) mini.textContent = `${q.nights} ${msgs.nights} · ${money(q.total)}`;
+    }
+  }
+  gEl.addEventListener('change', render);
+  root.querySelectorAll('.bw-addon').forEach((c) => c.addEventListener('change', render));
+
+  // --- the second click: straight to Stripe Checkout ---
+  bookBtn.addEventListener('click', async () => {
+    err('');
+    if (!(start && end)) { openCal(); return; }
+    if (!isFull) {
+      // From any page: carry the dates to the booking page (state preserved), one more click to pay —
+      // or go direct if configured. Direct-to-book keeps add-ons + itemised levies visible pre-payment (required disclosure).
+      location.href = `${bookUrl}?checkin=${iso(start)}&checkout=${iso(end)}&guests=${gEl.value}`;
+      return;
+    }
+    bookBtn.disabled = true; const orig = bookBtn.textContent; bookBtn.textContent = msgs.redirect;
+    try {
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ property: slug, checkin: iso(start), checkout: iso(end), guests: Number(gEl.value), addons: selectedAddons().map((a) => a.id), locale }),
+      });
+      const data = await res.json();
+      if (data.url) { location.href = data.url; return; }
+      err(data.error || 'Something went wrong — try again or WhatsApp us.');
+    } catch (e) {
+      err('Something went wrong — try again or WhatsApp us.');
+    }
+    bookBtn.disabled = false; bookBtn.textContent = orig;
+  });
+
+  // Abandoned-quote capture (Netlify form, AJAX)
+  const qForm = $('.bw-quote');
+  qForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(qForm);
+    try {
+      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(fd).toString() });
+      $('.bw-quote-ok').hidden = false;
+    } catch {}
+  });
+
+  render();
+  if (isFull && start && end) root.scrollIntoView({ block: 'center' });
+})();
+</script>

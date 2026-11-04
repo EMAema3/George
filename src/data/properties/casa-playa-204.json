@@ -1,0 +1,93 @@
+{
+  "slug": "casa-playa-204",
+  "active": true,
+  "flagship": true,
+  "name": "Casa Playa 204",
+  "shortName": "Unit 204",
+  "building": "Casa Playa — the former Royal Plaza Mall",
+  "address": {
+    "street": "L.G. Smith Boulevard 94",
+    "city": "Oranjestad",
+    "country": "Aruba",
+    "countryCode": "AW"
+  },
+  "geo": { "lat": 12.5186, "lng": -70.0358 },
+  "specs": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bedType": "King",
+    "bathrooms": 1,
+    "maxGuests": 4,
+    "sleeps": "2 + 2 on sofa bed",
+    "sizeM2": 65,
+    "floor": 2,
+    "wifiMbps": 100
+  },
+  "pricing": {
+    "currency": "USD",
+    "baseNightly": 199,
+    "seasons": [
+      { "name": "high", "from": "12-15", "to": "04-15", "nightly": 249 },
+      { "name": "carnival", "from": "01-20", "to": "02-10", "nightly": 289 }
+    ],
+    "monthlyNightly": 139,
+    "monthlyMinNights": 28,
+    "cleaningFee": 95,
+    "minNights": 3,
+    "touristLevyPct": 12.5,
+    "environmentalLevyPerNight": 3
+  },
+  "amenities": [
+    "pool", "gym", "library", "valet-parking", "security-24-7",
+    "fast-wifi", "smart-tv", "full-kitchen", "washer", "air-conditioning",
+    "balcony", "work-desk", "coffee-station", "rainfall-shower", "luggage-rack"
+  ],
+  "images": {
+    "dir": "/images/casa-playa-204",
+    "hero": "casa-playa-204-aruba-arcade-arched-windows-oranjestad",
+    "gallery": [
+      { "file": "casa-playa-204-aruba-arcade-arched-windows-oranjestad", "alt": { "en": "The Casa Playa arcade: floor-to-ceiling arched windows with fan muntins over green-and-white cement tile, looking onto L.G. Smith Boulevard in Oranjestad, Aruba", "es": "La arcada de Casa Playa: ventanas arqueadas de piso a techo sobre baldosas de cemento verde y blanco, con vista al bulevar L.G. Smith en Oranjestad, Aruba", "nl": "De arcade van Casa Playa: boogramen van vloer tot plafond boven groen-witte cementtegels, met uitzicht op de L.G. Smith Boulevard in Oranjestad, Aruba", "pt": "A arcada do Casa Playa: janelas em arco do chão ao teto sobre ladrilhos de cimento verde e branco, com vista para o bulevar L.G. Smith em Oranjestad, Aruba", "de": "Die Arkade von Casa Playa: bogenförmige Fenster über grün-weißen Zementfliesen mit Blick auf den L.G. Smith Boulevard in Oranjestad, Aruba" } },
+      { "file": "casa-playa-204-aruba-open-plan-living-room-green-kitchen", "alt": { "en": "Open-plan living room of Casa Playa 204 with two sofas, green shaker kitchen and stainless refrigerator", "es": "Sala de estar de concepto abierto del Casa Playa 204 con dos sofás y cocina verde", "nl": "Open woonkamer van Casa Playa 204 met twee banken en groene keuken", "pt": "Sala de estar em conceito aberto do Casa Playa 204 com dois sofás e cozinha verde", "de": "Offener Wohnbereich von Casa Playa 204 mit zwei Sofas und grüner Küche" } },
+      { "file": "casa-playa-204-aruba-living-room-balcony-royal-plaza-view", "alt": { "en": "Living room of Casa Playa 204 with smart TV and balcony view of the pink Dutch-colonial Royal Plaza facades", "es": "Sala del Casa Playa 204 con smart TV y vista al balcón de las fachadas rosadas de estilo colonial holandés", "nl": "Woonkamer van Casa Playa 204 met smart-tv en balkonzicht op de roze Nederlands-koloniale gevels", "pt": "Sala do Casa Playa 204 com smart TV e vista da varanda para as fachadas rosa de estilo colonial holandês", "de": "Wohnzimmer von Casa Playa 204 mit Smart-TV und Balkonblick auf die rosa niederländisch-kolonialen Fassaden" } },
+      { "file": "casa-playa-204-aruba-king-bed-bedroom-vacation-rental", "alt": { "en": "King bed with crisp white linen and oak headboard in the bedroom of Casa Playa 204, Aruba", "es": "Cama king con sábanas blancas y cabecero de roble en el dormitorio del Casa Playa 204, Aruba", "nl": "Kingsize bed met fris wit linnengoed en eiken hoofdbord in de slaapkamer van Casa Playa 204, Aruba", "pt": "Cama king com roupa de cama branca e cabeceira de carvalho no quarto do Casa Playa 204, Aruba", "de": "Kingsize-Bett mit weißer Bettwäsche und Eichenkopfteil im Schlafzimmer von Casa Playa 204, Aruba" } },
+      { "file": "casa-playa-204-aruba-balcony-dining-royal-plaza-courtyard", "alt": { "en": "Private balcony of Casa Playa 204 with dining table for two over the Royal Plaza courtyard, Oranjestad", "es": "Balcón privado del Casa Playa 204 con mesa para dos sobre el patio del Royal Plaza, Oranjestad", "nl": "Privébalkon van Casa Playa 204 met eettafel voor twee boven de binnenplaats van Royal Plaza, Oranjestad", "pt": "Varanda privativa do Casa Playa 204 com mesa para dois sobre o pátio do Royal Plaza, Oranjestad", "de": "Privater Balkon von Casa Playa 204 mit Esstisch für zwei über dem Innenhof des Royal Plaza, Oranjestad" } },
+      { "file": "casa-playa-204-aruba-kitchen-green-cabinets-dining-table", "alt": { "en": "Full kitchen with green shaker cabinets, farmhouse sink, brass fixtures and dining table in Casa Playa 204", "es": "Cocina completa con gabinetes verdes, fregadero de granja y mesa de comedor en Casa Playa 204", "nl": "Volledige keuken met groene kasten, spoelbak en eettafel in Casa Playa 204", "pt": "Cozinha completa com armários verdes, pia estilo fazenda e mesa de jantar no Casa Playa 204", "de": "Komplette Küche mit grünen Schränken, Landhausspüle und Esstisch in Casa Playa 204" } },
+      { "file": "casa-playa-204-aruba-bathroom-rainfall-shower-gold-fixtures", "alt": { "en": "Bathroom of Casa Playa 204 with walk-in rainfall shower, white subway tile, green vanity and brushed-gold fixtures", "es": "Baño del Casa Playa 204 con ducha de lluvia, azulejos blancos y grifería dorada", "nl": "Badkamer van Casa Playa 204 met inloopregendouche, witte tegels en goudkleurige kranen", "pt": "Banheiro do Casa Playa 204 com chuveiro de chuva, azulejos brancos e metais dourados", "de": "Badezimmer von Casa Playa 204 mit Regendusche, weißen Fliesen und goldenen Armaturen" } },
+      { "file": "casa-playa-204-aruba-balcony-view-oranjestad-harbor", "alt": { "en": "Balcony view from Casa Playa 204 toward the Oranjestad waterfront and harbour, palm trees in the foreground", "es": "Vista desde el balcón del Casa Playa 204 hacia el puerto de Oranjestad, con palmeras en primer plano", "nl": "Balkonzicht vanuit Casa Playa 204 richting de waterkant en haven van Oranjestad, met palmbomen", "pt": "Vista da varanda do Casa Playa 204 em direção ao porto de Oranjestad, com palmeiras", "de": "Balkonblick von Casa Playa 204 zur Uferpromenade und zum Hafen von Oranjestad mit Palmen" } },
+      { "file": "casa-playa-204-aruba-remote-work-desk-nook", "alt": { "en": "Dedicated work desk with task lamp and cane chair in Casa Playa 204 — remote-work ready with 100 Mbps Wi-Fi", "es": "Escritorio de trabajo con lámpara y silla de ratán en Casa Playa 204, listo para trabajo remoto con Wi-Fi de 100 Mbps", "nl": "Werkplek met bureaulamp en rotanstoel in Casa Playa 204 — klaar voor thuiswerken met 100 Mbps wifi", "pt": "Mesa de trabalho com luminária e cadeira de palhinha no Casa Playa 204 — pronta para trabalho remoto com Wi-Fi de 100 Mbps", "de": "Arbeitsplatz mit Schreibtischlampe und Rattanstuhl in Casa Playa 204 — bereit für Remote-Arbeit mit 100 Mbit/s WLAN" } },
+      { "file": "casa-playa-204-aruba-dining-area-coffee-station", "alt": { "en": "Dining table for four and coffee station with espresso maker in Casa Playa 204", "es": "Mesa de comedor para cuatro y estación de café con cafetera espresso en Casa Playa 204", "nl": "Eettafel voor vier en koffiestation met espressomachine in Casa Playa 204", "pt": "Mesa de jantar para quatro e estação de café com máquina de espresso no Casa Playa 204", "de": "Esstisch für vier und Kaffeestation mit Espressomaschine in Casa Playa 204" } },
+      { "file": "casa-playa-204-aruba-bedroom-king-bed-smart-tv", "alt": { "en": "Bedroom of Casa Playa 204 with king bed, storage drawers, luggage rack and wall-mounted smart TV", "es": "Dormitorio del Casa Playa 204 con cama king, cajones, portamaletas y smart TV", "nl": "Slaapkamer van Casa Playa 204 met kingsize bed, lades, bagagerek en smart-tv", "pt": "Quarto do Casa Playa 204 com cama king, gavetas, porta-malas e smart TV", "de": "Schlafzimmer von Casa Playa 204 mit Kingsize-Bett, Schubladen, Gepäckablage und Smart-TV" } },
+      { "file": "casa-playa-aruba-royal-plaza-arcade-green-white-tile", "alt": { "en": "The vaulted arcade of Casa Playa, former Royal Plaza Mall, with its signature green-and-white pinwheel cement tile", "es": "La arcada abovedada de Casa Playa, antiguo Royal Plaza Mall, con su característica baldosa de cemento verde y blanca", "nl": "De gewelfde arcade van Casa Playa, het voormalige Royal Plaza Mall, met zijn kenmerkende groen-witte cementtegels", "pt": "A arcada abobadada do Casa Playa, antigo Royal Plaza Mall, com seus ladrilhos de cimento verde e branco", "de": "Die gewölbte Arkade von Casa Playa, der ehemaligen Royal Plaza Mall, mit ihren grün-weißen Zementfliesen" } },
+      { "file": "casa-playa-204-aruba-sofa-dutch-colonial-window-view", "alt": { "en": "Sofa by the floor-to-ceiling window of Casa Playa 204 framing the pink gabled Royal Plaza architecture", "es": "Sofá junto al ventanal del Casa Playa 204 con vista a la arquitectura rosada del Royal Plaza", "nl": "Bank bij het raam van Casa Playa 204 met zicht op de roze architectuur van Royal Plaza", "pt": "Sofá junto à janela do Casa Playa 204 emoldurando a arquitetura rosa do Royal Plaza", "de": "Sofa am Fenster von Casa Playa 204 mit Blick auf die rosa Architektur des Royal Plaza" } },
+      { "file": "casa-playa-204-aruba-full-kitchen-oven-refrigerator", "alt": { "en": "Kitchen of Casa Playa 204 with oven, induction hob, toaster, coffee machine and full-size refrigerator with ice dispenser", "es": "Cocina del Casa Playa 204 con horno, placa de inducción y refrigerador de tamaño completo con dispensador de hielo", "nl": "Keuken van Casa Playa 204 met oven, inductiekookplaat en grote koelkast met ijsdispenser", "pt": "Cozinha do Casa Playa 204 com forno, cooktop de indução e geladeira grande com dispensador de gelo", "de": "Küche von Casa Playa 204 mit Backofen, Induktionskochfeld und großem Kühlschrank mit Eiswürfelspender" } },
+      { "file": "casa-playa-204-aruba-balcony-dutch-colonial-architecture-view", "alt": { "en": "Balcony table set for breakfast at Casa Playa 204, overlooking the ornate white railings and pink facades of the former Royal Plaza", "es": "Mesa del balcón preparada para el desayuno en Casa Playa 204, con vista a las barandillas blancas y fachadas rosadas", "nl": "Balkontafel gedekt voor ontbijt bij Casa Playa 204, met uitzicht op de witte balustrades en roze gevels", "pt": "Mesa da varanda posta para o café da manhã no Casa Playa 204, com vista para os gradis brancos e fachadas rosa", "de": "Balkontisch zum Frühstück gedeckt in Casa Playa 204, mit Blick auf die weißen Geländer und rosa Fassaden" } },
+      { "file": "casa-playa-204-aruba-living-dining-room-natural-light", "alt": { "en": "Light-filled living and dining room of Casa Playa 204 seen from the work desk, balcony beyond", "es": "Sala y comedor llenos de luz del Casa Playa 204 vistos desde el escritorio, con el balcón al fondo", "nl": "Lichte woon- en eetkamer van Casa Playa 204 gezien vanaf het bureau, met balkon", "pt": "Sala e jantar iluminados do Casa Playa 204 vistos da mesa de trabalho, com a varanda ao fundo", "de": "Lichtdurchfluteter Wohn- und Essbereich von Casa Playa 204 vom Schreibtisch aus gesehen, dahinter der Balkon" } },
+      { "file": "casa-playa-204-aruba-washer-dryer-laundry", "alt": { "en": "In-unit washer with detergent, iron and cleaning supplies in the laundry closet of Casa Playa 204", "es": "Lavadora en la unidad con detergente y plancha en el armario de lavandería del Casa Playa 204", "nl": "Wasmachine in de unit met wasmiddel en strijkijzer in de waskast van Casa Playa 204", "pt": "Máquina de lavar na unidade com detergente e ferro no armário de lavanderia do Casa Playa 204", "de": "Waschmaschine mit Waschmittel und Bügeleisen im Hauswirtschaftsschrank von Casa Playa 204" } }
+    ]
+  },
+  "addons": [
+    { "id": "airport-transfer", "price": 40, "unit": "each_way", "image": "/images/addons/airport-transfer.svg", "stage": "booking", "order": 1 },
+    { "id": "grocery-stock", "price": 75, "unit": "flat", "image": "/images/addons/grocery-stock.svg", "stage": "booking", "order": 2 },
+    { "id": "celebration", "price": 100, "unit": "flat", "image": "/images/addons/celebration.svg", "stage": "prearrival", "order": 3 },
+    { "id": "balcony-breakfast", "price": 55, "unit": "per_person", "image": "/images/addons/balcony-breakfast.svg", "stage": "prearrival", "order": 4 },
+    { "id": "balcony-dinner", "price": 80, "unit": "per_person", "image": "/images/addons/balcony-dinner.svg", "stage": "prearrival", "order": 5 },
+    { "id": "midstay-clean", "price": 65, "unit": "flat", "image": "/images/addons/midstay-clean.svg", "stage": "prearrival", "order": 6 },
+    { "id": "early-checkin", "price": 45, "unit": "flat", "image": "/images/addons/early-checkin.svg", "stage": "booking_alt", "order": 7 },
+    { "id": "late-checkout", "price": 45, "unit": "flat", "image": "/images/addons/late-checkout.svg", "stage": "booking_alt", "order": 8 }
+  ],
+  "reviews": [
+    { "name": "Dana", "month": "2026-09", "lang": "en", "text": "We walked to dinner every single night. The building is the one everyone photographs from the cruise ships — and we were living in it. The pool over the harbour at sunset is something else." },
+    { "name": "Marcos", "month": "2026-08", "lang": "es", "text": "Llegamos un día antes de nuestro crucero y fue la mejor decisión. Se ve la terminal desde la esquina. El apartamento es precioso y el edificio tiene seguridad 24 horas." },
+    { "name": "Anouk", "month": "2026-06", "lang": "nl", "text": "Drie weken gebleven, deels gewerkt. De wifi haalde ruim 100 Mbps, het bureau zit prima en het zwembad op de derde verdieping maakt elke pauze goed. Oranjestad voelt na een week als thuis." }
+  ],
+  "distances": [
+    { "id": "cruise-terminal", "walkMin": 5, "km": 0.4 },
+    { "id": "surfside-beach", "walkMin": 15, "km": 1.2 },
+    { "id": "eagle-beach", "driveMin": 10, "km": 4.5 },
+    { "id": "airport", "driveMin": 10, "km": 5.0 },
+    { "id": "renaissance-marketplace", "walkMin": 3, "km": 0.2 },
+    { "id": "main-street-tram", "walkMin": 2, "km": 0.15 }
+  ],
+  "checkin": { "from": "15:00", "to": "22:00", "checkout": "11:00" },
+  "cancellation": { "fullRefundDays": 14, "halfRefundDays": 7 }
+}

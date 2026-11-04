@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import { t } from '../i18n/index.mjs';
+import { flagship as p } from '../data/properties/index.mjs';
+
+const { locale = 'en' } = Astro.props;
+const tr = t(locale);
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${p.geo.lat},${p.geo.lng}`;
+const embed = `https://www.openstreetmap.org/export/embed.html?bbox=${p.geo.lng - 0.012}%2C${p.geo.lat - 0.008}%2C${p.geo.lng + 0.012}%2C${p.geo.lat + 0.008}&layer=mapnik&marker=${p.geo.lat}%2C${p.geo.lng}`;
+---
+<Base locale={locale} pageKey="location">
+  <section class="section" style="padding-bottom:24px">
+    <div class="container">
+      <p class="kicker">{p.address.street}, {p.address.city}</p>
+      <h1>{tr('location.title')}</h1>
+      <p style="max-width:62ch;font-size:1.1rem">{tr('location.intro')}</p>
+    </div>
+  </section>
+
+  <section class="container" style="padding-bottom:24px">
+    <div style="border-radius:var(--arch);overflow:hidden;box-shadow:var(--shadow-card)">
+      <iframe src={embed} title="Map — Casa Playa 204, L.G. Smith Boulevard 94, Oranjestad" style="width:100%;height:420px;border:0" loading="lazy"></iframe>
+    </div>
+    <p style="margin-top:12px"><a class="btn btn-outline" href={mapsUrl} rel="noopener">{tr('location.mapNote')}</a></p>
+  </section>
+
+  <section class="section" style="padding-top:16px">
+    <div class="container">
+      <h2>{tr('location.walkTitle')}</h2>
+      <ul class="dist-list">
+        {p.distances.map((d) => (
+          <li>
+            <span>{tr(`location.distances.${d.id}`)} <span style="color:var(--ink-soft);font-size:0.85rem">· {d.km} km</span></span>
+            <span class="d-time">{d.walkMin ? `${d.walkMin} ${tr('location.walkMin')}` : `${d.driveMin} ${tr('location.driveMin')}`}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <div class="tile-divider" role="presentation"></div>
+  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale={locale} property={p} mode="hero" /></div></section>
+</Base>
