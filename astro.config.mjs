@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 // Production URL — update when the custom domain (e.g. casaplaya204.com) is connected.
 export const SITE_URL = process.env.URL && !process.env.URL.includes('localhost')
   ? process.env.URL
-  : 'https://aruba-casa-playa.netlify.app';
+  : 'https://aruba-itf5.netlify.app';
 
 export default defineConfig({
   site: SITE_URL,

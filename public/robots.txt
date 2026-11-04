@@ -17,4 +17,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://aruba-casa-playa.netlify.app/sitemap-index.xml
+Sitemap: https://aruba-itf5.netlify.app/sitemap-index.xml
