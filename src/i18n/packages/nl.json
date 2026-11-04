@@ -1,0 +1,148 @@
+{
+  "seo": {
+    "title": "Aruba-arrangementen 2026–27: Oud & Nieuw, Valentijn | Casa Playa 204",
+    "desc": "Complete Aruba-arrangementen voor twee of drie: Thanksgiving, Oud & Nieuw, Valentijn, 4 juli, huwelijksreis en carnaval. Elke datum gaat maar één keer weg."
+  },
+  "nav": "Arrangementen",
+  "kicker": "Feestdagenarrangementen",
+  "title": "De feestdagen, al geregeld",
+  "sub": "Vier nachten of meer, met de transfer, het diner en de boottocht al geboekt. Gemaakt voor twee, met ruimte voor een derde.",
+  "honest": "Eén appartement betekent dat elke feestdag precies één keer wordt verkocht. Is hij geboekt, dan is hij weg — en er is geen tweede appartement waar we je naartoe kunnen verplaatsen.",
+  "home": {
+    "kicker": "Feestdagenarrangementen",
+    "title": "Boek de feestdag, niet alleen de kamer",
+    "sub": "Thanksgiving, Oud & Nieuw, Valentijnsdag en 4 juli. Elk arrangement is tot in de puntjes geregeld en gaat maar één keer weg.",
+    "cta": "Bekijk alle arrangementen"
+  },
+  "sections": {
+    "us": {
+      "h": "Arrangementen rond Amerikaanse feestdagen",
+      "sub": "Lange weekenden rond de feestdagen die ertoe doen, zonder orkaanseizoen en met Amerikaanse preclearance op de terugweg."
+    },
+    "br": {
+      "h": "Voor stellen uit Brazilië",
+      "sub": "Directe vluchten vanuit São Paulo, we spreken Portugees en alle prijzen zijn in Amerikaanse dollars."
+    },
+    "ar": {
+      "h": "Voor stellen uit Argentinië",
+      "sub": "In het seizoen directe vluchten vanuit Argentinië, we spreken Spaans en bij aankomst staat de mate al voor je klaar."
+    }
+  },
+  "labels": {
+    "bookBy": "Boek uiterlijk {date}",
+    "daysLeft": "Nog {n} dagen",
+    "oneDayLeft": "Laatste dag om te boeken",
+    "closed": "Boeken gesloten",
+    "booked": "Geboekt",
+    "available": "Beschikbaar",
+    "nights": "{n} nachten",
+    "for2": "Voor 2 gasten",
+    "for3": "Voor 2–3 gasten",
+    "included": "Wat is inbegrepen",
+    "value": "Los geboekt: {value}",
+    "save": "Je bespaart {amount}",
+    "total": "Totaal arrangement voor 2, incl. heffingen",
+    "thirdGuest": "Derde gast: +{price}",
+    "reserve": "Reserveer dit arrangement",
+    "flexible": "Jouw data · vanaf {n} nachten",
+    "onlyOne": "Eén appartement · gaat maar één keer weg",
+    "chooseDates": "Kies je data"
+  },
+  "packages": {
+    "thanksgiving-2026": {
+      "holiday": "Thanksgiving",
+      "name": "Thanksgiving in de Caraïben",
+      "tagline": "Geen gedoe in de keuken, geen kou. Een privékok serveert het diner op je balkon.",
+      "includes": [
+        "Privétransfer van en naar de luchthaven",
+        "Welkomstboodschappen in de koelkast",
+        "Thanksgiving-diner van een privékok op je balkon: geroosterde kalkoen, Arubaanse bijgerechten en pumpkin pie",
+        "Catamarantocht bij zonsondergang met open bar"
+      ]
+    },
+    "new-year-2026": {
+      "holiday": "Oud & Nieuw",
+      "name": "Oud & Nieuw in Oranjestad",
+      "tagline": "Vuurwerk om middernacht boven de haven, op twee minuten van je deur.",
+      "includes": [
+        "Privétransfer van en naar de luchthaven",
+        "Champagne op ijs voor middernacht, met bloemen en een charcuterieplank",
+        "Het vuurwerk aan de boulevard van Oranjestad, op 2 minuten lopen",
+        "Nieuwjaarsbrunch geserveerd op je balkon",
+        "Laat vertrek op 2 januari"
+      ]
+    },
+    "valentines-2027": {
+      "holiday": "Valentijn & Presidents’ Day",
+      "name": "Het romantische weekend",
+      "tagline": "In 2027 valt Valentijnsdag in het lange Amerikaanse Presidents’ Day-weekend. Vier nachten, en maar één vrije dag nodig.",
+      "includes": [
+        "Privétransfer van en naar de luchthaven",
+        "Rode rozen, champagne en bonbons die al in het appartement op je wachten",
+        "Hotstonemassage voor twee, 60 minuten",
+        "Privédiner bij kaarslicht onder de sterren, op je balkon",
+        "Ontbijt op het balkon"
+      ]
+    },
+    "july4-2027": {
+      "holiday": "Fourth of July",
+      "name": "Independence Day op het eiland",
+      "tagline": "Het lange weekend, ingeruild voor turquoise water en zeeschildpadden.",
+      "includes": [
+        "Privétransfer van en naar de luchthaven",
+        "Welkomstboodschappen in de koelkast",
+        "Snorkeltocht per catamaran in de ochtend naar het Antilla-wrak en de schildpadden, met lunch en drankjes",
+        "Laat vertrek op 5 juli"
+      ]
+    },
+    "br-honeymoon": {
+      "holiday": "Huwelijksreis",
+      "name": "Huwelijksreis op Aruba",
+      "tagline": "Zeven nachten of meer op jullie eigen data, met de foto's als bewijs.",
+      "includes": [
+        "Privétransfer van en naar de luchthaven",
+        "Mousserende wijn, bloemen en een charcuterieplank bij aankomst",
+        "Professionele fotoshoot bij zonsondergang op Eagle Beach, met 40 bewerkte foto's",
+        "Hotstonemassage voor twee, 60 minuten",
+        "Privédiner bij kaarslicht op je balkon",
+        "Ontbijt op het balkon"
+      ]
+    },
+    "br-carnival-2027": {
+      "holiday": "Carnavalsvakantie",
+      "name": "Carnavalsvakantie op Aruba",
+      "tagline": "De Braziliaanse carnavalsvakantie valt samen met de Grote Parade van Aruba in Oranjestad, op zondag 7 februari.",
+      "includes": [
+        "Privétransfer van en naar de luchthaven",
+        "Caipirinha-welkomstpakket: cachaça, limoenen en suiker, plus de basis voor het ontbijt",
+        "Snorkeltocht per catamaran naar de schildpadden, met lunch en drankjes",
+        "Professionele fotoshoot op Eagle Beach, met 40 bewerkte foto's",
+        "Laat vertrek op 10 februari"
+      ]
+    },
+    "ar-summer-2027": {
+      "holiday": "Argentijnse zomer",
+      "name": "Caribische zomer",
+      "tagline": "Acht januarinachten aan de kalme, turquoise Caribische Zee.",
+      "includes": [
+        "Privétransfer van en naar de luchthaven",
+        "Argentijns welkomstpakket: yerba, mate en thermosfles, medialunas, dulce de leche en een fles Malbec",
+        "Snorkeltocht per catamaran naar de schildpadden, met lunch en drankjes",
+        "Tussentijdse schoonmaak met schone lakens en handdoeken",
+        "Laat vertrek op 17 januari"
+      ]
+    },
+    "ar-winter-2027": {
+      "holiday": "Wintervakantie",
+      "name": "Ontsnap aan de winter",
+      "tagline": "Ruil juli in Buenos Aires in voor 28°C en de zee, met z'n tweetjes.",
+      "includes": [
+        "Privétransfer van en naar de luchthaven",
+        "Argentijns welkomstpakket: yerba, mate en thermosfles, medialunas, dulce de leche en een fles Malbec",
+        "Hotstonemassage voor twee, 60 minuten",
+        "Privédiner bij kaarslicht op je balkon",
+        "Laat vertrek op 25 juli"
+      ]
+    }
+  }
+}

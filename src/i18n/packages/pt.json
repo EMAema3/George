@@ -1,0 +1,148 @@
+{
+  "seo": {
+    "title": "Pacotes em Aruba 2026–27: Réveillon e Carnaval | Casa Playa 204",
+    "desc": "Pacotes completos em Aruba para dois ou três: Ação de Graças, Réveillon, São Valentim, 4 de Julho, lua de mel e Carnaval. Cada data é vendida uma única vez."
+  },
+  "nav": "Pacotes",
+  "kicker": "Pacotes especiais",
+  "title": "As datas especiais, já planejadas",
+  "sub": "Quatro noites ou mais, com transfer, jantar e passeio de barco já reservados. Pensado para dois, com espaço para um terceiro.",
+  "honest": "Um só apartamento significa que cada data é vendida uma única vez. Reservou, acabou — e não existe outra unidade para onde transferir você.",
+  "home": {
+    "kicker": "Pacotes especiais",
+    "title": "Reserve a data, não só o quarto",
+    "sub": "Ação de Graças, Réveillon, São Valentim e 4 de Julho. Cada um planejado do começo ao fim e vendido uma única vez.",
+    "cta": "Ver todos os pacotes"
+  },
+  "sections": {
+    "us": {
+      "h": "Pacotes para feriados dos EUA",
+      "sub": "Feriadões nas datas que importam, sem temporada de furacões e com a imigração americana feita em Aruba na volta."
+    },
+    "br": {
+      "h": "Para casais do Brasil",
+      "sub": "Voos diretos de São Paulo, atendimento em português e todos os preços em dólares americanos."
+    },
+    "ar": {
+      "h": "Para casais da Argentina",
+      "sub": "Voos diretos da Argentina na temporada, atendimento em espanhol e um mate esperando por vocês na chegada."
+    }
+  },
+  "labels": {
+    "bookBy": "Reserve até {date}",
+    "daysLeft": "Faltam {n} dias",
+    "oneDayLeft": "Último dia para reservar",
+    "closed": "Reservas encerradas",
+    "booked": "Reservado",
+    "available": "Disponível",
+    "nights": "{n} noites",
+    "for2": "Para 2 hóspedes",
+    "for3": "Para 2–3 hóspedes",
+    "included": "O que está incluído",
+    "value": "Comprando separado: {value}",
+    "save": "Você economiza {amount}",
+    "total": "Total do pacote para 2, taxas incluídas",
+    "thirdGuest": "Terceiro hóspede: +{price}",
+    "reserve": "Reservar este pacote",
+    "flexible": "Suas datas · a partir de {n} noites",
+    "onlyOne": "Um só apartamento · vendido uma única vez",
+    "chooseDates": "Escolha suas datas"
+  },
+  "packages": {
+    "thanksgiving-2026": {
+      "holiday": "Ação de Graças",
+      "name": "Ação de Graças no Caribe",
+      "tagline": "Esqueça o fogão e o frio. Um chef particular serve o jantar na sua varanda.",
+      "includes": [
+        "Transfer privativo do aeroporto, ida e volta",
+        "Compras de boas-vindas esperando na geladeira",
+        "Jantar de Ação de Graças preparado por um chef particular na sua varanda: peru assado, acompanhamentos arubianos e torta de abóbora",
+        "Passeio de catamarã ao pôr do sol com open bar"
+      ]
+    },
+    "new-year-2026": {
+      "holiday": "Réveillon",
+      "name": "Réveillon em Oranjestad",
+      "tagline": "Fogos à meia-noite sobre o porto, a dois minutos da sua porta.",
+      "includes": [
+        "Transfer privativo do aeroporto, ida e volta",
+        "Champanhe no gelo para a meia-noite, com flores e uma tábua de frios",
+        "A queima de fogos na orla de Oranjestad, a 2 minutos a pé",
+        "Brunch de Ano-Novo servido na sua varanda",
+        "Saída mais tarde no dia 2 de janeiro"
+      ]
+    },
+    "valentines-2027": {
+      "holiday": "São Valentim e Presidents’ Day",
+      "name": "Fim de semana romântico",
+      "tagline": "Em 2027, o Dia de São Valentim cai no feriadão americano de Presidents’ Day. Quatro noites, com só um dia de folga do trabalho.",
+      "includes": [
+        "Transfer privativo do aeroporto, ida e volta",
+        "Rosas vermelhas, champanhe e chocolates esperando no apartamento",
+        "Massagem a dois com pedras quentes, de 60 minutos",
+        "Jantar privativo à luz de velas, sob as estrelas, na sua varanda",
+        "Café da manhã na varanda"
+      ]
+    },
+    "july4-2027": {
+      "holiday": "4 de Julho",
+      "name": "4 de Julho na ilha",
+      "tagline": "O feriadão, trocado por água azul-turquesa e tartarugas marinhas.",
+      "includes": [
+        "Transfer privativo do aeroporto, ida e volta",
+        "Compras de boas-vindas esperando na geladeira",
+        "Catamarã de snorkel pela manhã até o naufrágio do Antilla e as tartarugas, com almoço e bebidas",
+        "Saída mais tarde no dia 5 de julho"
+      ]
+    },
+    "br-honeymoon": {
+      "holiday": "Lua de mel",
+      "name": "Lua de mel em Aruba",
+      "tagline": "Sete noites ou mais, nas datas que vocês escolherem, com as fotos para provar.",
+      "includes": [
+        "Transfer privativo do aeroporto, ida e volta",
+        "Espumante, flores e tábua de frios na chegada",
+        "Ensaio fotográfico profissional ao pôr do sol em Eagle Beach, com 40 fotos editadas",
+        "Massagem a dois com pedras quentes, de 60 minutos",
+        "Jantar privativo à luz de velas na sua varanda",
+        "Café da manhã na varanda"
+      ]
+    },
+    "br-carnival-2027": {
+      "holiday": "Feriado de Carnaval",
+      "name": "Feriado de Carnaval em Aruba",
+      "tagline": "O feriado de Carnaval no Brasil coincide com o Grande Desfile de Aruba, em Oranjestad, no domingo, 7 de fevereiro.",
+      "includes": [
+        "Transfer privativo do aeroporto, ida e volta",
+        "Kit caipirinha de boas-vindas: cachaça, limão e açúcar, mais o básico para o café da manhã",
+        "Catamarã de snorkel até as tartarugas, com almoço e bebidas",
+        "Ensaio fotográfico profissional em Eagle Beach, com 40 fotos editadas",
+        "Saída mais tarde no dia 10 de fevereiro"
+      ]
+    },
+    "ar-summer-2027": {
+      "holiday": "Verão argentino",
+      "name": "Verão no Caribe",
+      "tagline": "Oito noites de janeiro no mar calmo e azul-turquesa do Caribe.",
+      "includes": [
+        "Transfer privativo do aeroporto, ida e volta",
+        "Kit argentino de boas-vindas: erva-mate, cuia e garrafa térmica, medialunas, doce de leite e uma garrafa de Malbec",
+        "Catamarã de snorkel até as tartarugas, com almoço e bebidas",
+        "Limpeza no meio da estadia, com lençóis e toalhas trocados",
+        "Saída mais tarde no dia 17 de janeiro"
+      ]
+    },
+    "ar-winter-2027": {
+      "holiday": "Férias de inverno",
+      "name": "Fuja do inverno",
+      "tagline": "Troque o julho de Buenos Aires por 28°C e mar, só vocês dois.",
+      "includes": [
+        "Transfer privativo do aeroporto, ida e volta",
+        "Kit argentino de boas-vindas: erva-mate, cuia e garrafa térmica, medialunas, doce de leite e uma garrafa de Malbec",
+        "Massagem a dois com pedras quentes, de 60 minutos",
+        "Jantar privativo à luz de velas na sua varanda",
+        "Saída mais tarde no dia 25 de julho"
+      ]
+    }
+  }
+}

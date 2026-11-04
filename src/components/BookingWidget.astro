@@ -10,7 +10,12 @@ import { moneyWhole } from '../lib/money.mjs';
 import { stockSrc, stockAlt } from '../data/stock.mjs';
 import site from '../data/site.json';
 
-const { locale = 'en', property, mode = 'hero', uid: uidProp } = Astro.props;
+const { locale = 'en', property, mode = 'hero', uid: uidProp, pkg = null, pkgLabels = null } = Astro.props;
+// pkg: a package from src/data/packages.json. Fixed packages lock the dates; flexible ones set a minimum stay.
+const isPkg = !!pkg;
+const pkgFixed = isPkg && !pkg.flexible;
+const minNights = pkg?.minNights ?? property.pricing.minNights;
+const maxG = pkg?.maxGuests ?? property.specs.maxGuests;
 const tr = t(locale);
 const p = property;
 const full = mode === 'full';
@@ -22,17 +27,18 @@ const S = {
   nights: tr('common.nights'), night: tr('common.night'),
   accommodation: tr('booking.accommodation'), redirect: tr('booking.payRedirect'),
   selectCheckin: tr('cal.selectCheckin'), selectCheckout: tr('cal.selectCheckout'),
-  nightsSelected: tr('cal.nightsSelected'), minStay: tr('cal.minStayShort').replace('{n}', String(p.pricing.minNights)),
+  nightsSelected: tr('cal.nightsSelected'), minStay: tr('cal.minStayShort').replace('{n}', String(minNights)),
   unavailable: tr('booking.datesUnavailable'), addDates: tr('common.addDates'),
   generic: tr('errors.generic'), notConfigured: tr('errors.notConfigured'),
   total: tr('booking.total'), inclLevies: tr('booking.inclLevies'),
   prevMonth: tr('cal.prevMonth'), nextMonth: tr('cal.nextMonth'),
   bookNow: tr('common.bookNow'), done: tr('cal.done'),
+  booked: pkgLabels?.booked ?? 'Booked', closed: pkgLabels?.closed ?? 'Closed',
 };
 ---
-<div class="booking-box" id={uid} data-mode={mode}>
+<div class="booking-box" id={uid} data-mode={mode} data-pkg={pkg?.id}>
   <div class="bw-row">
-    <button type="button" class="bw-field bw-dates" aria-haspopup="dialog" aria-expanded="false">
+    <button type="button" class="bw-field bw-dates" aria-haspopup="dialog" aria-expanded="false" disabled={pkgFixed}>
       <span class="bw-label">{tr('common.checkin')} → {tr('common.checkout')}</span>
       <span class="bw-value">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
@@ -47,12 +53,12 @@ const S = {
         <button type="button" class="stp bw-g-plus" aria-label="+">+</button>
       </span>
     </div>
-    {!full && <button class="btn btn-terracotta btn-lg bw-book" type="button">{tr('common.bookNow')}</button>}
+    {!full && <button class="btn btn-terracotta btn-lg bw-book" type="button">{isPkg ? (pkgLabels?.reserve ?? tr('common.bookNow')) : tr('common.bookNow')}</button>}
   </div>
 
   {!full && (
     <div class="bw-foot">
-      <span class="bw-foot-main">{tr('common.fromLabel')} <strong>{moneyWhole(p.pricing.baseNightly, locale)}</strong> {tr('common.perNight')} · {tr('common.usd')}</span>
+      <span class="bw-foot-main">{isPkg ? (pkgLabels?.chooseDates ?? '') : <>{tr('common.fromLabel')} <strong>{moneyWhole(p.pricing.baseNightly, locale)}</strong> {tr('common.perNight')} · {tr('common.usd')}</>}</span>
       <span class="bw-secure">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
         {tr('common.instantConfirmation')}
@@ -65,7 +71,7 @@ const S = {
     <div class="dp-head">
       <div>
         <p class="dp-title"></p>
-        <p class="dp-sub">{tr('cal.minStayShort').replace('{n}', String(p.pricing.minNights))} · {tr('common.pricesUsd')}</p>
+        <p class="dp-sub">{tr('cal.minStayShort').replace('{n}', String(minNights))} · {tr('common.pricesUsd')}</p>
       </div>
       <button type="button" class="dp-x" aria-label={tr('cal.close')}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -155,7 +161,7 @@ const S = {
   <p class="bw-err" role="alert" hidden style="color:var(--terracotta);font-weight:600;margin:0 4px"></p>
 </div>
 
-<script define:vars={{ uid, locale, slug: p.slug, pricing: p.pricing, maxGuests: p.specs.maxGuests, dateTag: dateLocaleTag[locale] || 'en-US', isFull: full, S, waLink, bookUrl: urlFor('book', locale), addonNames: Object.fromEntries(p.addons.map((a) => [a.id, tr(`addons.${a.id}.name`)])) }}>
+<script define:vars={{ uid, locale, slug: p.slug, pricing: p.pricing, maxGuests: maxG, minNights, pkg: pkg ? { id: pkg.id, fixed: pkgFixed, checkin: pkg.checkin, checkout: pkg.checkout, extrasPrice: pkg.extrasPrice, extraGuestPrice: pkg.extraGuestPrice, baseGuests: pkg.baseGuests, bookBy: pkg.bookBy } : null, dateTag: dateLocaleTag[locale] || 'en-US', isFull: full, S, waLink, bookUrl: urlFor('book', locale), addonNames: Object.fromEntries(p.addons.map((a) => [a.id, tr(`addons.${a.id}.name`)])) }}>
 (() => {
   const root = document.getElementById(uid);
   if (!root) return;
@@ -173,7 +179,19 @@ const S = {
 
   let guests = 2, start = null, end = null, hover = null, viewY, viewM;
   let blocked = new Set();
-  fetch('/availability.json').then((r) => r.json()).then((d) => { blocked = new Set(d[slug] || []); if (!dp.hidden) draw(); }).catch(() => {});
+  fetch('/availability.json').then((r) => r.json()).then((d) => { blocked = new Set(d[slug] || []); if (!dp.hidden) draw(); checkPkgStatus(); }).catch(() => {});
+  // Packages: honest status — booked when its nights are taken, closed after the book-by date
+  function checkPkgStatus() {
+    if (!pkg) return;
+    const card = root.closest('.pkg');
+    const closed = pkg.bookBy && today > fromIso(pkg.bookBy);
+    const sold = pkg.fixed && start && end && !rangeFree(start, end);
+    if (sold || closed) {
+      bookBtn.disabled = true; bookBtn.textContent = sold ? S.booked : S.closed;
+      card?.classList.add(sold ? 'is-sold' : 'is-closed');
+      const st = card?.querySelector('[data-status]'); if (st) st.textContent = sold ? S.booked : S.closed;
+    }
+  }
 
   // ---- pricing (mirrored server-side; the server is the source of truth) ----
   const inSeason = (md, f, t) => (f <= t ? md >= f && md <= t : md >= f || md <= t);
@@ -188,7 +206,8 @@ const S = {
     const env = nights * pricing.environmentalLevyPerNight;
     const lines = [...root.querySelectorAll('.bw-addon:checked')].map((c) => ({ id: c.value, amt: c.dataset.unit === 'per_person' ? Number(c.dataset.price) * guests : Number(c.dataset.price) }));
     const addonTotal = lines.reduce((s, l) => s + l.amt, 0);
-    return { nights, acc, cleaning, levy, env, lines, total: acc + cleaning + levy + env + addonTotal };
+    const pkgExtras = pkg ? pkg.extrasPrice + Math.max(0, guests - pkg.baseGuests) * pkg.extraGuestPrice : 0;
+    return { nights, acc, cleaning, levy, env, lines, pkgExtras, total: acc + cleaning + levy + env + addonTotal + pkgExtras };
   }
 
   // ---- calendar ----
@@ -198,12 +217,14 @@ const S = {
     else if (dp.parentNode !== root) { root.appendChild(backdrop); root.appendChild(dp); }
     const base = start || today;
     viewY = base.getUTCFullYear(); viewM = base.getUTCMonth();
+    root.closest('.hero, .cta-band')?.classList.add('dp-on');
     dp.hidden = false; trigger.classList.add('is-active'); trigger.setAttribute('aria-expanded', 'true');
     if (isMobile()) { backdrop.classList.add('show'); document.documentElement.classList.add('sheet-open'); }
     draw();
   }
   function closeDp() {
-    dp.hidden = true; trigger.classList.remove('is-active'); trigger.setAttribute('aria-expanded', 'false');
+    dp.hidden = true; trigger.classList.remove('is-active');
+    root.closest('.hero, .cta-band')?.classList.remove('dp-on'); trigger.setAttribute('aria-expanded', 'false');
     backdrop.classList.remove('show'); document.documentElement.classList.remove('sheet-open');
   }
   function monthHtml(y, m) {
@@ -252,12 +273,12 @@ const S = {
     setMsg(''); err('');
     if (!start || end || dt <= start) { start = dt; end = null; hover = null; draw(); render(); return; }
     const n = Math.round((dt - start) / DAY);
-    if (n < pricing.minNights) { setMsg(S.minStay, true); return; }
+    if (n < minNights) { setMsg(S.minStay, true); return; }
     if (!rangeFree(start, dt)) { setMsg(S.unavailable, true); start = dt; end = null; draw(); render(); return; }
     end = dt; hover = null; draw(); render();
     if (!isMobile()) setTimeout(closeDp, 350);   // two taps and you're done (mobile: Book button appears in the sheet)
   }
-  trigger.addEventListener('click', (e) => { e.stopPropagation(); dp.hidden ? openDp() : closeDp(); });
+  trigger.addEventListener('click', (e) => { e.stopPropagation(); if (pkg && pkg.fixed) return; dp.hidden ? openDp() : closeDp(); });
   dp.addEventListener('click', (e) => e.stopPropagation());
   dp.querySelector('.dp-prev').addEventListener('click', () => { viewM--; if (viewM < 0) { viewM = 11; viewY--; } draw(); });
   dp.querySelector('.dp-next').addEventListener('click', () => { viewM++; if (viewM > 11) { viewM = 0; viewY++; } draw(); });
@@ -315,7 +336,7 @@ const S = {
     try {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ property: slug, checkin: iso(start), checkout: iso(end), guests, addons: [...root.querySelectorAll('.bw-addon:checked')].map((c) => c.value), locale }),
+        body: JSON.stringify({ property: slug, checkin: iso(start), checkout: iso(end), guests, addons: [...root.querySelectorAll('.bw-addon:checked')].map((c) => c.value), package: pkg ? pkg.id : undefined, locale }),
       });
       const data = await res.json().catch(() => ({}));
       if (data.url) { location.href = data.url; return; }
@@ -334,10 +355,12 @@ const S = {
 
   // ---- restore dates from the URL (?checkin=&checkout=&guests=) ----
   const qp = new URLSearchParams(location.search);
-  if (qp.get('checkin') && qp.get('checkout')) {
+  if (pkg && pkg.fixed) { start = fromIso(pkg.checkin); end = fromIso(pkg.checkout); }
+  else if (qp.get('checkin') && qp.get('checkout') && !pkg) {
     const s = fromIso(qp.get('checkin')), e2 = fromIso(qp.get('checkout'));
     if (!isNaN(s) && !isNaN(e2) && e2 > s && s >= today) { start = s; end = e2; }
   }
-  setGuests(Number(qp.get('guests')) || 2);
+  setGuests(pkg ? pkg.baseGuests : (Number(qp.get('guests')) || 2));
+  checkPkgStatus();
 })();
 </script>

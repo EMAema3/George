@@ -1,0 +1,62 @@
+---
+/** One package: photo, honest urgency (book-by countdown, one apartment), inclusions, value vs price, and a Reserve button straight to Stripe. */
+import BookingWidget from './BookingWidget.astro';
+import { dateLocaleTag } from '../i18n/index.mjs';
+import { img } from '../lib/img.mjs';
+import { money, moneyWhole } from '../lib/money.mjs';
+import { packageTotal } from '../lib/packages.mjs';
+
+const { locale = 'en', pkg, content: C, labels: Lb, property: p, reverse = false } = Astro.props;
+const im = img(pkg.image, locale, 1200);
+const fmt = new Intl.DateTimeFormat(dateLocaleTag[locale] || 'en-US', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const fmtShort = new Intl.DateTimeFormat(dateLocaleTag[locale] || 'en-US', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' });
+const d = (s) => new Date(`${s}T00:00:00Z`);
+const value = pkg.items.reduce((s, i) => s + i.value, 0);
+const save = value - pkg.extrasPrice;
+const nights = pkg.flexible ? pkg.minNights : Math.round((d(pkg.checkout) - d(pkg.checkin)) / 86400000);
+const total = packageTotal(pkg, p);
+const datesLine = pkg.flexible ? Lb.flexible.replace('{n}', String(pkg.minNights)) : `${fmtShort.format(d(pkg.checkin))} → ${fmtShort.format(d(pkg.checkout))} · ${Lb.nights.replace('{n}', String(nights))}`;
+---
+<article class:list={['pkg', { 'pkg-rev': reverse }]} id={pkg.id}>
+  <div class="pkg-img">
+    <img src={im.src} srcset={im.srcset} sizes="(max-width:900px) 100vw, 45vw" alt={im.alt} loading="lazy" width="1200" height="800" />
+    <span class="pkg-badge">{C.holiday}</span>
+    <span class="pkg-status" data-status></span>
+  </div>
+  <div class="pkg-body">
+    <p class="pkg-dates">{datesLine}</p>
+    <h3 class="pkg-name">{C.name}</h3>
+    <p class="pkg-tag">{C.tagline}</p>
+
+    <div class="pkg-urgency">
+      <span class="pkg-pill">{Lb.onlyOne}</span>
+      {pkg.bookBy && <span class="pkg-pill pkg-deadline" data-bookby={pkg.bookBy}>{Lb.bookBy.replace('{date}', fmt.format(d(pkg.bookBy)))} · <b class="pkg-left"></b></span>}
+      <span class="pkg-pill">{pkg.maxGuests > 2 ? Lb.for3 : Lb.for2}</span>
+    </div>
+
+    <h4 class="pkg-inc-h">{Lb.included}</h4>
+    <ul class="pkg-inc">{C.includes.map((x) => <li>{x}</li>)}</ul>
+
+    <div class="pkg-price">
+      <div>
+        <span class="pkg-total-l">{Lb.total}</span>
+        <strong class="pkg-total">{moneyWhole(Math.round(total), locale)}<small> USD</small></strong>
+        <span class="pkg-save">{Lb.value.replace('{value}', moneyWhole(value, locale))} · <b>{Lb.save.replace('{amount}', moneyWhole(save, locale))}</b></span>
+        {pkg.maxGuests > 2 && pkg.extraGuestPrice > 0 && <span class="pkg-third">{Lb.thirdGuest.replace('{price}', moneyWhole(pkg.extraGuestPrice, locale))}</span>}
+      </div>
+    </div>
+    <BookingWidget locale={locale} property={p} mode="hero" uid={`bk-pkg-${pkg.id}`} pkg={pkg} pkgLabels={Lb} />
+  </div>
+</article>
+
+<script define:vars={{ id: pkg.id, Lb, bookBy: pkg.bookBy }}>
+(() => {
+  const el = document.querySelector(`#${id} .pkg-left`);
+  if (!el || !bookBy) return;
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const end = new Date(bookBy + 'T23:59:59');
+  const days = Math.ceil((end - today) / 86400000) - 1;
+  el.textContent = days < 0 ? Lb.closed : days === 0 ? Lb.oneDayLeft : Lb.daysLeft.replace('{n}', String(days));
+  if (days <= 14) el.closest('.pkg-deadline').classList.add('is-soon');
+})();
+</script>

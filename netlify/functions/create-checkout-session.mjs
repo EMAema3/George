@@ -15,6 +15,14 @@ import nl from '../../src/i18n/nl.json';
 import pt from '../../src/i18n/pt.json';
 import de from '../../src/i18n/de.json';
 const DICT = { en, es, nl, pt, de };
+import packagesData from '../../src/data/packages.json';
+import pkEn from '../../src/i18n/packages/en.json';
+import pkEs from '../../src/i18n/packages/es.json';
+import pkNl from '../../src/i18n/packages/nl.json';
+import pkPt from '../../src/i18n/packages/pt.json';
+import pkDe from '../../src/i18n/packages/de.json';
+const PKDICT = { en: pkEn, es: pkEs, nl: pkNl, pt: pkPt, de: pkDe };
+const PACKAGES = Object.fromEntries(packagesData.packages.map((x) => [x.id, x]));
 
 const PROPERTIES = { 'casa-playa-204': casaPlaya204 };
 const AVAILABILITY = { 'casa-playa-204': availability204.blocked };
@@ -31,16 +39,16 @@ const STRIPE_LOCALES = { en: 'en', es: 'es', nl: 'nl', pt: 'pt-BR', de: 'de' };
 const iso = (d) => d.toISOString().slice(0, 10);
 const inSeason = (mmdd, from, to) => (from <= to ? mmdd >= from && mmdd <= to : mmdd >= from || mmdd <= to);
 
-function computeQuote(p, checkin, checkout, guests, addonIds) {
+function computeQuote(p, checkin, checkout, guests, addonIds, minNights = p.pricing.minNights, maxGuests = p.specs.maxGuests) {
   const start = new Date(`${checkin}T00:00:00Z`);
   const end = new Date(`${checkout}T00:00:00Z`);
   if (isNaN(start) || isNaN(end)) throw new Error('Invalid dates');
   const nights = Math.round((end - start) / 86400000);
-  if (nights < p.pricing.minNights) throw new Error(`Minimum stay is ${p.pricing.minNights} nights`);
+  if (nights < minNights) throw new Error(`Minimum stay is ${minNights} nights`);
   if (nights > 180) throw new Error('Stay too long');
   const today = new Date(); today.setUTCHours(0, 0, 0, 0);
   if (start < today) throw new Error('Check-in is in the past');
-  if (guests < 1 || guests > p.specs.maxGuests) throw new Error('Guest count out of range');
+  if (guests < 1 || guests > maxGuests) throw new Error('Guest count out of range');
 
   const blocked = new Set(AVAILABILITY[p.slug] ?? []);
   let acc = 0;
@@ -73,11 +81,22 @@ export const handler = async (event) => {
     return { statusCode: 503, headers, body: JSON.stringify({ code: 'not_configured', error: 'Payments are not configured yet. Set STRIPE_SECRET_KEY in Netlify environment variables.' }) };
   }
   try {
-    const { property, checkin, checkout, guests = 2, addons = [], locale = 'en' } = JSON.parse(event.body || '{}');
+    let { property, checkin, checkout, guests = 2, addons = [], locale = 'en', package: pkgId } = JSON.parse(event.body || '{}');
     const p = PROPERTIES[property];
     if (!p) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown property' }) };
 
-    const q = computeQuote(p, checkin, checkout, Number(guests), addons);
+    // Packages: server-side rules are the source of truth
+    let pkg = null, pkgExtras = 0;
+    if (pkgId) {
+      pkg = PACKAGES[pkgId];
+      if (!pkg || pkg.property !== property) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown package' }) };
+      const today = new Date(); today.setUTCHours(0, 0, 0, 0);
+      if (pkg.bookBy && today > new Date(`${pkg.bookBy}T00:00:00Z`)) return { statusCode: 400, headers, body: JSON.stringify({ error: 'This package is closed for booking' }) };
+      if (!pkg.flexible) { checkin = pkg.checkin; checkout = pkg.checkout; }
+      addons = [];
+      pkgExtras = pkg.extrasPrice + Math.max(0, Number(guests) - pkg.baseGuests) * pkg.extraGuestPrice;
+    }
+    const q = computeQuote(p, checkin, checkout, Number(guests), addons, pkg?.minNights ?? p.pricing.minNights, pkg?.maxGuests ?? p.specs.maxGuests);
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     const origin = process.env.URL || `https://${event.headers.host}`;
     const paths = LOCALE_PATHS[locale] ?? LOCALE_PATHS.en;
@@ -93,6 +112,10 @@ export const handler = async (event) => {
       { quantity: 1, price_data: { currency: cur, unit_amount: cents(q.env), product_data: { name: S.env.replace('{n}', String(q.nights)) } } },
       ...q.addons.map((a) => ({ quantity: 1, price_data: { currency: cur, unit_amount: cents(a.amount), product_data: { name: `${S.addon}: ${L.addons?.[a.id]?.name ?? a.id}` } } })),
     ];
+    if (pkg) {
+      const PK = (PKDICT[locale] ?? PKDICT.en).packages?.[pkg.id] ?? PKDICT.en.packages[pkg.id];
+      line_items.push({ quantity: 1, price_data: { currency: cur, unit_amount: cents(pkgExtras), product_data: { name: `${PK.name} — ${PK.includes.join(' · ')}`.slice(0, 250) } } });
+    }
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -100,7 +123,7 @@ export const handler = async (event) => {
       line_items,
       success_url: `${origin}${paths.confirmed}/?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}${paths.book}/?checkin=${checkin}&checkout=${checkout}&guests=${guests}`,
-      metadata: { property, checkin, checkout, guests: String(guests), addons: addons.join(',') },
+      metadata: { property, checkin, checkout, guests: String(guests), addons: addons.join(','), package: pkg ? pkg.id : '' },
       payment_intent_data: { description: `${p.name} ${checkin} → ${checkout}` },
       phone_number_collection: { enabled: true },
     });

@@ -69,3 +69,13 @@ Then update `SITE_URL` fallback in `astro.config.mjs` and the `Sitemap:` line in
 ## Adding properties 2–6
 
 See `ARCHITECTURE.md` → "The scaling model". It's one JSON file, one image folder, one registry line.
+
+## 8. Packages (`/packages`)
+
+Eight packages live in `src/data/packages.json` (dates, prices, inclusions, book-by deadlines);
+copy is in `src/i18n/packages/*.json`. The price shown is the price Stripe charges.
+- **Partners to line up before selling:** private chef (Thanksgiving), sunset catamaran, snorkel catamaran,
+  spa for couples hot-stone massage, beach photographer (40 edited photos), florist, grocery runner.
+- **When a package sells:** add its nights to `src/data/availability/casa-playa-204.json` — its card switches to "Booked"
+  automatically, and the regular calendar blocks those dates.
+- After a book-by date passes, the card shows "Booking closed"; it disappears on the next deploy.

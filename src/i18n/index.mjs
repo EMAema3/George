@@ -36,8 +36,15 @@ export const routes = {
   cruise:    { en: 'before-your-cruise', es: 'antes-de-su-crucero', nl: 'voor-je-cruise',      pt: 'antes-do-cruzeiro',     de: 'vor-der-kreuzfahrt' },
   weddings:  { en: 'weddings',       es: 'bodas',                 nl: 'bruiloften',            pt: 'casamentos',            de: 'hochzeiten' },
   carnival:  { en: 'carnival',       es: 'carnaval',              nl: 'carnaval',              pt: 'carnaval',              de: 'karneval' },
-  monthly:   { en: 'monthly',        es: 'estadias-largas',       nl: 'lang-verblijf',         pt: 'estadias-longas',       de: 'langzeitaufenthalt' }
+  monthly:   { en: 'monthly',        es: 'estadias-largas',       nl: 'lang-verblijf',         pt: 'estadias-longas',       de: 'langzeitaufenthalt' },
+  packages:  { en: 'packages',       es: 'paquetes',              nl: 'arrangementen',         pt: 'pacotes',               de: 'pakete' }
 };
+
+/** Package copy per locale (falls back to English). */
+const pkFiles = import.meta.glob('./packages/*.json', { eager: true, import: 'default' });
+export const packageContent = (locale) => pkFiles[`./packages/${locale}.json`] ?? pkFiles['./packages/en.json'];
+/** Which package market each language leads with. */
+export const marketOrder = { en: ['us', 'br', 'ar'], nl: ['us', 'ar', 'br'], de: ['us', 'br', 'ar'], pt: ['br', 'us', 'ar'], es: ['ar', 'us', 'br'] };
 
 /** English-only at launch (hreflang self only). Wave 2 translates them. */
 export const enOnlyRoutes = {

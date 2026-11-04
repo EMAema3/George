@@ -1,0 +1,148 @@
+{
+  "seo": {
+    "title": "Aruba Holiday Packages 2026–2027 — Thanksgiving, New Year, Valentine’s | Casa Playa 204",
+    "desc": "All-in Aruba packages for couples and small groups of three: Thanksgiving, New Year’s Eve, Valentine’s & Presidents’ Day and July 4th, plus honeymoon and Carnival stays. One apartment, so each holiday sells once."
+  },
+  "nav": "Packages",
+  "kicker": "Holiday packages",
+  "title": "The holidays, already planned",
+  "sub": "Four nights or more, with the transfer, the dinner and the boat already booked. Built for two, with room for a third.",
+  "honest": "One apartment means each holiday sells exactly once. When it’s booked, it’s gone, and there is no second unit to move you to.",
+  "home": {
+    "kicker": "Holiday packages",
+    "title": "Book the holiday, not just the room",
+    "sub": "Thanksgiving, New Year’s Eve, Valentine’s and the Fourth of July. Each one is planned in full and sells once.",
+    "cta": "See all packages"
+  },
+  "sections": {
+    "us": {
+      "h": "US holiday packages",
+      "sub": "Long weekends around the holidays that matter, with no hurricane season and US preclearance on the way home."
+    },
+    "br": {
+      "h": "For couples from Brazil",
+      "sub": "Direct flights from São Paulo, Portuguese spoken, and every price in US dollars."
+    },
+    "ar": {
+      "h": "For couples from Argentina",
+      "sub": "Direct flights from Argentina in season, Spanish spoken, and a mate waiting when you arrive."
+    }
+  },
+  "labels": {
+    "bookBy": "Book by {date}",
+    "daysLeft": "{n} days left",
+    "oneDayLeft": "Last day to book",
+    "closed": "Booking closed",
+    "booked": "Booked",
+    "available": "Available",
+    "nights": "{n} nights",
+    "for2": "For 2 guests",
+    "for3": "For 2–3 guests",
+    "included": "What’s included",
+    "value": "Bought separately: {value}",
+    "save": "You save {amount}",
+    "total": "Package total for 2, levies included",
+    "thirdGuest": "Third guest: +{price}",
+    "reserve": "Reserve this package",
+    "flexible": "Your dates · from {n} nights",
+    "onlyOne": "One apartment · sells once",
+    "chooseDates": "Choose your dates"
+  },
+  "packages": {
+    "thanksgiving-2026": {
+      "holiday": "Thanksgiving",
+      "name": "Thanksgiving in the Caribbean",
+      "tagline": "Skip the cooking and the cold. A private chef brings dinner to your balcony.",
+      "includes": [
+        "Round-trip private airport transfer",
+        "Welcome grocery pack in the fridge",
+        "Thanksgiving dinner by a private chef on your balcony: roast turkey, Aruban sides and pumpkin pie",
+        "Sunset catamaran sail with open bar"
+      ]
+    },
+    "new-year-2026": {
+      "holiday": "New Year’s Eve",
+      "name": "New Year’s Eve in Oranjestad",
+      "tagline": "Midnight fireworks over the harbour, two minutes from your door.",
+      "includes": [
+        "Round-trip private airport transfer",
+        "Champagne on ice for midnight, with flowers and a charcuterie board",
+        "Oranjestad’s waterfront fireworks, a 2-minute walk away",
+        "New Year’s Day brunch served on your balcony",
+        "Late checkout on January 2"
+      ]
+    },
+    "valentines-2027": {
+      "holiday": "Valentine’s & Presidents’ Day",
+      "name": "The Romance Weekend",
+      "tagline": "Valentine’s falls on the Presidents’ Day weekend in 2027. Four nights, and just one day off work.",
+      "includes": [
+        "Round-trip private airport transfer",
+        "Red roses, champagne and chocolates waiting in the apartment",
+        "60-minute couples hot-stone massage",
+        "Private candlelit dinner under the stars on your balcony",
+        "Breakfast on the balcony"
+      ]
+    },
+    "july4-2027": {
+      "holiday": "Fourth of July",
+      "name": "Independence Day Island Escape",
+      "tagline": "The long weekend, swapped for turquoise water and sea turtles.",
+      "includes": [
+        "Round-trip private airport transfer",
+        "Welcome grocery pack in the fridge",
+        "Morning snorkel catamaran to the Antilla wreck and the turtles, with lunch and drinks",
+        "Late checkout on July 5"
+      ]
+    },
+    "br-honeymoon": {
+      "holiday": "Honeymoon",
+      "name": "Honeymoon in Aruba",
+      "tagline": "Seven nights or more on your own dates, with the photos to prove it.",
+      "includes": [
+        "Round-trip private airport transfer",
+        "Sparkling wine, flowers and a charcuterie board on arrival",
+        "Professional sunset photoshoot at Eagle Beach, with 40 edited photos",
+        "60-minute couples hot-stone massage",
+        "Private candlelit dinner on your balcony",
+        "Breakfast on the balcony"
+      ]
+    },
+    "br-carnival-2027": {
+      "holiday": "Carnival holiday",
+      "name": "Carnival Holiday in Aruba",
+      "tagline": "Brazil’s Carnival holiday lines up with Aruba’s Grand Parade in Oranjestad on Sunday 7 February.",
+      "includes": [
+        "Round-trip private airport transfer",
+        "Caipirinha welcome kit: cachaça, limes and sugar, plus breakfast basics",
+        "Snorkel catamaran to the turtles, with lunch and drinks",
+        "Professional photoshoot at Eagle Beach, with 40 edited photos",
+        "Late checkout on February 10"
+      ]
+    },
+    "ar-summer-2027": {
+      "holiday": "Argentine summer",
+      "name": "Caribbean Summer",
+      "tagline": "Eight nights of January in the calm, turquoise Caribbean.",
+      "includes": [
+        "Round-trip private airport transfer",
+        "Argentine welcome kit: yerba, mate and thermos, medialunas, dulce de leche and a bottle of Malbec",
+        "Snorkel catamaran to the turtles, with lunch and drinks",
+        "Mid-stay clean with fresh sheets and towels",
+        "Late checkout on January 17"
+      ]
+    },
+    "ar-winter-2027": {
+      "holiday": "Winter break",
+      "name": "Escape the Winter",
+      "tagline": "Swap July in Buenos Aires for 28°C and the sea, just the two of you.",
+      "includes": [
+        "Round-trip private airport transfer",
+        "Argentine welcome kit: yerba, mate and thermos, medialunas, dulce de leche and a bottle of Malbec",
+        "60-minute couples hot-stone massage",
+        "Private candlelit dinner on your balcony",
+        "Late checkout on July 25"
+      ]
+    }
+  }
+}

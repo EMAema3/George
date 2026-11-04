@@ -1,0 +1,148 @@
+{
+  "seo": {
+    "title": "Aruba-Pakete 2026–27: Silvester, Valentinstag & mehr | Casa Playa 204",
+    "desc": "Rundum-Pakete auf Aruba für zwei oder drei: Thanksgiving, Silvester, Valentinstag, 4. Juli, Flitterwochen und Karneval. Jeder Termin wird nur einmal vergeben."
+  },
+  "nav": "Pakete",
+  "kicker": "Feiertagspakete",
+  "title": "Die Feiertage, schon geplant",
+  "sub": "Vier Nächte oder mehr, mit Transfer, Dinner und Bootsausflug bereits gebucht. Für zwei gemacht, mit Platz für eine dritte Person.",
+  "honest": "Ein Apartment heißt: Jeder Feiertag wird genau einmal verkauft. Ist er gebucht, ist er weg — und es gibt keine zweite Wohnung, in die wir Sie umbuchen könnten.",
+  "home": {
+    "kicker": "Feiertagspakete",
+    "title": "Buchen Sie den Feiertag, nicht nur das Zimmer",
+    "sub": "Thanksgiving, Silvester, Valentinstag und der 4. Juli. Jedes Paket ist komplett durchgeplant und wird nur einmal verkauft.",
+    "cta": "Alle Pakete ansehen"
+  },
+  "sections": {
+    "us": {
+      "h": "Pakete zu US-Feiertagen",
+      "sub": "Lange Wochenenden rund um die Feiertage, auf die es ankommt — ohne Hurrikansaison und mit US-Preclearance für den Rückflug."
+    },
+    "br": {
+      "h": "Für Paare aus Brasilien",
+      "sub": "Direktflüge ab São Paulo, wir sprechen Portugiesisch, und alle Preise sind in US-Dollar."
+    },
+    "ar": {
+      "h": "Für Paare aus Argentinien",
+      "sub": "In der Saison Direktflüge aus Argentinien, wir sprechen Spanisch, und bei der Ankunft wartet schon ein Mate auf Sie."
+    }
+  },
+  "labels": {
+    "bookBy": "Buchbar bis {date}",
+    "daysLeft": "Noch {n} Tage",
+    "oneDayLeft": "Letzter Buchungstag",
+    "closed": "Buchung geschlossen",
+    "booked": "Ausgebucht",
+    "available": "Verfügbar",
+    "nights": "{n} Nächte",
+    "for2": "Für 2 Gäste",
+    "for3": "Für 2–3 Gäste",
+    "included": "Inklusive",
+    "value": "Einzeln gebucht: {value}",
+    "save": "Sie sparen {amount}",
+    "total": "Paketpreis für 2, inkl. Abgaben",
+    "thirdGuest": "Dritter Gast: +{price}",
+    "reserve": "Dieses Paket reservieren",
+    "flexible": "Ihre Reisedaten · ab {n} Nächten",
+    "onlyOne": "Ein Apartment · nur einmal buchbar",
+    "chooseDates": "Reisedaten wählen"
+  },
+  "packages": {
+    "thanksgiving-2026": {
+      "holiday": "Thanksgiving",
+      "name": "Thanksgiving in der Karibik",
+      "tagline": "Kein Kochen, keine Kälte. Ein Privatkoch serviert das Dinner auf Ihrem Balkon.",
+      "includes": [
+        "Privater Flughafentransfer hin und zurück",
+        "Willkommenseinkauf im Kühlschrank",
+        "Thanksgiving-Dinner vom Privatkoch auf Ihrem Balkon: Truthahnbraten, arubanische Beilagen und Pumpkin Pie",
+        "Katamaranfahrt zum Sonnenuntergang mit Open Bar"
+      ]
+    },
+    "new-year-2026": {
+      "holiday": "Silvester",
+      "name": "Silvester in Oranjestad",
+      "tagline": "Mitternachtsfeuerwerk über dem Hafen, zwei Minuten von Ihrer Haustür.",
+      "includes": [
+        "Privater Flughafentransfer hin und zurück",
+        "Champagner auf Eis für Mitternacht, dazu Blumen und eine Charcuterie-Platte",
+        "Das Feuerwerk an der Uferpromenade von Oranjestad, 2 Gehminuten entfernt",
+        "Neujahrsbrunch auf Ihrem Balkon",
+        "Späte Abreise am 2. Januar"
+      ]
+    },
+    "valentines-2027": {
+      "holiday": "Valentinstag & Presidents’ Day",
+      "name": "Das romantische Wochenende",
+      "tagline": "2027 fällt der Valentinstag auf das lange US-Wochenende zum Presidents’ Day. Vier Nächte für nur einen Urlaubstag.",
+      "includes": [
+        "Privater Flughafentransfer hin und zurück",
+        "Rote Rosen, Champagner und Pralinen erwarten Sie im Apartment",
+        "60-minütige Hot-Stone-Massage für zwei",
+        "Privates Candlelight-Dinner unter Sternen auf Ihrem Balkon",
+        "Frühstück auf dem Balkon"
+      ]
+    },
+    "july4-2027": {
+      "holiday": "Fourth of July",
+      "name": "Independence Day auf der Insel",
+      "tagline": "Das lange Wochenende, eingetauscht gegen türkisfarbenes Wasser und Meeresschildkröten.",
+      "includes": [
+        "Privater Flughafentransfer hin und zurück",
+        "Willkommenseinkauf im Kühlschrank",
+        "Schnorchel-Katamaran am Vormittag zum Antilla-Wrack und zu den Schildkröten, mit Lunch und Getränken",
+        "Späte Abreise am 5. Juli"
+      ]
+    },
+    "br-honeymoon": {
+      "holiday": "Flitterwochen",
+      "name": "Flitterwochen auf Aruba",
+      "tagline": "Sieben Nächte oder mehr zu Ihren Wunschterminen — mit den Fotos als Beweis.",
+      "includes": [
+        "Privater Flughafentransfer hin und zurück",
+        "Sekt, Blumen und eine Charcuterie-Platte bei Ankunft",
+        "Professionelles Fotoshooting bei Sonnenuntergang am Eagle Beach, mit 40 bearbeiteten Fotos",
+        "60-minütige Hot-Stone-Massage für zwei",
+        "Privates Candlelight-Dinner auf Ihrem Balkon",
+        "Frühstück auf dem Balkon"
+      ]
+    },
+    "br-carnival-2027": {
+      "holiday": "Karnevalsferien",
+      "name": "Karnevalsferien auf Aruba",
+      "tagline": "Die brasilianischen Karnevalsfeiertage fallen mit Arubas großer Parade in Oranjestad zusammen — am Sonntag, 7. Februar.",
+      "includes": [
+        "Privater Flughafentransfer hin und zurück",
+        "Caipirinha-Willkommensset: Cachaça, Limetten und Zucker, dazu das Nötigste fürs Frühstück",
+        "Schnorchel-Katamaran zu den Schildkröten, mit Lunch und Getränken",
+        "Professionelles Fotoshooting am Eagle Beach, mit 40 bearbeiteten Fotos",
+        "Späte Abreise am 10. Februar"
+      ]
+    },
+    "ar-summer-2027": {
+      "holiday": "Argentinischer Sommer",
+      "name": "Karibischer Sommer",
+      "tagline": "Acht Januarnächte in der ruhigen, türkisblauen Karibik.",
+      "includes": [
+        "Privater Flughafentransfer hin und zurück",
+        "Argentinisches Willkommensset: Yerba, Mate und Thermoskanne, Medialunas, Dulce de Leche und eine Flasche Malbec",
+        "Schnorchel-Katamaran zu den Schildkröten, mit Lunch und Getränken",
+        "Zwischenreinigung mit frischer Bettwäsche und Handtüchern",
+        "Späte Abreise am 17. Januar"
+      ]
+    },
+    "ar-winter-2027": {
+      "holiday": "Winterferien",
+      "name": "Dem Winter entfliehen",
+      "tagline": "Tauschen Sie den Juli in Buenos Aires gegen 28°C und das Meer — nur Sie beide.",
+      "includes": [
+        "Privater Flughafentransfer hin und zurück",
+        "Argentinisches Willkommensset: Yerba, Mate und Thermoskanne, Medialunas, Dulce de Leche und eine Flasche Malbec",
+        "60-minütige Hot-Stone-Massage für zwei",
+        "Privates Candlelight-Dinner auf Ihrem Balkon",
+        "Späte Abreise am 25. Juli"
+      ]
+    }
+  }
+}

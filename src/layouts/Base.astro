@@ -1,5 +1,5 @@
 ---
-import { t, urlFor, alternatesFor, localeNames, locales, routes, enOnlyRoutes, occasions, pageContent } from '../i18n/index.mjs';
+import { t, urlFor, alternatesFor, localeNames, locales, routes, enOnlyRoutes, occasions, pageContent, packageContent } from '../i18n/index.mjs';
 import site from '../data/site.json';
 import { flagship } from '../data/properties/index.mjs';
 import { stockSrc } from '../data/stock.mjs';
@@ -40,6 +40,7 @@ const crumbs = {
 const allSchema = [crumbs, ...schema];
 const occ = occasions.map((o) => ({ ...o, label: pageContent(L, o.key).kicker, href: urlFor(o.key, L) }));
 const isOcc = occasions.some((o) => o.key === pageKey);
+const pkLabel = packageContent(L).nav;
 ---
 <!doctype html>
 <html lang={locale}>
@@ -84,6 +85,7 @@ const isOcc = occasions.some((o) => o.key === pageKey);
         <a href={urlFor('apartment', L)} aria-current={pageKey === 'apartment' ? 'page' : undefined}>{tr('nav.apartment')}</a>
         <a href={urlFor('building', L)} aria-current={pageKey === 'building' ? 'page' : undefined}>{tr('nav.building')}</a>
         <a href={urlFor('location', L)} aria-current={pageKey === 'location' ? 'page' : undefined}>{tr('nav.location')}</a>
+        <a class="nav-hot" href={urlFor('packages', L)} aria-current={pageKey === 'packages' ? 'page' : undefined}>{pkLabel}</a>
         <details class="nav-drop">
           <summary style={isOcc ? 'color:var(--tile-green)' : undefined}>{tr('nav.occasions')} <span aria-hidden="true">▾</span></summary>
           <div class="nav-drop-menu">
@@ -143,6 +145,7 @@ const isOcc = occasions.some((o) => o.key === pageKey);
         </div>
         <div>
           <h3>{tr('nav.occasions')}</h3>
+          <p><a href={urlFor('packages', L)}>{pkLabel}</a></p>
           {occ.map((o) => <p><a href={o.href}>{o.label}</a></p>)}
         </div>
         <div>

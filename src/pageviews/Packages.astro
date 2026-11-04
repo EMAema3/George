@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import PackageCard from '../components/PackageCard.astro';
+import { packageContent, marketOrder } from '../i18n/index.mjs';
+import { flagship as p } from '../data/properties/index.mjs';
+import { packagesFor, packageTotal } from '../lib/packages.mjs';
+import { img } from '../lib/img.mjs';
+
+const { locale = 'en' } = Astro.props;
+const K = packageContent(locale);
+const order = marketOrder[locale] ?? marketOrder.en;
+const list = packagesFor(order);
+const first = list[0];
+const heroImg = img(first?.image ?? 'new-years-eve-fireworks-over-water', locale, 1800);
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+// Offer schema so search engines and AI assistants can read each package's price and dates
+const schema = [{
+  '@context': 'https://schema.org', '@type': 'ItemList', name: K.title,
+  itemListElement: list.map((pk, i) => ({
+    '@type': 'ListItem', position: i + 1,
+    item: {
+      '@type': 'Offer', name: K.packages[pk.id].name, description: K.packages[pk.id].includes.join('; '),
+      price: Math.round(packageTotal(pk, p)), priceCurrency: 'USD',
+      availabilityStarts: pk.checkin, availabilityEnds: pk.checkout, validThrough: pk.bookBy ?? undefined,
+      url: `${siteUrl}${Astro.url.pathname}#${pk.id}`,
+    },
+  })),
+}];
+---
+<Base locale={locale} pageKey="packages" title={K.seo.title} description={K.seo.desc} heroPreload={heroImg.src} schema={schema}>
+  <Hero page image={heroImg} kicker={K.kicker} title={K.title} sub={K.sub}>
+    <p class="pkg-honest">{K.honest}</p>
+    <nav class="pkg-jump" aria-label={K.kicker}>
+      {list.map((pk) => <a href={`#${pk.id}`}>{K.packages[pk.id].holiday}</a>)}
+    </nav>
+  </Hero>
+
+  {order.map((m) => { const items = list.filter((x) => x.market === m); return items.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="sec-head">
+          <p class="kicker">{K.kicker}</p>
+          <h2>{K.sections[m].h}</h2>
+          <p class="lede">{K.sections[m].sub}</p>
+        </div>
+        <div class="pkg-list">
+          {items.map((pk, i) => <PackageCard locale={locale} pkg={pk} content={K.packages[pk.id]} labels={K.labels} property={p} reverse={i % 2 === 1} />)}
+        </div>
+      </div>
+    </section>
+  ); })}
+</Base>

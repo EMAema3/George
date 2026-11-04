@@ -3,7 +3,8 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import BookingWidget from '../components/BookingWidget.astro';
 import Gallery from '../components/Gallery.astro';
-import { t, urlFor, dateLocaleTag, pageContent, occasions } from '../i18n/index.mjs';
+import { t, urlFor, dateLocaleTag, pageContent, occasions, packageContent, marketOrder } from '../i18n/index.mjs';
+import { packagesFor, packageTotal } from '../lib/packages.mjs';
 import { flagship as p } from '../data/properties/index.mjs';
 import site from '../data/site.json';
 import { vacationRentalSchema, lodgingBusinessSchema } from '../lib/schema.mjs';
@@ -35,6 +36,10 @@ const buildingA = img('prop:casa-playa-aruba-royal-plaza-arcade-green-white-tile
 const buildingB = img('prop:casa-playa-204-aruba-balcony-dutch-colonial-architecture-view', locale, 800);
 const ctaImg = img('aruba-sunset-palapa-sea', locale, 1800);
 const schema = [vacationRentalSchema(p, siteUrl, locale), lodgingBusinessSchema(p, siteUrl, site)];
+const K = packageContent(locale);
+const teasers = packagesFor(marketOrder[locale] ?? marketOrder.en).slice(0, 4);
+const tFmt = new Intl.DateTimeFormat(dateLocaleTag[locale] || 'en-US', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+const tDates = (pk) => pk.flexible ? K.labels.flexible.replace('{n}', String(pk.minNights)) : `${tFmt.format(new Date(pk.checkin + 'T00:00:00Z'))} → ${tFmt.format(new Date(pk.checkout + 'T00:00:00Z'))}`;
 const icons = {
   pool: 'M2 17c2 0 2-1.4 4-1.4s2 1.4 4 1.4 2-1.4 4-1.4 2 1.4 4 1.4M2 21c2 0 2-1.4 4-1.4s2 1.4 4 1.4 2-1.4 4-1.4 2 1.4 4 1.4M14 4v9M8 4v9M8 7h6M8 11h6',
   gym: 'M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10M2 12h2M20 12h2',
@@ -72,6 +77,31 @@ const factIcons = [
         <h2>{tr('gallery.title')}</h2>
       </div>
       <Gallery locale={locale} property={p} mode="preview" uid="home-gal" />
+    </div>
+  </section>
+
+  <!-- Holiday packages -->
+  <section class="section" style="background:#fff">
+    <div class="container">
+      <div class="sec-head">
+        <p class="kicker">{K.home.kicker}</p>
+        <h2>{K.home.title}</h2>
+        <p class="lede">{K.home.sub}</p>
+      </div>
+      <div class="pkg-teasers">
+        {teasers.map((pk) => { const im = img(pk.image, locale, 600); return (
+          <a class="pkg-teaser" href={`${urlFor('packages', locale)}#${pk.id}`}>
+            <span class="t-img"><img src={im.src} srcset={im.srcset} sizes="(max-width:600px) 100vw, 25vw" alt={im.alt} loading="lazy" width="600" height="400" /><span class="pkg-badge">{K.packages[pk.id].holiday}</span></span>
+            <span class="t-body">
+              <span class="t-dates">{tDates(pk)}</span>
+              <h3>{K.packages[pk.id].name}</h3>
+              <span class="t-price">{moneyWhole(Math.round(packageTotal(pk, p)), locale)} <small>USD</small></span>
+              <small style="color:var(--terracotta-deep);font-weight:600;font-size:0.8rem">{pk.bookBy ? K.labels.bookBy.replace('{date}', new Intl.DateTimeFormat(dateLocaleTag[locale] || 'en-US', { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(new Date(pk.bookBy + 'T00:00:00Z'))) : K.labels.onlyOne}</small>
+            </span>
+          </a>
+        ); })}
+      </div>
+      <p style="margin-top:24px"><a class="btn btn-terracotta" href={urlFor('packages', locale)}>{K.home.cta} →</a></p>
     </div>
   </section>
 

@@ -301,7 +301,7 @@ a:hover { color: var(--terracotta); }
 .stat { background: #fff; padding: 22px 20px; }
 .stat b { display: block; font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; color: var(--tile-green); line-height: 1.1; }
 .stat span { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.4; display: block; margin-top: 4px; }
-.stats-float { margin-top: -54px; position: relative; z-index: 3; }
+.stats-float { margin-top: -54px; position: relative; z-index: 6; }
 
 /* ---------- Story sections (alternating image / text) ---------- */
 .story { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
@@ -498,3 +498,72 @@ html.sheet-open .sticky-book, html.sheet-open .wa-float { display: none; }
   .dp-foot { position: static; flex: none; margin: 8px -16px 0; }
   .dp-foot > * { min-width: 0; }
 }
+
+/* A hero / CTA band rises above everything only while its calendar is open */
+.hero.dp-on, .cta-band.dp-on { z-index: 40; }
+
+/* ---------- Packages ---------- */
+.pkg-honest { display: inline-flex; gap: 10px; align-items: center; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(6px); padding: 10px 16px; border-radius: 12px; font-size: 0.98rem; max-width: 62ch; color: #fff; text-shadow: none; }
+.pkg-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.pkg-jump a { color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; background: rgba(8,26,20,0.45); border: 1px solid rgba(255,255,255,0.35); }
+.pkg-jump a:hover { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+.pkg-list { display: grid; gap: clamp(28px, 4vw, 44px); }
+.pkg { display: grid; grid-template-columns: 1fr 1.1fr; background: #fff; border-radius: 24px; box-shadow: var(--shadow-card); overflow: visible; scroll-margin-top: 90px; position: relative; }
+.pkg-rev .pkg-img { order: 2; border-radius: 0 24px 24px 0; }
+.pkg-img { position: relative; border-radius: 24px 0 0 24px; overflow: hidden; min-height: 420px; }
+.pkg-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pkg-badge { position: absolute; top: 18px; left: 18px; background: var(--terracotta); color: #fff; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 7px 14px; border-radius: 999px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+.pkg-status { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(8,26,20,0.6); color: #fff; font-family: var(--font-display); font-size: 2rem; }
+.pkg.is-sold .pkg-status::after { content: attr(data-label); }
+.pkg.is-sold .pkg-img img, .pkg.is-closed .pkg-img img { filter: grayscale(0.7); }
+.pkg-body { padding: clamp(22px, 3vw, 38px); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pkg-dates { font-weight: 700; color: var(--caribbean-deep); font-size: 0.95rem; margin: 0; letter-spacing: 0.02em; }
+.pkg-name { font-size: clamp(1.6rem, 2.8vw, 2.2rem); margin: 4px 0 4px; }
+.pkg-tag { color: var(--ink-soft); font-size: 1.05rem; margin-bottom: 8px; }
+.pkg-urgency { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+.pkg-pill { font-size: 0.8rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: var(--cream); color: var(--ink); border: 1px solid rgba(29,106,80,0.18); }
+.pkg-deadline { background: var(--terracotta-soft); border-color: rgba(194,73,47,0.3); color: var(--terracotta-deep); }
+.pkg-deadline.is-soon { background: var(--terracotta); color: #fff; border-color: var(--terracotta); }
+.pkg-inc-h { font-family: var(--font-body); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 12px 0 4px; }
+.pkg-inc { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 8px; }
+.pkg-inc li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.97rem; line-height: 1.45; }
+.pkg-inc li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 1px; border-radius: 999px; background: var(--tile-green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center / 12px no-repeat; }
+.pkg-price { border-top: 1px solid rgba(29,106,80,0.14); padding-top: 14px; margin-top: auto; }
+.pkg-total-l { display: block; font-size: 0.8rem; color: var(--ink-soft); }
+.pkg-total { display: block; font-family: var(--font-display); font-size: 2.1rem; line-height: 1.15; }
+.pkg-total small { font-family: var(--font-body); font-size: 0.8rem; color: var(--ink-soft); font-weight: 600; }
+.pkg-save { display: block; font-size: 0.9rem; color: var(--ink-soft); }
+.pkg-save b { color: var(--tile-green); }
+.pkg-third { display: block; font-size: 0.85rem; color: var(--ink-soft); margin-top: 2px; }
+.pkg .booking-box { box-shadow: none; border: 1.5px solid rgba(29,106,80,0.16); max-width: none; margin-top: 12px; padding: 10px; }
+.pkg .bw-field:disabled { cursor: default; opacity: 1; }
+.pkg .bw-row { grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.9fr) auto; }
+
+/* Home: package teaser cards */
+.pkg-teasers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.pkg-teaser { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-card); text-decoration: none; color: var(--ink); display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+.pkg-teaser:hover { transform: translateY(-3px); box-shadow: var(--shadow-float); color: var(--ink); }
+.pkg-teaser .t-img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.pkg-teaser .t-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.pkg-teaser:hover .t-img img { transform: scale(1.05); }
+.pkg-teaser .pkg-badge { top: 12px; left: 12px; font-size: 0.72rem; padding: 5px 10px; }
+.pkg-teaser .t-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.pkg-teaser .t-dates { font-size: 0.82rem; font-weight: 700; color: var(--caribbean-deep); }
+.pkg-teaser h3 { font-size: 1.15rem; margin: 0; }
+.pkg-teaser .t-price { margin-top: auto; padding-top: 8px; font-weight: 700; color: var(--tile-green-deep); }
+.pkg-teaser .t-price small { color: var(--ink-soft); font-weight: 500; }
+.main-nav a.nav-hot { color: var(--terracotta); font-weight: 700; }
+
+@media (max-width: 1120px) { .pkg-teasers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) {
+  .pkg { grid-template-columns: 1fr; }
+  .pkg-img, .pkg-rev .pkg-img { order: 0; border-radius: 24px 24px 0 0; min-height: 0; aspect-ratio: 16 / 10; }
+  .pkg .bw-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) { .pkg-teasers { grid-template-columns: 1fr; } }
+
+.pkg.is-sold .pkg-status, .pkg.is-closed .pkg-status { display: flex; }
+.pkg .bw-row { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+.pkg .bw-row .bw-book { grid-column: 1 / -1; min-height: 56px; }
+.hero.page-hero .hero-content { padding-bottom: clamp(70px, 8vw, 100px); }
+@media (max-width: 900px) { .pkg .bw-row { grid-template-columns: 1fr 1fr; } }
