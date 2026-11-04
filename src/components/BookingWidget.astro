@@ -58,7 +58,7 @@ const S = {
 
   {!full && (
     <div class="bw-foot">
-      <span class="bw-foot-main">{isPkg ? (pkgLabels?.chooseDates ?? '') : <>{tr('common.fromLabel')} <strong>{moneyWhole(p.pricing.baseNightly, locale)}</strong> {tr('common.perNight')} · {tr('common.usd')}</>}</span>
+      <span class="bw-foot-main">{isPkg ? (pkgLabels?.chooseDates ?? '') : <>{tr('common.fromLabel')}{' '}<strong>{moneyWhole(p.pricing.baseNightly, locale)}</strong>{' '}{tr('common.perNight')} · {tr('common.usd')}</>}</span>
       <span class="bw-secure">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
         {tr('common.instantConfirmation')}
