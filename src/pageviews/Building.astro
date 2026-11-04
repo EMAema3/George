@@ -1,43 +1,46 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 import BookingWidget from '../components/BookingWidget.astro';
-import { t } from '../i18n/index.mjs';
+import { t, urlFor } from '../i18n/index.mjs';
 import { flagship as p } from '../data/properties/index.mjs';
+import { img } from '../lib/img.mjs';
 
 const { locale = 'en' } = Astro.props;
 const tr = t(locale);
-const img = (f, s = '') => `${p.images.dir}/${f}${s ? `-${s}w` : ''}.webp`;
-const alt = (g) => g.alt[locale] ?? g.alt.en;
-const arcade = p.images.gallery.find((g) => g.file.includes('royal-plaza-arcade')) ?? p.images.gallery[0];
-const courtyard = p.images.gallery.find((g) => g.file.includes('courtyard')) ?? p.images.gallery[4];
+const hero = img('prop:casa-playa-aruba-royal-plaza-arcade-green-white-tile', locale, 1200);
+const a = img('prop:casa-playa-204-aruba-balcony-dining-royal-plaza-courtyard', locale, 1200);
+const b = img('oranjestad-waterfront-pastel-buildings', locale, 1200);
+const c = img('prop:casa-playa-204-aruba-balcony-view-oranjestad-harbor', locale, 1200);
 const amens = ['pool', 'gym', 'library', 'valet-parking', 'security-24-7'];
+const resW = { en: 'Private residences', es: 'Residencias privadas', nl: 'Privéresidenties', pt: 'Residências privadas', de: 'Privatresidenzen' }[locale];
+const stats = [{ n: '62', l: resW }, { n: '3rd', l: tr('apartment.amenities.pool') }, { n: '24/7', l: tr('apartment.amenities.security-24-7') }, { n: '5 min', l: tr('location.distances.cruise-terminal') }];
 ---
 <Base locale={locale} pageKey="building">
-  <section class="section" style="padding-bottom:24px">
-    <div class="container">
-      <p class="kicker">Royal Plaza · Oranjestad</p>
-      <h1>{tr('building.title')}</h1>
-    </div>
-  </section>
-
-  <section class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-    <div class="arch-img" style="aspect-ratio:4/3"><img src={img(arcade.file, 800)} alt={alt(arcade)} width="800" height="533" /></div>
-    <div class="arch-img" style="aspect-ratio:4/3"><img src={img(courtyard.file, 800)} alt={alt(courtyard)} loading="lazy" width="800" height="533" /></div>
-  </section>
+  <Hero page image={hero} kicker="Royal Plaza · Oranjestad" title={tr('building.title')} sub={tr('building.p3')}>
+    <BookingWidget locale={locale} property={p} mode="hero" />
+  </Hero>
+  <section class="container"><div class="stats stats-float">{stats.map((s) => <div class="stat"><b>{s.n}</b><span>{s.l}</span></div>)}</div></section>
 
   <section class="section">
-    <div class="container" style="max-width:760px">
-      <p style="font-size:1.15rem">{tr('building.p1')}</p>
-      <p style="font-size:1.05rem">{tr('building.p2')}</p>
-      <p style="font-size:1.05rem">{tr('building.p3')}</p>
-      <h2 style="margin-top:36px">{tr('building.amenHeading')}</h2>
-      <ul class="amen-list" style="grid-template-columns:1fr">
-        {amens.map((a) => <li>{tr(`apartment.amenities.${a}`)}</li>)}
-      </ul>
+    <div class="container">
+      <div class="story">
+        <div class="story-img"><img src={b.src} srcset={b.srcset} sizes="(max-width:800px) 100vw, 50vw" alt={b.alt} loading="lazy" width="1200" height="800" /></div>
+        <div class="story-text"><p class="kicker">Royal Plaza</p><h2>{tr('home.heroTitle')}</h2><p>{tr('building.p1')}</p></div>
+      </div>
+      <div class="story">
+        <div class="story-img"><img src={a.src} srcset={a.srcset} sizes="(max-width:800px) 100vw, 50vw" alt={a.alt} loading="lazy" width="1024" height="683" /></div>
+        <div class="story-text">
+          <p class="kicker">{tr('building.amenHeading')}</p>
+          <h2>{tr('home.proofTitle')}</h2>
+          <p>{tr('building.p2')}</p>
+          <ul class="amen-list" style="grid-template-columns:1fr;margin-top:16px">{amens.map((x) => <li>{tr(`apartment.amenities.${x}`)}</li>)}</ul>
+        </div>
+      </div>
+      <div class="story">
+        <div class="story-img"><img src={c.src} srcset={c.srcset} sizes="(max-width:800px) 100vw, 50vw" alt={c.alt} loading="lazy" width="1024" height="683" /></div>
+        <div class="story-text"><p class="kicker">{tr('nav.location')}</p><h2>{tr('location.title')}</h2><p>{tr('location.intro')}</p><p><a class="btn btn-outline" href={urlFor('location', locale)}>{tr('nav.location')} →</a></p></div>
+      </div>
     </div>
   </section>
-
-  <div class="tile-divider" role="presentation"></div>
-  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale={locale} property={p} mode="hero" /></div></section>
-  <style>@media (max-width:800px){ section[style*="grid-template-columns"]{ display:block !important } section[style*="grid-template-columns"] > div{ margin-bottom:16px } }</style>
 </Base>

@@ -1,5 +1,16 @@
 {
-  "nav": { "home": "Start", "apartment": "Das Apartment", "building": "Das Gebäude", "location": "Lage", "reviews": "Bewertungen", "faq": "Fragen", "book": "Buchen", "guide": "Aruba-Guide" },
+  "nav": {
+    "home": "Start",
+    "apartment": "Apartment",
+    "building": "Gebäude",
+    "location": "Lage",
+    "reviews": "Bewertungen",
+    "faq": "FAQ",
+    "book": "Buchen",
+    "guide": "Aruba-Guide",
+    "occasions": "Anlässe",
+    "aruba": "Aruba"
+  },
   "common": {
     "bookNow": "Jetzt buchen",
     "checkDates": "Termine prüfen",
@@ -9,8 +20,8 @@
     "nights": "Nächte",
     "guests": "Gäste",
     "guest": "Gast",
-    "checkin": "Check-in",
-    "checkout": "Check-out",
+    "checkin": "Anreise",
+    "checkout": "Abreise",
     "selectDates": "Reisedaten wählen",
     "clearDates": "Löschen",
     "viewAllPhotos": "Alle Fotos ansehen",
@@ -21,7 +32,12 @@
     "instantConfirmation": "Sofortige Bestätigung. Kein Konto nötig.",
     "securePayment": "Sichere Kartenzahlung über Stripe",
     "minStay": "Mindestaufenthalt: {n} Nächte",
-    "backHome": "Zurück zur Startseite"
+    "backHome": "Zurück zur Startseite",
+    "dates": "Reisedaten",
+    "addDates": "Daten wählen",
+    "usd": "USD",
+    "pricesUsd": "Alle Preise in US-Dollar",
+    "fromLabel": "ab"
   },
   "booking": {
     "title": "Aufenthalt buchen",
@@ -29,7 +45,7 @@
     "accommodation": "Unterkunft",
     "cleaningFee": "Endreinigung",
     "touristLevy": "Aruba-Tourismusabgabe (12,5 %)",
-    "envLevy": "Umweltabgabe (3 $ × Nacht)",
+    "envLevy": "Umweltabgabe (US$3 × Nacht)",
     "total": "Gesamt",
     "totalNote": "Der Gesamtpreis, den Sie sehen, ist der Preis, den Sie zahlen. Alle Abgaben sind oben aufgeschlüsselt — keine Überraschung im letzten Schritt.",
     "payNow": "Weiter zur sicheren Zahlung",
@@ -46,14 +62,17 @@
     "selectDatesFirst": "Wählen Sie Ihre Daten, um den genauen Gesamtpreis zu sehen",
     "perPerson": "pro Person",
     "eachWay": "pro Strecke",
-    "payRedirect": "Weiterleitung zur sicheren Zahlung…"
+    "payRedirect": "Weiterleitung zur sicheren Zahlung…",
+    "inclLevies": "inkl. Abgaben & Reinigung",
+    "add": "Hinzufügen",
+    "added": "Hinzugefügt"
   },
   "confirmed": {
     "title": "Gebucht.",
     "sub": "Bestätigung und Beleg sind in Ihrem Posteingang. Vor der Anreise senden wir Ihnen alles Nötige — und wir sind nur eine WhatsApp-Nachricht entfernt.",
     "next": "Wie es weitergeht",
     "step1": "Sie erhalten innerhalb weniger Minuten eine Bestätigungs-E-Mail.",
-    "step2": "7–10 Tage vor Anreise: Check-in-Details, Anfahrt und einige optionale Extras.",
+    "step2": "7–10 Tage vor Anreise: Ankunftsinformationen, Anfahrt und einige optionale Extras.",
     "step3": "Fragen jederzeit — schreiben Sie uns per WhatsApp."
   },
   "home": {
@@ -147,16 +166,46 @@
   "faq": {
     "title": "Fragen, vollständig beantwortet",
     "items": [
-      { "q": "Welche Steuern und Abgaben zahle ich?", "a": "Aruba erhebt auf Ferienvermietungen eine Tourismusabgabe von 12,5 %, berechnet auf den Gesamtpreis inklusive Endreinigung, plus eine Umweltabgabe von 3 US-Dollar pro Nacht. Beide sind vor der Zahlung im Gesamtpreis aufgeschlüsselt — der Preis an der Kasse ist endgültig." },
-      { "q": "Wann kann ich ein- und auschecken?", "a": "Check-in von 15:00 bis 22:00 Uhr, Check-out bis 11:00 Uhr. Früher Check-in oder später Check-out kann für 45 $ hinzugebucht werden, wenn der Kalender es zulässt — ideal vor einer Kreuzfahrt." },
-      { "q": "Gibt es Parkplätze?", "a": "Ja — Valet-Parken unter dem Gebäude, im Aufenthalt inbegriffen. Die Einfahrt liegt an der Rückseite." },
-      { "q": "Wie schnell ist das WLAN wirklich?", "a": "Gemessen mit über 100 Mbit/s im Download. Im Wohnzimmer steht ein eigener Schreibtisch. Remote-Arbeitende bleiben regelmäßig einen Monat." },
-      { "q": "Kann man zu einem Strand laufen?", "a": "Ehrlich gesagt: Dies ist ein Stadtaufenthalt, keine Strandlage. Surfside Beach liegt etwa 15 Gehminuten an der Uferpromenade entlang; Eagle Beach — einer der besten der Karibik — 10 Autominuten oder eine kurze Busfahrt entfernt. Wer vom Zimmer direkt in den Sand will, ist in einem Resort am Palm Beach besser aufgehoben; wer abends zu Fuß essen gehen will, ist hier richtig." },
-      { "q": "Wie weit ist das Kreuzfahrtterminal?", "a": "Etwa 400 Meter — 5 Gehminuten mit Gepäck. Von der Gebäudeecke sehen Sie die Schiffe im Hafen. Viele Gäste übernachten hier am Abend vor der Einschiffung." },
-      { "q": "Wie sind die Stornobedingungen?", "a": "Volle Rückerstattung bis 14 Tage vor Anreise, 50 % bis 7 Tage davor. Sie stehen auch auf der Buchungsseite, bevor Sie zahlen." },
-      { "q": "Ist das Apartment barrierefrei?", "a": "Das Gebäude hat einen Aufzug von Garage und Straße in den zweiten Stock, das Apartment ist innen stufenlos. Die Dusche ist ebenerdig mit niedriger Schwelle. Sagen Sie uns, was Sie brauchen, und wir antworten präzise." },
-      { "q": "Muss ich in Florin zahlen?", "a": "Nein. Aruba rechnet überall in US-Dollar ab, wir auch. Karten werden auf der ganzen Insel akzeptiert." },
-      { "q": "Können Lebensmittel bei Ankunft im Kühlschrank sein?", "a": "Ja — buchen Sie den Einkaufsservice bei der Reservierung oder bis 3 Tage vor Anreise hinzu, ab 75 $. Nennen Sie Vorlieben und Allergien; wir kaufen am Morgen ein." }
+      {
+        "q": "Welche Steuern und Abgaben zahle ich?",
+        "a": "Aruba erhebt auf Ferienvermietungen eine Tourismusabgabe von 12,5 %, berechnet auf den Gesamtpreis inklusive Endreinigung, plus eine Umweltabgabe von 3 US-Dollar pro Nacht. Beide sind vor der Zahlung im Gesamtpreis aufgeschlüsselt — der Preis an der Kasse ist endgültig."
+      },
+      {
+        "q": "Wann kann ich anreisen und abreisen?",
+        "a": "Anreise von 15:00 bis 22:00 Uhr, Abreise bis 11:00 Uhr. Frühe Anreise (ab 11 Uhr) oder späte Abreise (bis 15 Uhr) für US$45, wenn der Kalender es zulässt — ideal vor einer Kreuzfahrt."
+      },
+      {
+        "q": "Gibt es Parkplätze?",
+        "a": "Ja — Valet-Parken unter dem Gebäude, im Aufenthalt inbegriffen. Die Einfahrt liegt an der Rückseite."
+      },
+      {
+        "q": "Wie schnell ist das WLAN wirklich?",
+        "a": "Gemessen mit über 100 Mbit/s im Download. Im Wohnzimmer steht ein eigener Schreibtisch. Remote-Arbeitende bleiben regelmäßig einen Monat."
+      },
+      {
+        "q": "Kann man zu einem Strand laufen?",
+        "a": "Ehrlich gesagt: Dies ist ein Stadtaufenthalt, keine Strandlage. Surfside Beach liegt etwa 15 Gehminuten an der Uferpromenade entlang; Eagle Beach — einer der besten der Karibik — 10 Autominuten oder eine kurze Busfahrt entfernt. Wer vom Zimmer direkt in den Sand will, ist in einem Resort am Palm Beach besser aufgehoben; wer abends zu Fuß essen gehen will, ist hier richtig."
+      },
+      {
+        "q": "Wie weit ist das Kreuzfahrtterminal?",
+        "a": "Etwa 400 Meter — 5 Gehminuten mit Gepäck. Von der Gebäudeecke sehen Sie die Schiffe im Hafen. Viele Gäste übernachten hier am Abend vor der Einschiffung."
+      },
+      {
+        "q": "Wie sind die Stornobedingungen?",
+        "a": "Volle Rückerstattung bis 14 Tage vor Anreise, 50 % bis 7 Tage davor. Sie stehen auch auf der Buchungsseite, bevor Sie zahlen."
+      },
+      {
+        "q": "Ist das Apartment barrierefrei?",
+        "a": "Das Gebäude hat einen Aufzug von Garage und Straße in den zweiten Stock, das Apartment ist innen stufenlos. Die Dusche ist ebenerdig mit niedriger Schwelle. Sagen Sie uns, was Sie brauchen, und wir antworten präzise."
+      },
+      {
+        "q": "Muss ich in Florin zahlen?",
+        "a": "Nein. Aruba rechnet überall in US-Dollar ab, wir auch. Karten werden auf der ganzen Insel akzeptiert."
+      },
+      {
+        "q": "Können Lebensmittel bei Ankunft im Kühlschrank sein?",
+        "a": "Ja — buchen Sie das Willkommenspaket (US$85) mit: Kaffee, Milch, Eier, frisches Brot, Obst der Saison und 12 Flaschen Wasser warten im Kühlschrank."
+      }
     ]
   },
   "footer": {
@@ -169,23 +218,110 @@
     "regNumber": "Aruba-Registrierungsnr."
   },
   "seo": {
-    "home": { "title": "Casa Playa 204 — Ferienwohnung im Royal-Plaza-Wahrzeichen, Oranjestad, Aruba", "desc": "Wohnen Sie im meistfotografierten Gebäude Oranjestads. Residenz mit 1 Schlafzimmer, Pool, Fitnessraum und 24/7-Sicherheitsdienst. 5 Gehminuten zum Kreuzfahrthafen. Direkt buchen — ohne Plattformgebühren." },
-    "apartment": { "title": "Das Apartment — Casa Playa 204, Oranjestad | Kingsize-Bett, Balkon, komplette Küche", "desc": "65 m², Kingsize-Schlafzimmer, Regendusche, komplette Küche, Balkon über dem Innenhof des Royal Plaza, 100 Mbit/s WLAN. Jeden Raum ansehen." },
-    "building": { "title": "Das Gebäude — Casa Playa, die ehemalige Royal Plaza Mall, Aruba", "desc": "Das pastellfarbene niederländisch-koloniale Wahrzeichen an der Uferpromenade von Oranjestad: 62 Residenzen, Pool mit Hafenblick, Fitnessraum, Valet-Parken, 24/7-Sicherheit." },
-    "location": { "title": "Lage — Casa Playa 204, L.G. Smith Boulevard 94, Oranjestad, Aruba", "desc": "5 Gehminuten zum Kreuzfahrtterminal, 15 zum Surfside Beach, 10 Autominuten zu Eagle Beach und Flughafen. Jede Entfernung ab der Tür gemessen." },
-    "reviews": { "title": "Gästebewertungen — Casa Playa 204, Oranjestad, Aruba", "desc": "Was Gäste über ihren Aufenthalt im Royal-Plaza-Wahrzeichen sagen — unbearbeitet, mit Vornamen und Monat." },
-    "faq": { "title": "Häufige Fragen — Abgaben, Check-in, Parken, WLAN | Casa Playa 204 Aruba", "desc": "Die Tourismusabgabe von 12,5 % und die Umweltabgabe von 3 $ pro Nacht erklärt, Check-in-Zeiten, Valet-Parken, gemessene WLAN-Geschwindigkeit, Stornierung." },
-    "book": { "title": "Casa Playa 204 buchen — Live-Verfügbarkeit, Gesamtpreis mit Abgaben, sofortige Bestätigung", "desc": "Daten wählen, Gesamtpreis mit aufgeschlüsselten Aruba-Abgaben sehen, mit Karte zahlen. Sofortige Bestätigung, kein Konto, keine Plattformgebühren." },
-    "confirmed": { "title": "Buchung bestätigt — Casa Playa 204", "desc": "Ihr Aufenthalt im Casa Playa 204 ist bestätigt." }
+    "home": {
+      "title": "Casa Playa 204 — Ferienwohnung im Royal-Plaza-Wahrzeichen, Oranjestad, Aruba",
+      "desc": "Wohnen Sie im meistfotografierten Gebäude Oranjestads. Residenz mit 1 Schlafzimmer, Pool, Fitnessraum und 24/7-Sicherheitsdienst. 5 Gehminuten zum Kreuzfahrthafen. Direkt buchen — ohne Plattformgebühren."
+    },
+    "apartment": {
+      "title": "Das Apartment — Casa Playa 204, Oranjestad | Kingsize-Bett, Balkon, komplette Küche",
+      "desc": "65 m², Kingsize-Schlafzimmer, Regendusche, komplette Küche, Balkon über dem Innenhof des Royal Plaza, 100 Mbit/s WLAN. Jeden Raum ansehen."
+    },
+    "building": {
+      "title": "Das Gebäude — Casa Playa, die ehemalige Royal Plaza Mall, Aruba",
+      "desc": "Das pastellfarbene niederländisch-koloniale Wahrzeichen an der Uferpromenade von Oranjestad: 62 Residenzen, Pool mit Hafenblick, Fitnessraum, Valet-Parken, 24/7-Sicherheit."
+    },
+    "location": {
+      "title": "Lage — Casa Playa 204, L.G. Smith Boulevard 94, Oranjestad, Aruba",
+      "desc": "5 Gehminuten zum Kreuzfahrtterminal, 15 zum Surfside Beach, 10 Autominuten zu Eagle Beach und Flughafen. Jede Entfernung ab der Tür gemessen."
+    },
+    "reviews": {
+      "title": "Gästebewertungen — Casa Playa 204, Oranjestad, Aruba",
+      "desc": "Was Gäste über ihren Aufenthalt im Royal-Plaza-Wahrzeichen sagen — unbearbeitet, mit Vornamen und Monat."
+    },
+    "faq": {
+      "title": "Häufige Fragen — Abgaben, Anreise, Parken, WLAN | Casa Playa 204 Aruba",
+      "desc": "Die Tourismusabgabe von 12,5 % und die Umweltabgabe von US$3 pro Nacht erklärt, An- und Abreisezeiten, Valet-Parken, gemessene WLAN-Geschwindigkeit, Stornierung."
+    },
+    "book": {
+      "title": "Casa Playa 204 buchen — Live-Verfügbarkeit, Gesamtpreis mit Abgaben, sofortige Bestätigung",
+      "desc": "Daten wählen, Gesamtpreis mit aufgeschlüsselten Aruba-Abgaben sehen, mit Karte zahlen. Sofortige Bestätigung, kein Konto, keine Plattformgebühren."
+    },
+    "confirmed": {
+      "title": "Buchung bestätigt — Casa Playa 204",
+      "desc": "Ihr Aufenthalt im Casa Playa 204 ist bestätigt."
+    }
   },
   "addons": {
-    "airport-transfer": { "name": "Flughafentransfer", "desc": "Abholung in der Ankunftshalle, 10 Minuten bis zur Tür. Pro Strecke buchbar." },
-    "grocery-stock": { "name": "Einkaufsservice", "desc": "Der Kühlschrank ist gefüllt, bevor Sie landen. Kaffee, Frühstück, Obst, Wein — schicken Sie Ihre Liste." },
-    "celebration": { "name": "Festpaket", "desc": "Prosecco auf Eis, Blumen und eine Charcuterie-Platte im Zimmer." },
-    "balcony-breakfast": { "name": "Privates Balkonfrühstück", "desc": "Serviert auf Ihrem Balkon über dem Innenhof." },
-    "balcony-dinner": { "name": "Abendessen unter Sternen", "desc": "Ein privates Abendessen für zwei auf dem Balkon." },
-    "midstay-clean": { "name": "Zwischenreinigung & Wäsche", "desc": "Komplette Reinigung und frische Bettwäsche, ideal ab einer Woche." },
-    "early-checkin": { "name": "Früher Check-in", "desc": "Ab 11 Uhr im Zimmer, wenn der Kalender es zulässt." },
-    "late-checkout": { "name": "Später Check-out", "desc": "Zimmer bis 15 Uhr behalten, wenn der Kalender es zulässt." }
+    "airport-transfer": {
+      "name": "Flughafentransfer",
+      "desc": "Privatwagen, hin und zurück. Abholung mit Namensschild in der Ankunftshalle; 10 Minuten bis zur Tür."
+    },
+    "grocery-stock": {
+      "name": "Willkommenspaket",
+      "desc": "Bei Ankunft im Kühlschrank: Kaffee, Milch, Eier, frisches Brot, Obst der Saison und 12 Flaschen Wasser."
+    },
+    "celebration": {
+      "name": "Festpaket",
+      "desc": "Gekühlter Prosecco, frische Blumen und eine Wurst- und Käseplatte, vor Ihrer Ankunft bereitgestellt."
+    },
+    "balcony-breakfast": {
+      "name": "Frühstück auf dem Balkon",
+      "desc": "Croissants, frisches Obst, Saft und Kaffee, serviert auf Ihrem Balkon."
+    },
+    "midstay-clean": {
+      "name": "Zwischenreinigung",
+      "desc": "Komplette Reinigung mit frischer Bettwäsche und Handtüchern. Empfohlen ab einer Woche."
+    },
+    "late-checkout": {
+      "name": "Späte Abreise",
+      "desc": "Behalten Sie das Apartment bis 15 Uhr. Ideal vor einem Abendflug oder einer Abfahrt am Abend."
+    },
+    "early-checkin": {
+      "name": "Frühe Anreise",
+      "desc": "Ab 11 Uhr im Apartment, wenn der Kalender es zulässt."
+    },
+    "balcony-dinner": {
+      "name": "Abendessen unter Sternen",
+      "desc": "Ein privates Abendessen für zwei auf dem Balkon."
+    }
+  },
+  "cal": {
+    "selectCheckin": "Wählen Sie Ihr Anreisedatum",
+    "selectCheckout": "Wählen Sie jetzt Ihr Abreisedatum",
+    "nightsSelected": "{n} Nächte ausgewählt",
+    "clear": "Daten löschen",
+    "done": "Fertig",
+    "close": "Schließen",
+    "prevMonth": "Vorheriger Monat",
+    "nextMonth": "Nächster Monat",
+    "unavailable": "Nicht verfügbar",
+    "minStayShort": "Mindestens {n} Nächte"
+  },
+  "gallery": {
+    "all": "Alle",
+    "living": "Wohnen",
+    "kitchen": "Küche & Essen",
+    "bedroom": "Schlafzimmer",
+    "bathroom": "Bad",
+    "balcony": "Balkon",
+    "building": "Das Gebäude",
+    "close": "Galerie schließen",
+    "prev": "Vorheriges Foto",
+    "next": "Nächstes Foto",
+    "of": "von",
+    "viewAll": "Alle {n} Fotos ansehen",
+    "title": "Jeder Raum, jeder Blick"
+  },
+  "errors": {
+    "generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen oder uns per WhatsApp schreiben.",
+    "notConfigured": "Die Online-Zahlung wird gerade eingerichtet. Schreiben Sie uns per WhatsApp, wir bestätigen Ihre Daten."
+  },
+  "stripe": {
+    "nights": "Nächte",
+    "guests": "Gäste",
+    "cleaning": "Endreinigung",
+    "levy": "Aruba-Tourismusabgabe (12,5 %)",
+    "env": "Umweltabgabe (US$3 × {n} Nächte)",
+    "addon": "Extra"
   }
 }

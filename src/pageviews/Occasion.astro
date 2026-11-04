@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import { t, urlFor, pageContent, occasions } from '../i18n/index.mjs';
+import { flagship as p } from '../data/properties/index.mjs';
+import { img } from '../lib/img.mjs';
+import { money } from '../lib/money.mjs';
+import { vacationRentalSchema } from '../lib/schema.mjs';
+
+const { locale = 'en', occasion } = Astro.props;
+const tr = t(locale);
+const C = pageContent(locale, occasion);
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+// Live numbers for any {placeholder} in the copy (monthly page) — never hard-coded
+const pr = p.pricing;
+const acc = pr.monthlyNightly * 28;
+const levy = Math.round((acc + pr.cleaningFee) * pr.touristLevyPct) / 100;
+const env = 28 * pr.environmentalLevyPerNight;
+const vars = { rate: money(pr.monthlyNightly, locale), acc: money(acc, locale), cleaning: money(pr.cleaningFee, locale), levy: money(levy, locale), env: money(env, locale), total: money(acc + pr.cleaningFee + levy + env, locale) };
+const fill = (s) => (s ?? '').replace(/\{(\w+)\}/g, (m, k) => vars[k] ?? m);
+
+const heroImg = img(C.hero, locale, 1800);
+const others = occasions.filter((o) => o.key !== occasion).map((o) => ({ href: urlFor(o.key, locale), im: img(o.img, locale, 600), label: pageContent(locale, o.key).kicker, title: pageContent(locale, o.key).title }));
+---
+<Base locale={locale} pageKey={occasion} title={fill(C.seo.title)} description={fill(C.seo.desc)} heroPreload={heroImg.src} schema={[vacationRentalSchema(p, siteUrl, locale)]}>
+  <Hero page image={heroImg} kicker={C.kicker} title={C.title} sub={C.sub}>
+    <BookingWidget locale={locale} property={p} mode="hero" />
+  </Hero>
+
+  <section class="container">
+    <div class="stats stats-float">
+      {C.facts.map((f) => <div class="stat"><b>{f.n}</b><span>{f.l}</span></div>)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {C.sections.map((s) => { const im = img(s.img, locale, 1200); return (
+        <div class="story">
+          <div class="story-img"><img src={im.src} srcset={im.srcset} sizes="(max-width:800px) 100vw, 50vw" alt={im.alt} loading="lazy" width="1200" height="800" /></div>
+          <div class="story-text">
+            <p class="kicker">{s.kicker}</p>
+            <h2>{s.h}</h2>
+            {s.p.map((para) => <p>{fill(para)}</p>)}
+          </div>
+        </div>
+      ); })}
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="check-band">
+      <div>
+        <h2>{C.listTitle}</h2>
+        <p style="color:#cfe3d8">{p.name} · {p.address.street}, {p.address.city}</p>
+        <p style="margin-top:20px"><a class="btn btn-terracotta" href={urlFor('book', locale)}>{tr('common.bookNow')}</a></p>
+      </div>
+      <ul class="check-list">{C.list.map((li) => <li>{fill(li)}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head"><h2>{tr('nav.occasions')}</h2></div>
+      <div class="img-cards">
+        {others.map((o) => (
+          <a class="img-card" href={o.href}>
+            <img src={o.im.src} srcset={o.im.srcset} sizes="(max-width:800px) 50vw, 25vw" alt={o.im.alt} loading="lazy" width="600" height="400" />
+            <div><strong>{o.label}</strong><span>{o.title}</span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band section">
+    <img src={heroImg.src} srcset={heroImg.srcset} sizes="100vw" alt="" loading="lazy" width="1800" height="1200" />
+    <div class="container">
+      <h2>{C.ctaTitle}</h2>
+      <p style="max-width:56ch;font-size:1.1rem">{C.ctaText}</p>
+      <div style="margin-top:22px"><BookingWidget locale={locale} property={p} mode="hero" uid={`bk-${occasion}-cta`} /></div>
+    </div>
+  </section>
+</Base>

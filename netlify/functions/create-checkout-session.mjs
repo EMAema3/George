@@ -9,6 +9,12 @@
 import Stripe from 'stripe';
 import casaPlaya204 from '../../src/data/properties/casa-playa-204.json';
 import availability204 from '../../src/data/availability/casa-playa-204.json';
+import en from '../../src/i18n/en.json';
+import es from '../../src/i18n/es.json';
+import nl from '../../src/i18n/nl.json';
+import pt from '../../src/i18n/pt.json';
+import de from '../../src/i18n/de.json';
+const DICT = { en, es, nl, pt, de };
 
 const PROPERTIES = { 'casa-playa-204': casaPlaya204 };
 const AVAILABILITY = { 'casa-playa-204': availability204.blocked };
@@ -54,7 +60,7 @@ function computeQuote(p, checkin, checkout, guests, addonIds) {
   const addons = [];
   for (const id of addonIds ?? []) {
     const a = p.addons.find((x) => x.id === id);
-    if (!a) continue;
+    if (!a || a.stage !== 'booking') continue;
     addons.push({ id, amount: a.unit === 'per_person' ? a.price * guests : a.price });
   }
   return { nights, acc, cleaning, levy, env, addons };
@@ -64,7 +70,7 @@ export const handler = async (event) => {
   const headers = { 'Content-Type': 'application/json' };
   if (event.httpMethod !== 'POST') return { statusCode: 405, headers, body: JSON.stringify({ error: 'POST only' }) };
   if (!process.env.STRIPE_SECRET_KEY) {
-    return { statusCode: 500, headers, body: JSON.stringify({ error: 'Payments are not configured yet. Set STRIPE_SECRET_KEY in Netlify environment variables.' }) };
+    return { statusCode: 503, headers, body: JSON.stringify({ code: 'not_configured', error: 'Payments are not configured yet. Set STRIPE_SECRET_KEY in Netlify environment variables.' }) };
   }
   try {
     const { property, checkin, checkout, guests = 2, addons = [], locale = 'en' } = JSON.parse(event.body || '{}');
@@ -78,12 +84,14 @@ export const handler = async (event) => {
     const cur = (p.pricing.currency || 'USD').toLowerCase();
     const cents = (n) => Math.round(n * 100);
 
+    const L = (DICT[locale] ?? DICT.en);
+    const S = L.stripe;
     const line_items = [
-      { quantity: 1, price_data: { currency: cur, unit_amount: cents(q.acc), product_data: { name: `${p.name} — ${q.nights} nights (${checkin} → ${checkout}, ${guests} guests)`, images: [`${origin}${p.images.dir}/${p.images.hero}-800w.webp`] } } },
-      { quantity: 1, price_data: { currency: cur, unit_amount: cents(q.cleaning), product_data: { name: 'Cleaning fee' } } },
-      { quantity: 1, price_data: { currency: cur, unit_amount: cents(q.levy), product_data: { name: `Aruba tourist levy (${p.pricing.touristLevyPct}%)` } } },
-      { quantity: 1, price_data: { currency: cur, unit_amount: cents(q.env), product_data: { name: `Environmental levy ($${p.pricing.environmentalLevyPerNight} × ${q.nights} nights)` } } },
-      ...q.addons.map((a) => ({ quantity: 1, price_data: { currency: cur, unit_amount: cents(a.amount), product_data: { name: `Add-on: ${a.id.replace(/-/g, ' ')}` } } })),
+      { quantity: 1, price_data: { currency: cur, unit_amount: cents(q.acc), product_data: { name: `${p.name} — ${q.nights} ${S.nights} (${checkin} → ${checkout}, ${guests} ${S.guests})`, images: [`${origin}${p.images.dir}/${p.images.hero}-800w.webp`] } } },
+      { quantity: 1, price_data: { currency: cur, unit_amount: cents(q.cleaning), product_data: { name: S.cleaning } } },
+      { quantity: 1, price_data: { currency: cur, unit_amount: cents(q.levy), product_data: { name: S.levy } } },
+      { quantity: 1, price_data: { currency: cur, unit_amount: cents(q.env), product_data: { name: S.env.replace('{n}', String(q.nights)) } } },
+      ...q.addons.map((a) => ({ quantity: 1, price_data: { currency: cur, unit_amount: cents(a.amount), product_data: { name: `${S.addon}: ${L.addons?.[a.id]?.name ?? a.id}` } } })),
     ];
 
     const session = await stripe.checkout.sessions.create({

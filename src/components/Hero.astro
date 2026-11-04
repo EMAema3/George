@@ -1,0 +1,16 @@
+---
+/** Full-bleed photo hero. The scrim guarantees white text is readable on any photo. */
+const { image, kicker, title, sub, page = false, eager = true } = Astro.props;
+---
+<section class:list={['hero', { 'page-hero': page }]}>
+  <div class="hero-img">
+    <img src={image.src} srcset={image.srcset} sizes="100vw" alt={image.alt} width={image.w} height={image.h} fetchpriority={eager ? 'high' : undefined} loading={eager ? 'eager' : 'lazy'} />
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="container hero-content">
+    {kicker && <p class="kicker">{kicker}</p>}
+    <h1>{title}</h1>
+    {sub && <p class="hero-sub">{sub}</p>}
+    <slot />
+  </div>
+</section>

@@ -1,42 +1,75 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 import BookingWidget from '../components/BookingWidget.astro';
 import { flagship as p } from '../data/properties/index.mjs';
 import { articleSchema, faqSchema } from '../lib/schema.mjs';
+import { guides, guideBySlug } from '../data/guides.mjs';
+import { img } from '../lib/img.mjs';
 
 const { slug, title, metaTitle, description, kicker, faq = [], published = '2026-11-03' } = Astro.props;
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const url = `${siteUrl}/guide/${slug}/`;
+const g = guideBySlug(slug);
+const heroImg = img(g?.img ?? 'aruba-tropical-beach-palms', 'en', 1800);
 const schema = [articleSchema({ title, description, url, datePublished: published, siteUrl })];
 if (faq.length) schema.push(faqSchema(faq));
+const related = guides.filter((x) => x.slug !== slug).slice(0, 3);
 ---
-<Base locale="en" pageKey={`guide/${slug}`} enOnly={true} title={metaTitle ?? title} description={description} schema={schema}>
+<Base locale="en" pageKey={`guide/${slug}`} enOnly={true} enOnlyPath={`/guide/${slug}/`} title={metaTitle ?? title} description={description} schema={schema} heroPreload={heroImg.src}>
+  <Hero page image={heroImg} kicker={kicker ?? g?.tag ?? 'Aruba guide'} title={title} />
   <article>
-    <section class="section" style="padding-bottom:20px">
-      <div class="container" style="max-width:760px">
-        <p class="kicker">{kicker ?? 'Aruba guide'}</p>
-        <h1>{title}</h1>
-      </div>
-    </section>
-    <section class="container section guide-body" style="padding-top:0;max-width:760px">
+    <section class="container section guide-body" style="max-width:780px">
+      <p style="font-size:0.9rem;color:var(--ink-soft)"><a href="/aruba/">← Aruba guide</a></p>
       <slot />
-      <div style="background:var(--tile-green-soft);border-radius:var(--radius);padding:24px;margin-top:36px">
+      {faq.length > 0 && (
+        <div style="margin-top:36px">
+          <h2>Quick answers</h2>
+          {faq.map((f) => (
+            <details class="faq-item"><summary>{f.q}</summary><div class="faq-a"><p style="margin:0">{f.a}</p></div></details>
+          ))}
+        </div>
+      )}
+      <div style="background:var(--tile-green-soft);border-radius:var(--radius);padding:26px;margin-top:36px">
         <h3 style="margin-bottom:6px">Three days in Oranjestad, on foot</h3>
-        <p style="font-size:0.95rem;margin-bottom:14px">Every article here ends the same way: with our full walking itinerary, free by email.</p>
+        <p style="font-size:0.95rem;margin-bottom:14px">Our full walking itinerary, free by email.</p>
         <form name="itinerary-lead" method="POST" data-netlify="true" style="display:flex;gap:8px;flex-wrap:wrap">
           <input type="hidden" name="form-name" value="itinerary-lead" />
           <input type="hidden" name="locale" value="en" />
-          <input type="email" name="email" required placeholder="you@email.com" style="flex:1;min-width:200px;font:inherit;padding:11px;border:1.5px solid rgba(29,106,80,0.35);border-radius:8px" aria-label="Email" />
+          <input type="email" name="email" required placeholder="you@email.com" style="flex:1;min-width:200px;font:inherit;padding:12px;border:1.5px solid rgba(29,106,80,0.35);border-radius:10px" aria-label="Email" />
           <button class="btn btn-primary" type="submit">Send it to me</button>
         </form>
       </div>
     </section>
   </article>
-  <div class="tile-divider" role="presentation"></div>
-  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale="en" property={p} mode="hero" /></div></section>
+
+  <section class="container" style="padding-bottom:clamp(48px,7vw,80px)">
+    <h2>Keep reading</h2>
+    <div class="guide-grid">
+      {related.map((r) => { const im = img(r.img, 'en', 600); return (
+        <a class="guide-card" href={`/guide/${r.slug}/`}>
+          <span class="gc-img"><img src={im.src} alt={im.alt} loading="lazy" width="600" height="400" /></span>
+          <span class="gc-body"><span class="gc-tag">{r.tag}</span><h3>{r.title}</h3><p>{r.blurb}</p></span>
+        </a>
+      ); })}
+    </div>
+  </section>
+
+  <section class="cta-band section">
+    <img src={heroImg.src} alt="" loading="lazy" width="1800" height="1200" />
+    <div class="container">
+      <h2>Stay in the middle of it</h2>
+      <p style="max-width:56ch">Casa Playa 204, on the Oranjestad waterfront. Book direct, with no platform fees.</p>
+      <div style="margin-top:20px"><BookingWidget locale="en" property={p} mode="hero" /></div>
+    </div>
+  </section>
   <style is:global>
     .guide-body h2 { margin-top: 1.6em; }
-    .guide-body ul { padding-left: 20px; }
-    .guide-body li { margin-bottom: 6px; }
+    .guide-body ul, .guide-body ol { padding-left: 22px; }
+    .guide-body li { margin-bottom: 8px; }
+    .guide-body > p { font-size: 1.07rem; }
+    .guide-body table { width: 100%; border-collapse: collapse; margin: 8px 0 20px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-card); }
+    .guide-body th, .guide-body td { text-align: left; padding: 12px 14px; border-bottom: 1px solid rgba(29,106,80,0.12); font-size: 0.97rem; }
+    .guide-body th { background: var(--tile-green-soft); }
   </style>
 </Base>

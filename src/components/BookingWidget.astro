@@ -1,76 +1,125 @@
 ---
 /**
- * The conversion machine. Present on every page (hero/compact) and on /book (full).
- * Two clicks to checkout: (1) tap a date range in the calendar, (2) hit Book —
- * the browser goes straight to Stripe Checkout. No account, no enquiry form.
+ * The conversion machine — on every page.
+ * Click 1: pick a date range (two taps in the calendar).
+ * Click 2: Book → Stripe Checkout (levies itemised there and shown here first).
+ * mode="hero": compact bar. mode="full": /book page with breakdown + six add-ons.
  */
 import { t, urlFor, dateLocaleTag } from '../i18n/index.mjs';
+import { moneyWhole } from '../lib/money.mjs';
+import { stockSrc, stockAlt } from '../data/stock.mjs';
+import site from '../data/site.json';
 
-const { locale = 'en', property, mode = 'hero' } = Astro.props;
+const { locale = 'en', property, mode = 'hero', uid: uidProp } = Astro.props;
 const tr = t(locale);
 const p = property;
 const full = mode === 'full';
-const bookingAddons = p.addons.filter((a) => a.stage === 'booking').slice(0, 2); // max 2 add-ons at a time
-const addonI18n = Object.fromEntries(p.addons.map((a) => [a.id, { name: tr(`addons.${a.id}.name`), desc: tr(`addons.${a.id}.desc`) }]));
-const uid = full ? 'bk-full' : 'bk-hero';
+const uid = uidProp ?? (full ? 'bk-full' : 'bk-hero');
+const addons = p.addons.filter((a) => a.stage === 'booking').sort((a, b) => a.order - b.order);
+const unitLabel = (a) => (a.unit === 'per_person' ? tr('booking.perPerson') : '');
+const waLink = `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, '')}`;
+const S = {
+  nights: tr('common.nights'), night: tr('common.night'),
+  accommodation: tr('booking.accommodation'), redirect: tr('booking.payRedirect'),
+  selectCheckin: tr('cal.selectCheckin'), selectCheckout: tr('cal.selectCheckout'),
+  nightsSelected: tr('cal.nightsSelected'), minStay: tr('cal.minStayShort').replace('{n}', String(p.pricing.minNights)),
+  unavailable: tr('booking.datesUnavailable'), addDates: tr('common.addDates'),
+  generic: tr('errors.generic'), notConfigured: tr('errors.notConfigured'),
+  total: tr('booking.total'), inclLevies: tr('booking.inclLevies'),
+  prevMonth: tr('cal.prevMonth'), nextMonth: tr('cal.nextMonth'),
+  bookNow: tr('common.bookNow'), done: tr('cal.done'),
+};
 ---
 <div class="booking-box" id={uid} data-mode={mode}>
-  <div class="booking-fields">
-    <div class="bfield">
-      <label for={`${uid}-in`}>{tr('common.checkin')}</label>
-      <input id={`${uid}-in`} class="bw-in" type="text" inputmode="none" readonly placeholder={tr('common.selectDates')} autocomplete="off" />
+  <div class="bw-row">
+    <button type="button" class="bw-field bw-dates" aria-haspopup="dialog" aria-expanded="false">
+      <span class="bw-label">{tr('common.checkin')} → {tr('common.checkout')}</span>
+      <span class="bw-value">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        <span class="bw-dates-txt"><span class="ph">{tr('common.addDates')}</span></span>
+      </span>
+    </button>
+    <div class="bw-field bw-guests-f" role="group" aria-label={tr('common.guests')}>
+      <span class="bw-label">{tr('common.guests')}</span>
+      <span class="bw-guests">
+        <button type="button" class="stp bw-g-minus" aria-label="−">−</button>
+        <span class="bw-value"><span class="bw-g">2</span></span>
+        <button type="button" class="stp bw-g-plus" aria-label="+">+</button>
+      </span>
     </div>
-    <div class="bfield">
-      <label for={`${uid}-out`}>{tr('common.checkout')}</label>
-      <input id={`${uid}-out`} class="bw-out" type="text" inputmode="none" readonly placeholder="—" autocomplete="off" />
+    {!full && <button class="btn btn-terracotta btn-lg bw-book" type="button">{tr('common.bookNow')}</button>}
+  </div>
+
+  {!full && (
+    <div class="bw-foot">
+      <span class="bw-foot-main">{tr('common.fromLabel')} <strong>{moneyWhole(p.pricing.baseNightly, locale)}</strong> {tr('common.perNight')} · {tr('common.usd')}</span>
+      <span class="bw-secure">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        {tr('common.instantConfirmation')}
+      </span>
     </div>
-    <div class="bfield">
-      <label for={`${uid}-g`}>{tr('common.guests')}</label>
-      <select id={`${uid}-g`} class="bw-guests">
-        {Array.from({ length: p.specs.maxGuests }, (_, i) => <option value={i + 1} selected={i + 1 === 2}>{i + 1}</option>)}
-      </select>
+  )}
+
+  <div class="dp-backdrop"></div>
+  <div class="dp" role="dialog" aria-modal="false" aria-label={tr('common.selectDates')} hidden>
+    <div class="dp-head">
+      <div>
+        <p class="dp-title"></p>
+        <p class="dp-sub">{tr('cal.minStayShort').replace('{n}', String(p.pricing.minNights))} · {tr('common.pricesUsd')}</p>
+      </div>
+      <button type="button" class="dp-x" aria-label={tr('cal.close')}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
     </div>
-    <div class="bfield bfield-btn">
-      <button class="btn btn-terracotta btn-lg bw-book" type="button">{full ? tr('booking.payNow') : tr('common.bookNow')}</button>
+    <div class="dp-months">
+      <div class="dp-nav">
+        <button type="button" class="dp-prev" aria-label={S.prevMonth}>‹</button>
+        <button type="button" class="dp-next" aria-label={S.nextMonth}>›</button>
+      </div>
+      <div class="dp-month" data-k="0"></div>
+      <div class="dp-month" data-k="1"></div>
+    </div>
+    <div class="dp-foot">
+      <span class="dp-msg" aria-live="polite"></span>
+      <span style="display:flex;gap:8px;align-items:center">
+        <button type="button" class="dp-clear">{tr('cal.clear')}</button>
+        <button type="button" class="btn btn-primary dp-done">{tr('cal.done')}</button>
+      </span>
     </div>
   </div>
 
-  <div class="bw-cal" hidden style="position:relative"><div class="cal-pop" style="position:absolute;top:4px;left:0;z-index:90"></div></div>
-
-  {full ? (
-    <div class="bw-lines" style="display:grid;gap:6px;font-size:0.98rem">
+  {full && (
+    <div class="bw-lines" style="display:grid;gap:8px;font-size:0.98rem;padding:6px 6px 0">
       <p class="bw-hint" style="margin:0;color:var(--ink-soft)">{tr('booking.selectDatesFirst')}</p>
-      <div class="bw-breakdown" hidden>
+      <div class="bw-breakdown" hidden style="display:grid;gap:6px">
         <div style="display:flex;justify-content:space-between"><span class="bw-l-nights"></span><span class="bw-v-acc"></span></div>
         <div style="display:flex;justify-content:space-between"><span>{tr('booking.cleaningFee')}</span><span class="bw-v-clean"></span></div>
         <div style="display:flex;justify-content:space-between"><span>{tr('booking.touristLevy')}</span><span class="bw-v-levy"></span></div>
         <div style="display:flex;justify-content:space-between"><span>{tr('booking.envLevy')}</span><span class="bw-v-env"></span></div>
-        <div class="bw-addon-lines"></div>
-        <div style="display:flex;justify-content:space-between;border-top:2px solid var(--tile-green);padding-top:8px;margin-top:4px;font-weight:700;font-size:1.15rem"><span>{tr('booking.total')}</span><span class="bw-v-total"></span></div>
-        <p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0 0">{tr('booking.totalNote')}</p>
+        <div class="bw-addon-lines" style="display:grid;gap:6px"></div>
+        <div style="display:flex;justify-content:space-between;border-top:2px solid var(--tile-green);padding-top:10px;margin-top:4px;font-weight:700;font-size:1.2rem"><span>{tr('booking.total')} <small style="font-size:0.75rem;color:var(--ink-soft);font-weight:600">USD</small></span><span class="bw-v-total"></span></div>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin:2px 0 0">{tr('booking.totalNote')}</p>
       </div>
-    </div>
-  ) : (
-    <div class="booking-total">
-      <span>{tr('common.from')} <strong>${p.pricing.baseNightly}</strong> {tr('common.perNight')}</span>
-      <span class="bw-mini-total" style="font-weight:700;color:var(--tile-green-deep)"></span>
     </div>
   )}
 
-  {full && bookingAddons.length > 0 && (
-    <div>
+  {full && (
+    <div style="padding:8px 4px 0">
       <h3 style="margin-bottom:4px">{tr('booking.addonsTitle')}</h3>
-      <p style="font-size:0.9rem;color:var(--ink-soft);margin-bottom:12px">{tr('booking.addonsHint')}</p>
-      <div class="addon-grid">
-        {bookingAddons.map((a) => (
-          <label class="addon">
+      <p style="font-size:0.9rem;color:var(--ink-soft);margin-bottom:14px">{tr('booking.addonsHint')}</p>
+      <div class="ao-grid">
+        {addons.map((a) => (
+          <label class="ao">
             <input type="checkbox" class="bw-addon" value={a.id} data-price={a.price} data-unit={a.unit} />
-            <img src={a.image} alt="" width="72" height="72" loading="lazy" />
-            <span style="flex:1">
-              <span class="a-name">{addonI18n[a.id].name}</span><br />
-              <span class="a-desc">{addonI18n[a.id].desc}</span>
+            <span class="ao-img"><img src={stockSrc(a.image, 600)} alt={stockAlt(a.image, locale)} width="600" height="400" loading="lazy" /></span>
+            <span class="ao-body">
+              <span class="ao-name">{tr(`addons.${a.id}.name`)}</span>
+              <span class="ao-desc">{tr(`addons.${a.id}.desc`)}</span>
+              <span class="ao-row">
+                <span class="ao-price">{moneyWhole(a.price, locale)} {unitLabel(a) && <small>{unitLabel(a)}</small>}</span>
+                <span class="ao-tick"><span class="off">+ {tr('booking.add')}</span><span class="on">✓ {tr('booking.added')}</span></span>
+              </span>
             </span>
-            <span class="a-price">${a.price}{a.unit === 'per_person' ? ` ${tr('booking.perPerson')}` : a.unit === 'each_way' ? ` ${tr('booking.eachWay')}` : ''}</span>
           </label>
         ))}
       </div>
@@ -78,224 +127,217 @@ const uid = full ? 'bk-full' : 'bk-hero';
   )}
 
   {full && (
-    <form class="bw-quote" name="abandoned-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden style="background:var(--caribbean-soft);border-radius:var(--radius);padding:18px">
+    <div class="bw-paybar">
+      <div><span class="bw-label">{tr('booking.total')} · USD</span><strong class="bw-pay-total">—</strong></div>
+      <button class="btn btn-terracotta btn-lg bw-book" type="button">{tr('booking.payNow')} →</button>
+    </div>
+  )}
+
+  {full && (
+    <form class="bw-quote" name="abandoned-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden style="background:var(--caribbean-soft);border-radius:var(--radius);padding:18px;margin:4px">
       <input type="hidden" name="form-name" value="abandoned-quote" />
       <p style="display:none"><input name="bot-field" /></p>
       <input type="hidden" name="property" value={p.slug} />
       <input type="hidden" name="checkin" class="bw-q-in" />
       <input type="hidden" name="checkout" class="bw-q-out" />
       <input type="hidden" name="total" class="bw-q-total" />
+      <input type="hidden" name="locale" value={locale} />
       <strong>{tr('booking.emailQuoteTitle')}</strong>
       <p style="font-size:0.9rem;margin:4px 0 10px">{tr('booking.emailQuoteSub')}</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <input type="email" name="email" required placeholder={tr('booking.emailPlaceholder')} style="flex:1;min-width:200px;font:inherit;padding:11px;border:1.5px solid rgba(24,121,168,0.4);border-radius:8px" />
+        <input type="email" name="email" required placeholder={tr('booking.emailPlaceholder')} aria-label="Email" style="flex:1;min-width:200px;font:inherit;padding:12px;border:1.5px solid rgba(24,121,168,0.4);border-radius:10px" />
         <button class="btn btn-outline" type="submit">{tr('booking.emailBtn')}</button>
       </div>
       <p class="bw-quote-ok" hidden style="color:var(--tile-green-deep);font-weight:600;margin:8px 0 0">{tr('booking.emailOk')}</p>
     </form>
   )}
 
-  <p style="font-size:0.85rem;color:var(--ink-soft);margin:0;display:flex;gap:6px;align-items:center">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-    {tr('common.securePayment')} · {tr('common.instantConfirmation')}
-  </p>
-  <p class="bw-err" role="alert" hidden style="color:var(--terracotta);font-weight:600;margin:0"></p>
+  <p class="bw-err" role="alert" hidden style="color:var(--terracotta);font-weight:600;margin:0 4px"></p>
 </div>
 
-<script define:vars={{
-  uid, locale,
-  slug: p.slug,
-  pricing: p.pricing,
-  dateTag: dateLocaleTag[locale] || 'en-US',
-  bookUrl: urlFor('book', locale),
-  isFull: full,
-  msgs: {
-    unavailable: tr('booking.datesUnavailable'),
-    minStay: tr('common.minStay').replace('{n}', String(p.pricing.minNights)),
-    nights: tr('common.nights'),
-    accommodation: tr('booking.accommodation'),
-    redirect: tr('booking.payRedirect'),
-    perPerson: tr('booking.perPerson'),
-  },
-  addonNames: Object.fromEntries(p.addons.map((a) => [a.id, tr(`addons.${a.id}.name`)])),
-}}>
+<script define:vars={{ uid, locale, slug: p.slug, pricing: p.pricing, maxGuests: p.specs.maxGuests, dateTag: dateLocaleTag[locale] || 'en-US', isFull: full, S, waLink, bookUrl: urlFor('book', locale), addonNames: Object.fromEntries(p.addons.map((a) => [a.id, tr(`addons.${a.id}.name`)])) }}>
 (() => {
   const root = document.getElementById(uid);
   if (!root) return;
   const $ = (s) => root.querySelector(s);
-  const inEl = $('.bw-in'), outEl = $('.bw-out'), gEl = $('.bw-guests'), bookBtn = $('.bw-book');
-  const calWrap = $('.bw-cal'), calPop = $('.cal-pop'), errEl = $('.bw-err');
-  const fmt = new Intl.DateTimeFormat(dateTag, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  const trigger = $('.bw-dates'), txt = $('.bw-dates-txt'), dp = $('.dp'), backdrop = $('.dp-backdrop');
+  const errEl = $('.bw-err'), bookBtn = $('.bw-book'), msg = $('.dp-msg'), title = $('.dp-title');
+  const DAY = 86400000;
   const iso = (d) => d.toISOString().slice(0, 10);
-  const money = (n) => '$' + n.toLocaleString(dateTag, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fromIso = (s) => new Date(s + 'T00:00:00Z');
+  const fmtShort = new Intl.DateTimeFormat(dateTag, { day: 'numeric', month: 'short', timeZone: 'UTC' });
+  const fmtLong = new Intl.DateTimeFormat(dateTag, { weekday: 'short', day: 'numeric', month: 'long', timeZone: 'UTC' });
+  const money = (n) => (locale === 'en' ? '$' : 'US$') + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const isMobile = () => matchMedia('(max-width: 800px)').matches;
+  const today = new Date(); today.setUTCHours(0, 0, 0, 0);
 
+  let guests = 2, start = null, end = null, hover = null, viewY, viewM;
   let blocked = new Set();
-  fetch('/availability.json').then((r) => r.json()).then((d) => {
-    blocked = new Set(d[slug] || d.blocked || []);
-    render();
-  }).catch(() => {});
+  fetch('/availability.json').then((r) => r.json()).then((d) => { blocked = new Set(d[slug] || []); if (!dp.hidden) draw(); }).catch(() => {});
 
-  // --- pricing (mirrored server-side in the Stripe function) ---
-  function inSeason(mmdd, from, to) { return from <= to ? (mmdd >= from && mmdd <= to) : (mmdd >= from || mmdd <= to); }
-  function nightlyFor(d) {
-    const mmdd = iso(d).slice(5);
-    let rate = pricing.baseNightly;
-    for (const s of pricing.seasons || []) if (inSeason(mmdd, s.from, s.to)) rate = s.nightly;
-    return rate;
-  }
-  function quote(start, end, guests, addons) {
-    const nights = Math.round((end - start) / 86400000);
+  // ---- pricing (mirrored server-side; the server is the source of truth) ----
+  const inSeason = (md, f, t) => (f <= t ? md >= f && md <= t : md >= f || md <= t);
+  function nightly(d) { const md = iso(d).slice(5); let r = pricing.baseNightly; for (const s of pricing.seasons || []) if (inSeason(md, s.from, s.to)) r = s.nightly; return r; }
+  function quote() {
+    const nights = Math.round((end - start) / DAY);
     let acc = 0;
-    for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) acc += nightlyFor(d);
+    for (let d = new Date(start); d < end; d.setUTCDate(d.getUTCDate() + 1)) acc += nightly(d);
     if (nights >= (pricing.monthlyMinNights || 9999)) acc = nights * pricing.monthlyNightly;
     const cleaning = pricing.cleaningFee;
-    const levy = (acc + cleaning) * pricing.touristLevyPct / 100;
+    const levy = Math.round((acc + cleaning) * pricing.touristLevyPct) / 100;
     const env = nights * pricing.environmentalLevyPerNight;
-    let addonTotal = 0; const addonLines = [];
-    for (const a of addons) {
-      const amt = a.unit === 'per_person' ? a.price * guests : a.price;
-      addonTotal += amt; addonLines.push({ id: a.id, amt });
-    }
-    return { nights, acc, cleaning, levy, env, addonTotal, addonLines, total: acc + cleaning + levy + env + addonTotal };
+    const lines = [...root.querySelectorAll('.bw-addon:checked')].map((c) => ({ id: c.value, amt: c.dataset.unit === 'per_person' ? Number(c.dataset.price) * guests : Number(c.dataset.price) }));
+    const addonTotal = lines.reduce((s, l) => s + l.amt, 0);
+    return { nights, acc, cleaning, levy, env, lines, total: acc + cleaning + levy + env + addonTotal };
   }
 
-  // --- state ---
-  let start = null, end = null;
-  const params = new URLSearchParams(location.search);
-  if (params.get('checkin') && params.get('checkout')) {
-    const s = new Date(params.get('checkin') + 'T00:00:00Z'), e = new Date(params.get('checkout') + 'T00:00:00Z');
-    if (!isNaN(s) && !isNaN(e) && e > s) { start = s; end = e; }
-    if (params.get('guests')) gEl.value = params.get('guests');
-  }
-
-  // --- calendar: two taps to a date range ---
-  let viewY, viewM;
-  const today = new Date(); today.setUTCHours(0, 0, 0, 0);
-  function openCal() {
+  // ---- calendar ----
+  function openDp() {
+    // On phones the calendar is a bottom sheet: move it to <body> so nothing can sit on top of it
+    if (isMobile()) { if (dp.parentNode !== document.body) { document.body.appendChild(backdrop); document.body.appendChild(dp); } }
+    else if (dp.parentNode !== root) { root.appendChild(backdrop); root.appendChild(dp); }
     const base = start || today;
     viewY = base.getUTCFullYear(); viewM = base.getUTCMonth();
-    calWrap.hidden = false; drawCal();
+    dp.hidden = false; trigger.classList.add('is-active'); trigger.setAttribute('aria-expanded', 'true');
+    if (isMobile()) { backdrop.classList.add('show'); document.documentElement.classList.add('sheet-open'); }
+    draw();
   }
-  function closeCal() { calWrap.hidden = true; }
-  function drawCal() {
-    const first = new Date(Date.UTC(viewY, viewM, 1));
-    const monthName = first.toLocaleDateString(dateTag, { month: 'long', year: 'numeric', timeZone: 'UTC' });
+  function closeDp() {
+    dp.hidden = true; trigger.classList.remove('is-active'); trigger.setAttribute('aria-expanded', 'false');
+    backdrop.classList.remove('show'); document.documentElement.classList.remove('sheet-open');
+  }
+  function monthHtml(y, m) {
+    const first = new Date(Date.UTC(y, m, 1));
+    let name = first.toLocaleDateString(dateTag, { month: 'long', year: 'numeric', timeZone: 'UTC' });
+    name = name.charAt(0).toUpperCase() + name.slice(1);
     const dows = [...Array(7)].map((_, i) => new Date(Date.UTC(2024, 0, i + 1)).toLocaleDateString(dateTag, { weekday: 'narrow', timeZone: 'UTC' }));
-    let html = `<div class="cal-head"><button type="button" data-nav="-1" aria-label="Previous month">‹</button><span>${monthName}</span><button type="button" data-nav="1" aria-label="Next month">›</button></div><div class="cal-grid">`;
-    html += dows.map((d) => `<span class="dow">${d}</span>`).join('');
-    const offset = (first.getUTCDay() + 6) % 7;
-    html += '<span></span>'.repeat(offset);
-    const days = new Date(Date.UTC(viewY, viewM + 1, 0)).getUTCDate();
+    let h = `<h4>${name}</h4><div class="dp-grid">` + dows.map((d) => `<span class="dp-dow">${d}</span>`).join('');
+    h += '<span></span>'.repeat((first.getUTCDay() + 6) % 7);
+    const days = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
     for (let d = 1; d <= days; d++) {
-      const dt = new Date(Date.UTC(viewY, viewM, d));
-      const id = iso(dt);
-      const isPast = dt < today;
-      const isBlocked = blocked.has(id);
-      let cls = 'cal-day';
-      if (start && iso(start) === id) cls += ' sel';
-      if (end && iso(end) === id) cls += ' sel';
-      if (start && end && dt > start && dt < end) cls += ' in-range';
-      html += `<button type="button" class="${cls}" data-d="${id}" ${isPast || isBlocked ? 'disabled' : ''} aria-label="${fmt.format(dt)}">${d}</button>`;
+      const dt = new Date(Date.UTC(y, m, d)); const id = iso(dt);
+      const off = dt < today || blocked.has(id);
+      const cls = ['dp-day'];
+      if (+dt === +today) cls.push('today');
+      if (start && +dt === +start) cls.push('edge-s');
+      if (end && +dt === +end) cls.push('edge-e');
+      if (start && end && dt > start && dt < end) cls.push('in-range');
+      if (start && !end && hover && dt > start && dt <= hover) cls.push('hover-range');
+      if (start && !end && !end && dt <= start) {} // fine
+      const price = Math.round(nightly(dt));
+      h += `<button type="button" class="${cls.join(' ')}" data-d="${id}" ${off ? 'disabled' : ''} aria-label="${fmtLong.format(dt)}${off ? ' — ' + 'n/a' : ''}" aria-pressed="${cls.includes('edge-s') || cls.includes('edge-e')}"><span class="n">${d}<span class="pr">${off ? '' : (locale === 'en' ? '$' : '') + price}</span></span></button>`;
     }
-    html += '</div>';
-    calPop.innerHTML = html;
-    calPop.querySelectorAll('[data-nav]').forEach((b) => b.addEventListener('click', (e) => {
-      e.stopPropagation(); viewM += Number(b.dataset.nav);
-      if (viewM < 0) { viewM = 11; viewY--; } if (viewM > 11) { viewM = 0; viewY++; }
-      drawCal();
-    }));
-    calPop.querySelectorAll('.cal-day:not(:disabled)').forEach((b) => b.addEventListener('click', () => pick(new Date(b.dataset.d + 'T00:00:00Z'))));
+    return h + '</div>';
   }
-  function rangeClear(s, e) { for (let d = new Date(s); d < e; d.setDate(d.getDate() + 1)) if (blocked.has(iso(d))) return false; return true; }
+  function draw() {
+    const months = dp.querySelectorAll('.dp-month');
+    months.forEach((el, k) => { const y = viewY + Math.floor((viewM + k) / 12), m = (viewM + k) % 12; el.innerHTML = monthHtml(y, m); });
+    dp.querySelector('.dp-prev').disabled = viewY === today.getUTCFullYear() && viewM === today.getUTCMonth();
+    dp.querySelectorAll('.dp-day:not(:disabled)').forEach((b) => {
+      b.addEventListener('click', (e) => { e.stopPropagation(); pick(fromIso(b.dataset.d)); });
+      b.addEventListener('mouseenter', () => { if (start && !end && !isMobile()) { hover = fromIso(b.dataset.d); paintHover(); } });
+    });
+    if (!start) { title.textContent = S.selectCheckin; }
+    else if (!end) { title.textContent = S.selectCheckout; }
+    else { title.textContent = `${fmtShort.format(start)} → ${fmtShort.format(end)}`; }
+    if (start && end) setMsg(S.nightsSelected.replace('{n}', Math.round((end - start) / DAY)));
+    doneBtn.textContent = isMobile() && start && end ? `${S.bookNow} · ${(locale === 'en' ? '$' : 'US$') + Math.round(quote().total).toLocaleString('en-US')}` : S.done;
+  }
+  function paintHover() {
+    dp.querySelectorAll('.dp-day').forEach((b) => { const dt = fromIso(b.dataset.d); b.classList.toggle('hover-range', !!(start && !end && hover && dt > start && dt <= hover)); });
+  }
+  function setMsg(m, isErr = false) { msg.textContent = m || ''; msg.classList.toggle('err', isErr); }
+  function rangeFree(s, e) { for (let d = new Date(s); d < e; d.setUTCDate(d.getUTCDate() + 1)) if (blocked.has(iso(d))) return false; return true; }
   function pick(dt) {
-    err('');
-    if (!start || (start && end)) { start = dt; end = null; drawCal(); render(); return; }
-    if (dt <= start) { start = dt; end = null; drawCal(); render(); return; }
-    const nights = Math.round((dt - start) / 86400000);
-    if (nights < pricing.minNights) { err(msgs.minStay); drawCal(); return; }
-    if (!rangeClear(start, dt)) { err(msgs.unavailable); start = null; end = null; drawCal(); render(); return; }
-    end = dt; drawCal(); render(); closeCal();
+    setMsg(''); err('');
+    if (!start || end || dt <= start) { start = dt; end = null; hover = null; draw(); render(); return; }
+    const n = Math.round((dt - start) / DAY);
+    if (n < pricing.minNights) { setMsg(S.minStay, true); return; }
+    if (!rangeFree(start, dt)) { setMsg(S.unavailable, true); start = dt; end = null; draw(); render(); return; }
+    end = dt; hover = null; draw(); render();
+    if (!isMobile()) setTimeout(closeDp, 350);   // two taps and you're done (mobile: Book button appears in the sheet)
   }
-  [inEl, outEl].forEach((el) => el.addEventListener('click', openCal));
-  document.addEventListener('click', (e) => {
-    // A tapped calendar day is re-rendered (removed from the DOM) before this bubbles up —
-    // a disconnected target means the click was inside the widget, so don't close.
-    if (e.target instanceof Node && !e.target.isConnected) return;
-    if (!root.contains(e.target)) closeCal();
-  });
+  trigger.addEventListener('click', (e) => { e.stopPropagation(); dp.hidden ? openDp() : closeDp(); });
+  dp.addEventListener('click', (e) => e.stopPropagation());
+  dp.querySelector('.dp-prev').addEventListener('click', () => { viewM--; if (viewM < 0) { viewM = 11; viewY--; } draw(); });
+  dp.querySelector('.dp-next').addEventListener('click', () => { viewM++; if (viewM > 11) { viewM = 0; viewY++; } draw(); });
+  dp.querySelector('.dp-x').addEventListener('click', closeDp);
+  const doneBtn = dp.querySelector('.dp-done');
+  doneBtn.addEventListener('click', () => { const go = isMobile() && start && end; closeDp(); if (go) bookBtn.click(); });
+  window.addEventListener('cp:open-dates', () => { if (uid === 'bk-hero' || uid === 'bk-full') { trigger.scrollIntoView({ block: 'center' }); openDp(); } });
+  dp.querySelector('.dp-clear').addEventListener('click', () => { start = end = hover = null; setMsg(''); draw(); render(); });
+  backdrop.addEventListener('click', closeDp);
+  document.addEventListener('click', (e) => { if (!dp.hidden && !root.contains(e.target)) closeDp(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !dp.hidden) { closeDp(); trigger.focus(); } });
 
-  function err(m) { errEl.textContent = m; errEl.hidden = !m; }
+  // ---- guests ----
+  const gOut = $('.bw-g'), gMinus = $('.bw-g-minus'), gPlus = $('.bw-g-plus');
+  function setGuests(n) { guests = Math.max(1, Math.min(maxGuests, n)); gOut.textContent = guests; gMinus.disabled = guests <= 1; gPlus.disabled = guests >= maxGuests; render(); }
+  gMinus.addEventListener('click', () => setGuests(guests - 1));
+  gPlus.addEventListener('click', () => setGuests(guests + 1));
 
-  function selectedAddons() {
-    return [...root.querySelectorAll('.bw-addon:checked')].map((c) => ({ id: c.value, price: Number(c.dataset.price), unit: c.dataset.unit }));
-  }
-
+  // ---- render ----
+  function err(m) { errEl.innerHTML = m; errEl.hidden = !m; }
   function render() {
-    inEl.value = start ? fmt.format(start) : '';
-    outEl.value = end ? fmt.format(end) : '';
-    if (!(start && end)) return;
-    const q = quote(start, end, Number(gEl.value), selectedAddons());
+    if (start && end) {
+      const n = Math.round((end - start) / DAY);
+      txt.textContent = `${fmtShort.format(start)} → ${fmtShort.format(end)} · ${n} ${n === 1 ? S.night : S.nights}`;
+    } else if (start) {
+      txt.textContent = `${fmtShort.format(start)} → …`;
+    } else {
+      txt.innerHTML = `<span class="ph">${S.addDates}</span>`;
+    }
+    if (!(start && end)) { if (isFull) { $('.bw-hint').hidden = false; $('.bw-breakdown').hidden = true; } return; }
+    const q = quote();
     if (isFull) {
-      $('.bw-hint').hidden = true;
-      const bd = $('.bw-breakdown'); bd.hidden = false;
-      $('.bw-l-nights').textContent = `${msgs.accommodation} · ${q.nights} ${msgs.nights}`;
+      $('.bw-hint').hidden = true; $('.bw-breakdown').hidden = false;
+      $('.bw-l-nights').textContent = `${S.accommodation} · ${q.nights} ${S.nights}`;
       $('.bw-v-acc').textContent = money(q.acc);
       $('.bw-v-clean').textContent = money(q.cleaning);
       $('.bw-v-levy').textContent = money(q.levy);
       $('.bw-v-env').textContent = money(q.env);
-      $('.bw-addon-lines').innerHTML = q.addonLines.map((l) => `<div style="display:flex;justify-content:space-between"><span>${addonNames[l.id]}</span><span>${money(l.amt)}</span></div>`).join('');
+      $('.bw-addon-lines').innerHTML = q.lines.map((l) => `<div style="display:flex;justify-content:space-between"><span>${addonNames[l.id]}</span><span>${money(l.amt)}</span></div>`).join('');
       $('.bw-v-total').textContent = money(q.total);
+      $('.bw-pay-total').textContent = money(q.total);
       const qf = $('.bw-quote');
-      if (qf) {
-        qf.hidden = false;
-        $('.bw-q-in').value = iso(start); $('.bw-q-out').value = iso(end); $('.bw-q-total').value = money(q.total);
-      }
+      if (qf) { qf.hidden = false; $('.bw-q-in').value = iso(start); $('.bw-q-out').value = iso(end); $('.bw-q-total').value = money(q.total); }
     } else {
-      const mini = $('.bw-mini-total');
-      if (mini) mini.textContent = `${q.nights} ${msgs.nights} · ${money(q.total)}`;
+      $('.bw-foot-main').innerHTML = `<span class="bw-total-line">${S.total}: ${money(q.total)} USD</span> · ${S.inclLevies}`;
     }
   }
-  gEl.addEventListener('change', render);
   root.querySelectorAll('.bw-addon').forEach((c) => c.addEventListener('change', render));
 
-  // --- the second click: straight to Stripe Checkout ---
-  bookBtn.addEventListener('click', async () => {
-    err('');
-    if (!(start && end)) { openCal(); return; }
-    if (!isFull) {
-      // From any page: carry the dates to the booking page (state preserved), one more click to pay —
-      // or go direct if configured. Direct-to-book keeps add-ons + itemised levies visible pre-payment (required disclosure).
-      location.href = `${bookUrl}?checkin=${iso(start)}&checkout=${iso(end)}&guests=${gEl.value}`;
-      return;
-    }
-    bookBtn.disabled = true; const orig = bookBtn.textContent; bookBtn.textContent = msgs.redirect;
+  // ---- Book: straight to Stripe ----
+  bookBtn.addEventListener('click', async (e) => {
+    e.stopPropagation(); err('');
+    if (!(start && end)) { openDp(); return; }
+    bookBtn.disabled = true; const orig = bookBtn.textContent; bookBtn.textContent = S.redirect;
     try {
       const res = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ property: slug, checkin: iso(start), checkout: iso(end), guests: Number(gEl.value), addons: selectedAddons().map((a) => a.id), locale }),
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ property: slug, checkin: iso(start), checkout: iso(end), guests, addons: [...root.querySelectorAll('.bw-addon:checked')].map((c) => c.value), locale }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (data.url) { location.href = data.url; return; }
-      err(data.error || 'Something went wrong — try again or WhatsApp us.');
-    } catch (e) {
-      err('Something went wrong — try again or WhatsApp us.');
-    }
+      const notConf = data.code === 'not_configured';
+      err(`${notConf ? S.notConfigured : (data.error || S.generic)} <a href="${waLink}" rel="noopener">WhatsApp →</a>`);
+    } catch { err(`${S.generic} <a href="${waLink}" rel="noopener">WhatsApp →</a>`); }
     bookBtn.disabled = false; bookBtn.textContent = orig;
   });
 
-  // Abandoned-quote capture (Netlify form, AJAX)
+  // ---- abandoned-quote capture ----
   const qForm = $('.bw-quote');
   qForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const fd = new FormData(qForm);
-    try {
-      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(fd).toString() });
-      $('.bw-quote-ok').hidden = false;
-    } catch {}
+    try { await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(qForm)).toString() }); $('.bw-quote-ok').hidden = false; } catch {}
   });
 
-  render();
-  if (isFull && start && end) root.scrollIntoView({ block: 'center' });
+  // ---- restore dates from the URL (?checkin=&checkout=&guests=) ----
+  const qp = new URLSearchParams(location.search);
+  if (qp.get('checkin') && qp.get('checkout')) {
+    const s = fromIso(qp.get('checkin')), e2 = fromIso(qp.get('checkout'));
+    if (!isNaN(s) && !isNaN(e2) && e2 > s && s >= today) { start = s; end = e2; }
+  }
+  setGuests(Number(qp.get('guests')) || 2);
 })();
 </script>

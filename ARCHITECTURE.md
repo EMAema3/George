@@ -11,7 +11,7 @@ A static, multi-language, multi-property vacation-rental platform.
 | Hosting | Netlify (project **aruba**) | CDN, forms, serverless functions, env vars |
 | Payments | Stripe Checkout via Netlify Function | Card data never touches our code; totals recomputed server-side |
 | Lead capture | Netlify Forms (`itinerary-lead`, `abandoned-quote`) | Zero-backend email capture; wire to Klaviyo in Wave 2 |
-| Images | Pre-processed WebP, SEO filenames, responsive sizes | `scripts/process-images.py` |
+| Images | Property: pre-processed WebP (`scripts/process-images.py`). Stock: `src/data/stock.mjs`, fetched at build by `scripts/fetch-stock.mjs` | SEO filenames, responsive sizes |
 
 ## The scaling model: data-driven properties
 
@@ -43,6 +43,12 @@ none of them hard-code Casa Playa.
 - Switcher keeps the page (`/location` → `/es/ubicacion`). Detect-and-offer bar, never auto-redirect; choice remembered in localStorage.
 - hreflang + x-default emitted in every `<head>`; dates formatted per locale (03/11 ambiguity solved).
 - English-only Wave-2 pages (`/work-from-aruba`, `/carnival`, `/guide/*` …) self-reference until translated.
+
+## Pages
+
+Home · Apartment (filterable gallery + fullscreen viewer) · Building · Location · Aruba (discover) ·
+Weddings · Carnival · Before your cruise · Work from Aruba · Monthly · Reviews · FAQ · Book — all in 5 languages
+(content in `src/i18n/*.json` + `src/i18n/pages/*.json`). Guide articles (`/guide/*`) are English.
 
 ## Booking: two clicks from any page
 

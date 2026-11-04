@@ -1,44 +1,66 @@
 ---
 import Base from '../layouts/Base.astro';
 import BookingWidget from '../components/BookingWidget.astro';
-import { t } from '../i18n/index.mjs';
+import { t, urlFor, pageContent } from '../i18n/index.mjs';
 import { flagship as p } from '../data/properties/index.mjs';
+import { img } from '../lib/img.mjs';
 
 const { locale = 'en' } = Astro.props;
 const tr = t(locale);
+const H = pageContent(locale, 'home');
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${p.geo.lat},${p.geo.lng}`;
 const embed = `https://www.openstreetmap.org/export/embed.html?bbox=${p.geo.lng - 0.012}%2C${p.geo.lat - 0.008}%2C${p.geo.lng + 0.012}%2C${p.geo.lat + 0.008}&layer=mapnik&marker=${p.geo.lat}%2C${p.geo.lng}`;
+const near = [
+  { img: 'oranjestad-cruise-terminal-ship-docked', id: 'cruise-terminal' },
+  { img: 'oranjestad-main-street-red-tram', id: 'main-street-tram' },
+  { img: 'aruba-beach-palapas-palm-trees', id: 'surfside-beach' },
+  { img: 'eagle-beach-aruba-fofoti-tree', id: 'eagle-beach' },
+].map((n) => ({ ...n, im: img(n.img, locale, 600), d: p.distances.find((x) => x.id === n.id) }));
 ---
 <Base locale={locale} pageKey="location">
   <section class="section" style="padding-bottom:24px">
     <div class="container">
       <p class="kicker">{p.address.street}, {p.address.city}</p>
       <h1>{tr('location.title')}</h1>
-      <p style="max-width:62ch;font-size:1.1rem">{tr('location.intro')}</p>
+      <p class="lede">{tr('location.intro')}</p>
     </div>
   </section>
 
-  <section class="container" style="padding-bottom:24px">
-    <div style="border-radius:var(--arch);overflow:hidden;box-shadow:var(--shadow-card)">
-      <iframe src={embed} title="Map — Casa Playa 204, L.G. Smith Boulevard 94, Oranjestad" style="width:100%;height:420px;border:0" loading="lazy"></iframe>
-    </div>
-    <p style="margin-top:12px"><a class="btn btn-outline" href={mapsUrl} rel="noopener">{tr('location.mapNote')}</a></p>
-  </section>
-
-  <section class="section" style="padding-top:16px">
-    <div class="container">
-      <h2>{tr('location.walkTitle')}</h2>
-      <ul class="dist-list">
-        {p.distances.map((d) => (
-          <li>
-            <span>{tr(`location.distances.${d.id}`)} <span style="color:var(--ink-soft);font-size:0.85rem">· {d.km} km</span></span>
-            <span class="d-time">{d.walkMin ? `${d.walkMin} ${tr('location.walkMin')}` : `${d.driveMin} ${tr('location.driveMin')}`}</span>
-          </li>
-        ))}
-      </ul>
+  <section class="container">
+    <div class="img-cards">
+      {near.map((n) => (
+        <a class="img-card" href={urlFor('aruba', locale)}>
+          <img src={n.im.src} srcset={n.im.srcset} sizes="(max-width:800px) 50vw, 25vw" alt={n.im.alt} loading="lazy" width="600" height="400" />
+          <div><strong>{tr(`location.distances.${n.id}`)}</strong><span>{n.d.walkMin ? `${n.d.walkMin} ${tr('location.walkMin')}` : `${n.d.driveMin} ${tr('location.driveMin')}`}</span></div>
+        </a>
+      ))}
     </div>
   </section>
 
-  <div class="tile-divider" role="presentation"></div>
-  <section class="section"><div class="container" style="max-width:780px"><BookingWidget locale={locale} property={p} mode="hero" /></div></section>
+  <section class="section">
+    <div class="container split" style="align-items:start">
+      <div>
+        <h2>{tr('location.walkTitle')}</h2>
+        <ul class="dist-list">
+          {p.distances.map((d) => (
+            <li><span>{tr(`location.distances.${d.id}`)} <span style="color:var(--ink-soft);font-size:0.85rem">· {d.km} km</span></span><span class="d-time">{d.walkMin ? `${d.walkMin} ${tr('location.walkMin')}` : `${d.driveMin} ${tr('location.driveMin')}`}</span></li>
+          ))}
+        </ul>
+        <p style="margin-top:18px"><a class="btn btn-outline" href={mapsUrl} rel="noopener">{tr('location.mapNote')}</a></p>
+      </div>
+      <div style="border-radius:var(--arch);overflow:hidden;box-shadow:var(--shadow-card)">
+        <iframe src={embed} title={`Map — ${p.name}, ${p.address.street}, ${p.address.city}`} style="width:100%;height:460px;border:0;display:block" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:#fff">
+    <div class="container" style="max-width:820px">
+      <p class="kicker">{H.arubaKicker}</p>
+      <h2>{H.arubaTitle}</h2>
+      <p class="lede">{H.arubaSub}</p>
+      <p style="margin:20px 0 28px"><a class="btn btn-primary" href={urlFor('aruba', locale)}>{H.arubaCta} →</a></p>
+      <BookingWidget locale={locale} property={p} mode="hero" />
+    </div>
+  </section>
 </Base>

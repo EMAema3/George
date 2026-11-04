@@ -1,5 +1,16 @@
 {
-  "nav": { "home": "Home", "apartment": "Het appartement", "building": "Het gebouw", "location": "Locatie", "reviews": "Beoordelingen", "faq": "Vragen", "book": "Boeken", "guide": "Aruba-gids" },
+  "nav": {
+    "home": "Home",
+    "apartment": "Appartement",
+    "building": "Gebouw",
+    "location": "Locatie",
+    "reviews": "Reviews",
+    "faq": "Vragen",
+    "book": "Boeken",
+    "guide": "Aruba-gids",
+    "occasions": "Gelegenheden",
+    "aruba": "Aruba"
+  },
   "common": {
     "bookNow": "Nu boeken",
     "checkDates": "Data bekijken",
@@ -9,8 +20,8 @@
     "nights": "nachten",
     "guests": "Gasten",
     "guest": "gast",
-    "checkin": "Inchecken",
-    "checkout": "Uitchecken",
+    "checkin": "Aankomst",
+    "checkout": "Vertrek",
     "selectDates": "Kies je data",
     "clearDates": "Wissen",
     "viewAllPhotos": "Alle foto's bekijken",
@@ -21,7 +32,12 @@
     "instantConfirmation": "Directe bevestiging. Geen account nodig.",
     "securePayment": "Veilig betalen met je kaart via Stripe",
     "minStay": "Minimaal verblijf: {n} nachten",
-    "backHome": "Terug naar home"
+    "backHome": "Terug naar home",
+    "dates": "Data",
+    "addDates": "Kies data",
+    "usd": "USD",
+    "pricesUsd": "Alle prijzen in Amerikaanse dollars",
+    "fromLabel": "vanaf"
   },
   "booking": {
     "title": "Boek je verblijf",
@@ -29,7 +45,7 @@
     "accommodation": "Accommodatie",
     "cleaningFee": "Schoonmaakkosten",
     "touristLevy": "Toeristenheffing Aruba (12,5%)",
-    "envLevy": "Milieuheffing ($3 × nacht)",
+    "envLevy": "Milieuheffing (US$3 × nacht)",
     "total": "Totaal",
     "totalNote": "Het totaal dat je ziet, is het totaal dat je betaalt. De heffingen staan hierboven uitgesplitst — geen verrassing bij de laatste stap.",
     "payNow": "Door naar veilig betalen",
@@ -46,7 +62,10 @@
     "selectDatesFirst": "Kies je data om het exacte totaal te zien",
     "perPerson": "per persoon",
     "eachWay": "per rit",
-    "payRedirect": "We brengen je naar de beveiligde checkout…"
+    "payRedirect": "We brengen je naar de beveiligde checkout…",
+    "inclLevies": "incl. heffingen & schoonmaak",
+    "add": "Toevoegen",
+    "added": "Toegevoegd"
   },
   "confirmed": {
     "title": "Geboekt.",
@@ -147,16 +166,46 @@
   "faq": {
     "title": "Vragen, volledig beantwoord",
     "items": [
-      { "q": "Welke belastingen en heffingen betaal ik?", "a": "Aruba rekent 12,5% toeristenheffing op vakantieverhuur, berekend over je totaal inclusief schoonmaakkosten, plus een milieuheffing van US$3 per nacht. Beide staan uitgesplitst in je totaal vóór je betaalt — de prijs bij de checkout is definitief." },
-      { "q": "Wanneer kan ik in- en uitchecken?", "a": "Inchecken van 15:00 tot 22:00, uitchecken vóór 11:00. Vroeg inchecken of laat uitchecken kan voor $45 worden toegevoegd als de kalender het toelaat — ideaal vóór een cruise." },
-      { "q": "Is er parkeergelegenheid?", "a": "Ja — valet parking onder het gebouw, inbegrepen bij je verblijf. De ingang is aan de achterstraat." },
-      { "q": "Hoe snel is de wifi echt?", "a": "Gemeten op 100+ Mbps download. Er staat een volwaardig bureau in de woonkamer. Thuiswerkers blijven geregeld een maand." },
-      { "q": "Kun je naar een strand lopen?", "a": "Eerlijk: dit is een stadsverblijf, geen beachfront. Surfside Beach is zo'n 15 minuten lopen langs het water; Eagle Beach — een van de mooiste van het Caribisch gebied — is 10 minuten rijden of een korte busrit. Wil je vanuit je kamer het zand op stappen, dan past een resort aan Palm Beach beter; wil je lopend uit eten, dan zit je hier goed." },
-      { "q": "Hoe ver is de cruiseterminal?", "a": "Ongeveer 400 meter — 5 minuten lopen met bagage. Vanaf de hoek van het gebouw zie je de schepen liggen. Veel gasten slapen hier de nacht vóór inscheping." },
-      { "q": "Wat is het annuleringsbeleid?", "a": "Volledige terugbetaling tot 14 dagen vóór aankomst, 50% tot 7 dagen ervoor. Het staat ook op de boekingspagina vóór je betaalt." },
-      { "q": "Is het appartement toegankelijk?", "a": "Het gebouw heeft een lift van de garage en straat naar de tweede verdieping, en het appartement is binnen drempelvrij. De douche is een inloopdouche met lage instap. Vertel ons wat je nodig hebt en we antwoorden precies." },
-      { "q": "Moet ik in florin betalen?", "a": "Nee. Aruba rekent overal in Amerikaanse dollars, wij ook. Kaarten worden op het hele eiland geaccepteerd." },
-      { "q": "Kunnen de boodschappen al in de koelkast liggen?", "a": "Ja — voeg het boodschappenpakket toe bij het boeken of tot 3 dagen vóór aankomst, vanaf $75. Geef voorkeuren en allergieën door; wij doen die ochtend de boodschappen." }
+      {
+        "q": "Welke belastingen en heffingen betaal ik?",
+        "a": "Aruba rekent 12,5% toeristenheffing op vakantieverhuur, berekend over je totaal inclusief schoonmaakkosten, plus een milieuheffing van US$3 per nacht. Beide staan uitgesplitst in je totaal vóór je betaalt — de prijs bij de checkout is definitief."
+      },
+      {
+        "q": "Wanneer kan ik in- en uitchecken?",
+        "a": "Aankomst van 15:00 tot 22:00, vertrek vóór 11:00. Vroege aankomst (vanaf 11:00) of laat vertrek (tot 15:00) voor US$45 als de kalender het toelaat — ideaal vóór een cruise."
+      },
+      {
+        "q": "Is er parkeergelegenheid?",
+        "a": "Ja — valet parking onder het gebouw, inbegrepen bij je verblijf. De ingang is aan de achterstraat."
+      },
+      {
+        "q": "Hoe snel is de wifi echt?",
+        "a": "Gemeten op 100+ Mbps download. Er staat een volwaardig bureau in de woonkamer. Thuiswerkers blijven geregeld een maand."
+      },
+      {
+        "q": "Kun je naar een strand lopen?",
+        "a": "Eerlijk: dit is een stadsverblijf, geen beachfront. Surfside Beach is zo'n 15 minuten lopen langs het water; Eagle Beach — een van de mooiste van het Caribisch gebied — is 10 minuten rijden of een korte busrit. Wil je vanuit je kamer het zand op stappen, dan past een resort aan Palm Beach beter; wil je lopend uit eten, dan zit je hier goed."
+      },
+      {
+        "q": "Hoe ver is de cruiseterminal?",
+        "a": "Ongeveer 400 meter — 5 minuten lopen met bagage. Vanaf de hoek van het gebouw zie je de schepen liggen. Veel gasten slapen hier de nacht vóór inscheping."
+      },
+      {
+        "q": "Wat is het annuleringsbeleid?",
+        "a": "Volledige terugbetaling tot 14 dagen vóór aankomst, 50% tot 7 dagen ervoor. Het staat ook op de boekingspagina vóór je betaalt."
+      },
+      {
+        "q": "Is het appartement toegankelijk?",
+        "a": "Het gebouw heeft een lift van de garage en straat naar de tweede verdieping, en het appartement is binnen drempelvrij. De douche is een inloopdouche met lage instap. Vertel ons wat je nodig hebt en we antwoorden precies."
+      },
+      {
+        "q": "Moet ik in florin betalen?",
+        "a": "Nee. Aruba rekent overal in Amerikaanse dollars, wij ook. Kaarten worden op het hele eiland geaccepteerd."
+      },
+      {
+        "q": "Kunnen de boodschappen al in de koelkast liggen?",
+        "a": "Ja — voeg het welkomstpakket (US$85) toe bij het boeken: koffie, melk, eieren, vers brood, seizoensfruit en 12 flessen water staan klaar in de koelkast."
+      }
     ]
   },
   "footer": {
@@ -169,23 +218,110 @@
     "regNumber": "Aruba-registratienr."
   },
   "seo": {
-    "home": { "title": "Casa Playa 204 — Vakantieappartement in het Royal Plaza-monument, Oranjestad, Aruba", "desc": "Logeer in het meest gefotografeerde gebouw van Oranjestad. Appartement met 1 slaapkamer, zwembad, fitness en 24/7 beveiliging. 5 minuten lopen naar de cruisehaven. Boek direct — zonder platformkosten." },
-    "apartment": { "title": "Het appartement — Casa Playa 204, Oranjestad | Kingsize bed, balkon, complete keuken", "desc": "65 m², kingsize slaapkamer, regendouche, complete keuken, balkon boven de binnenplaats van Royal Plaza, 100 Mbps wifi. Bekijk elke kamer en wat is inbegrepen." },
-    "building": { "title": "Het gebouw — Casa Playa, het voormalige Royal Plaza Mall, Aruba", "desc": "Het pastelkleurige Nederlands-koloniale monument aan de waterkant van Oranjestad: 62 residenties, zwembad met havenzicht, fitness, valet parking, 24/7 beveiliging." },
-    "location": { "title": "Locatie — Casa Playa 204, L.G. Smith Boulevard 94, Oranjestad, Aruba", "desc": "5 minuten lopen naar de cruiseterminal, 15 naar Surfside Beach, 10 minuten rijden naar Eagle Beach en de luchthaven. Elke afstand gemeten vanaf de deur." },
-    "reviews": { "title": "Gastbeoordelingen — Casa Playa 204, Oranjestad, Aruba", "desc": "Wat recente gasten zeggen over verblijven in het Royal Plaza-monument — onbewerkt, met voornaam en maand." },
-    "faq": { "title": "Veelgestelde vragen — Heffingen, inchecken, parkeren, wifi | Casa Playa 204 Aruba", "desc": "De toeristenheffing van 12,5% en de milieuheffing van US$3 per nacht uitgelegd, onze incheck-tijden, valet parking, gemeten wifisnelheid en annuleringsvoorwaarden." },
-    "book": { "title": "Boek Casa Playa 204 — Live beschikbaarheid, totaal met heffingen, directe bevestiging", "desc": "Kies data, zie het volledige totaal met uitgesplitste Arubaanse heffingen, betaal met je kaart. Directe bevestiging, geen account, geen platformkosten." },
-    "confirmed": { "title": "Boeking bevestigd — Casa Playa 204", "desc": "Je verblijf in Casa Playa 204 is bevestigd." }
+    "home": {
+      "title": "Casa Playa 204 — Vakantieappartement in het Royal Plaza-monument, Oranjestad, Aruba",
+      "desc": "Logeer in het meest gefotografeerde gebouw van Oranjestad. Appartement met 1 slaapkamer, zwembad, fitness en 24/7 beveiliging. 5 minuten lopen naar de cruisehaven. Boek direct — zonder platformkosten."
+    },
+    "apartment": {
+      "title": "Het appartement — Casa Playa 204, Oranjestad | Kingsize bed, balkon, complete keuken",
+      "desc": "65 m², kingsize slaapkamer, regendouche, complete keuken, balkon boven de binnenplaats van Royal Plaza, 100 Mbps wifi. Bekijk elke kamer en wat is inbegrepen."
+    },
+    "building": {
+      "title": "Het gebouw — Casa Playa, het voormalige Royal Plaza Mall, Aruba",
+      "desc": "Het pastelkleurige Nederlands-koloniale monument aan de waterkant van Oranjestad: 62 residenties, zwembad met havenzicht, fitness, valet parking, 24/7 beveiliging."
+    },
+    "location": {
+      "title": "Locatie — Casa Playa 204, L.G. Smith Boulevard 94, Oranjestad, Aruba",
+      "desc": "5 minuten lopen naar de cruiseterminal, 15 naar Surfside Beach, 10 minuten rijden naar Eagle Beach en de luchthaven. Elke afstand gemeten vanaf de deur."
+    },
+    "reviews": {
+      "title": "Gastbeoordelingen — Casa Playa 204, Oranjestad, Aruba",
+      "desc": "Wat recente gasten zeggen over verblijven in het Royal Plaza-monument — onbewerkt, met voornaam en maand."
+    },
+    "faq": {
+      "title": "Veelgestelde vragen — Heffingen, inchecken, parkeren, wifi | Casa Playa 204 Aruba",
+      "desc": "De toeristenheffing van 12,5% en de milieuheffing van US$3 per nacht uitgelegd, onze incheck-tijden, valet parking, gemeten wifisnelheid en annuleringsvoorwaarden."
+    },
+    "book": {
+      "title": "Boek Casa Playa 204 — Live beschikbaarheid, totaal met heffingen, directe bevestiging",
+      "desc": "Kies data, zie het volledige totaal met uitgesplitste Arubaanse heffingen, betaal met je kaart. Directe bevestiging, geen account, geen platformkosten."
+    },
+    "confirmed": {
+      "title": "Boeking bevestigd — Casa Playa 204",
+      "desc": "Je verblijf in Casa Playa 204 is bevestigd."
+    }
   },
   "addons": {
-    "airport-transfer": { "name": "Luchthaventransfer", "desc": "We staan bij aankomst klaar, 10 minuten naar de voordeur. Per rit toe te voegen." },
-    "grocery-stock": { "name": "Boodschappen vooraf", "desc": "De koelkast gevuld vóór je landt. Koffie, ontbijt, fruit, wijn — stuur je lijstje." },
-    "celebration": { "name": "Feestpakket", "desc": "Prosecco op ijs, bloemen en charcuterie in de kamer." },
-    "balcony-breakfast": { "name": "Privéontbijt op het balkon", "desc": "Geserveerd op je balkon boven de binnenplaats." },
-    "balcony-dinner": { "name": "Diner onder de sterren", "desc": "Een privédiner voor twee op het balkon." },
-    "midstay-clean": { "name": "Tussentijdse schoonmaak", "desc": "Volledige schoonmaak en vers linnengoed, ideaal bij verblijven langer dan een week." },
-    "early-checkin": { "name": "Vroeg inchecken", "desc": "Vanaf 11:00 in de kamer als de kalender het toelaat." },
-    "late-checkout": { "name": "Laat uitchecken", "desc": "Houd de kamer tot 15:00 als de kalender het toelaat." }
+    "airport-transfer": {
+      "name": "Luchthaventransfer",
+      "desc": "Privéauto, heen en terug. We wachten bij aankomst met je naam; 10 minuten tot de deur."
+    },
+    "grocery-stock": {
+      "name": "Welkomstpakket",
+      "desc": "Klaar in de koelkast: koffie, melk, eieren, vers brood, seizoensfruit en 12 flessen water."
+    },
+    "celebration": {
+      "name": "Feestpakket",
+      "desc": "Gekoelde prosecco, verse bloemen en een charcuterieplank, klaargezet vóór je aankomst."
+    },
+    "balcony-breakfast": {
+      "name": "Ontbijt op het balkon",
+      "desc": "Croissants, vers fruit, sap en koffie, geserveerd op je balkon."
+    },
+    "midstay-clean": {
+      "name": "Tussentijdse schoonmaak",
+      "desc": "Volledige schoonmaak met schone lakens en handdoeken. Aanrader vanaf een week."
+    },
+    "late-checkout": {
+      "name": "Laat vertrek",
+      "desc": "Houd het appartement tot 15:00. Ideaal vóór een avondvlucht of -cruise."
+    },
+    "early-checkin": {
+      "name": "Vroege aankomst",
+      "desc": "Vanaf 11:00 in het appartement als de kalender het toelaat."
+    },
+    "balcony-dinner": {
+      "name": "Diner onder de sterren",
+      "desc": "Een privédiner voor twee op het balkon."
+    }
+  },
+  "cal": {
+    "selectCheckin": "Kies je aankomstdatum",
+    "selectCheckout": "Kies nu je vertrekdatum",
+    "nightsSelected": "{n} nachten geselecteerd",
+    "clear": "Data wissen",
+    "done": "Klaar",
+    "close": "Sluiten",
+    "prevMonth": "Vorige maand",
+    "nextMonth": "Volgende maand",
+    "unavailable": "Niet beschikbaar",
+    "minStayShort": "Minimaal {n} nachten"
+  },
+  "gallery": {
+    "all": "Alles",
+    "living": "Woonkamer",
+    "kitchen": "Keuken & eten",
+    "bedroom": "Slaapkamer",
+    "bathroom": "Badkamer",
+    "balcony": "Balkon",
+    "building": "Het gebouw",
+    "close": "Galerij sluiten",
+    "prev": "Vorige foto",
+    "next": "Volgende foto",
+    "of": "van",
+    "viewAll": "Bekijk alle {n} foto's",
+    "title": "Elke kamer, elk uitzicht"
+  },
+  "errors": {
+    "generic": "Er ging iets mis. Probeer het opnieuw of stuur ons een WhatsApp.",
+    "notConfigured": "Online betalen wordt nu ingericht. Stuur ons een WhatsApp en we bevestigen je data."
+  },
+  "stripe": {
+    "nights": "nachten",
+    "guests": "gasten",
+    "cleaning": "Schoonmaakkosten",
+    "levy": "Toeristenheffing Aruba (12,5%)",
+    "env": "Milieuheffing (US$3 × {n} nachten)",
+    "addon": "Extra"
   }
 }

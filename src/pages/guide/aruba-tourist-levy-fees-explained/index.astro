@@ -1,0 +1,36 @@
+---
+import GuideArticle from '../../../pageviews/GuideArticle.astro';
+import { flagship as p } from '../../../data/properties/index.mjs';
+const n = 5, rate = p.pricing.baseNightly, clean = p.pricing.cleaningFee;
+const acc = n * rate, levy = Math.round((acc + clean) * p.pricing.touristLevyPct) / 100, env = n * p.pricing.environmentalLevyPerNight;
+const f = (x) => '$' + x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const faq = [
+  { q: 'What is the tourist levy on Aruba vacation rentals?', a: 'Aruba charges a 12.5% tourist levy on vacation-rental stays, calculated on the total including the cleaning fee. Casa Playa 204 shows it as a separate line before you pay.' },
+  { q: 'What is the Aruba environmental levy?', a: 'An environmental levy of US$3 per night applies to accommodation stays in Aruba. It is charged separately from the 12.5% tourist levy.' },
+  { q: 'What is the Aruba sustainability fee?', a: 'Since 1 July 2024, non-resident visitors arriving by air pay a US$20 sustainability fee online when completing the mandatory ED card. Children under 8 are exempt. It is paid to the government, not to your accommodation.' },
+];
+---
+<GuideArticle slug="aruba-tourist-levy-fees-explained"
+  title="Aruba tourist levy and fees, explained for 2027"
+  metaTitle="Aruba Tourist Levy & Fees 2027 Explained — 12.5%, $3/Night, $20 Sustainability Fee"
+  description="Every fee you pay to stay in Aruba, line by line: the 12.5% vacation-rental tourist levy, the US$3 per night environmental levy and the US$20 airport sustainability fee."
+  kicker="Money · fees explained" faq={faq}>
+  <p>Nobody likes a surprise at the last step of a booking, so here is every fee involved in staying in an Aruba vacation rental, stated completely. All amounts are in US dollars, which is how Aruba prices everything.</p>
+  <h2>1. The tourist levy: 12.5%</h2>
+  <p>Vacation rentals in Aruba charge a <strong>12.5% tourist levy</strong>, calculated on the accommodation total <em>including</em> the cleaning fee. It is a government levy collected by the host. At Casa Playa 204 it appears as its own line in your total before you pay.</p>
+  <h2>2. The environmental levy: US$3 per night</h2>
+  <p>A separate <strong>environmental levy of US$3 per night</strong> applies to accommodation stays. It funds the island's environmental programs and is shown as its own line too.</p>
+  <h2>3. The sustainability fee: US$20 per person, paid online</h2>
+  <p>Since <strong>1 July 2024</strong>, every non-resident visitor arriving by air pays a <strong>US$20 sustainability fee</strong>. It is paid online by credit card while completing Aruba's mandatory ED card before you travel, not at the airport and not to your host. Children under eight are exempt. Cruise passengers, who don't complete an ED card, generally don't pay it.</p>
+  <h2>A worked example</h2>
+  <p>Five nights at Casa Playa 204 at the standard rate:</p>
+  <table>
+    <tr><th>Line</th><th>Amount (USD)</th></tr>
+    <tr><td>{n} nights × {f(rate)}</td><td>{f(acc)}</td></tr>
+    <tr><td>Cleaning fee</td><td>{f(clean)}</td></tr>
+    <tr><td>Tourist levy, 12.5% of {f(acc + clean)}</td><td>{f(levy)}</td></tr>
+    <tr><td>Environmental levy, $3 × {n}</td><td>{f(env)}</td></tr>
+    <tr><th>Total paid to us</th><th>{f(acc + clean + levy + env)}</th></tr>
+  </table>
+  <p>Add the US$20 sustainability fee per adult, paid to the government with your ED card. That's the complete picture: no resort fee, no service fee, and no platform fee, because you book direct.</p>
+</GuideArticle>

@@ -8,6 +8,13 @@ import es from './es.json';
 import nl from './nl.json';
 import pt from './pt.json';
 import de from './de.json';
+import pEn from './pages/en.json';
+import pEs from './pages/es.json';
+import pNl from './pages/nl.json';
+import pPt from './pages/pt.json';
+import pDe from './pages/de.json';
+export const pagesDict = { en: pEn, es: pEs, nl: pNl, pt: pPt, de: pDe };
+export const pageContent = (locale, key) => (pagesDict[locale] ?? pagesDict.en)[key] ?? pagesDict.en[key];
 
 export const locales = ['en', 'es', 'nl', 'pt', 'de'];
 export const defaultLocale = 'en';
@@ -23,20 +30,30 @@ export const routes = {
   reviews:   { en: 'reviews',        es: 'resenas',               nl: 'beoordelingen',         pt: 'avaliacoes',            de: 'bewertungen' },
   faq:       { en: 'faq',            es: 'preguntas-frecuentes',  nl: 'veelgestelde-vragen',   pt: 'perguntas-frequentes',  de: 'haeufige-fragen' },
   book:      { en: 'book',           es: 'reservar',              nl: 'boeken',                pt: 'reservar',              de: 'buchen' },
-  confirmed: { en: 'book/confirmed', es: 'reservar/confirmado',   nl: 'boeken/bevestigd',      pt: 'reservar/confirmado',   de: 'buchen/bestaetigt' }
+  confirmed: { en: 'book/confirmed', es: 'reservar/confirmado',   nl: 'boeken/bevestigd',      pt: 'reservar/confirmado',   de: 'buchen/bestaetigt' },
+  aruba:     { en: 'aruba',          es: 'aruba',                 nl: 'aruba',                 pt: 'aruba',                 de: 'aruba' },
+  work:      { en: 'work-from-aruba', es: 'trabajar-desde-aruba', nl: 'werken-vanuit-aruba',   pt: 'trabalhar-de-aruba',    de: 'arbeiten-auf-aruba' },
+  cruise:    { en: 'before-your-cruise', es: 'antes-de-su-crucero', nl: 'voor-je-cruise',      pt: 'antes-do-cruzeiro',     de: 'vor-der-kreuzfahrt' },
+  weddings:  { en: 'weddings',       es: 'bodas',                 nl: 'bruiloften',            pt: 'casamentos',            de: 'hochzeiten' },
+  carnival:  { en: 'carnival',       es: 'carnaval',              nl: 'carnaval',              pt: 'carnaval',              de: 'karneval' },
+  monthly:   { en: 'monthly',        es: 'estadias-largas',       nl: 'lang-verblijf',         pt: 'estadias-longas',       de: 'langzeitaufenthalt' }
 };
 
 /** English-only at launch (hreflang self only). Wave 2 translates them. */
 export const enOnlyRoutes = {
-  work:     'work-from-aruba',
-  cruise:   'before-your-cruise',
-  weddings: 'weddings',
-  carnival: 'carnival',
-  monthly:  'monthly',
   guide:    'guide',
   about:    'about',
   privacy:  'privacy'
 };
+
+/** Occasion pages, in menu order, with their hero image (stock name or prop:file). */
+export const occasions = [
+  { key: 'weddings', img: 'aruba-beach-wedding-flower-arch' },
+  { key: 'carnival', img: 'aruba-carnival-costume-feathers-ocean' },
+  { key: 'cruise',   img: 'oranjestad-cruise-ship-palm-trees' },
+  { key: 'work',     img: 'remote-work-laptop-pool-terrace' },
+  { key: 'monthly',  img: 'oranjestad-shopping-street-palms' },
+];
 
 export function urlFor(pageKey, locale = 'en') {
   const slug = routes[pageKey]?.[locale] ?? routes[pageKey]?.en ?? enOnlyRoutes[pageKey] ?? '';

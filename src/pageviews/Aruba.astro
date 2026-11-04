@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+import { t, pageContent } from '../i18n/index.mjs';
+import { flagship as p } from '../data/properties/index.mjs';
+import { guides } from '../data/guides.mjs';
+import { img } from '../lib/img.mjs';
+import { faqSchema } from '../lib/schema.mjs';
+
+const { locale = 'en' } = Astro.props;
+const tr = t(locale);
+const A = pageContent(locale, 'aruba');
+const heroImg = img(A.hero, locale, 1800);
+const ctaImg = img('aruba-california-lighthouse', locale, 1800);
+const enTag = locale === 'en' ? '' : ' · EN';
+// Practical facts as an FAQ for search engines & AI assistants
+const schema = [faqSchema(A.practical.map((x) => ({ q: x.t, a: x.d })))];
+---
+<Base locale={locale} pageKey="aruba" title={A.seo.title} description={A.seo.desc} heroPreload={heroImg.src} schema={schema}>
+  <Hero page image={heroImg} kicker={A.kicker} title={A.title} sub={A.sub}>
+    <BookingWidget locale={locale} property={p} mode="hero" />
+  </Hero>
+
+  <section class="container">
+    <div class="stats stats-float">
+      {A.facts.map((f) => <div class="stat"><b>{f.n}</b><span>{f.l}</span></div>)}
+    </div>
+  </section>
+
+  <!-- quick jump chips -->
+  <section class="container" style="padding-top:28px">
+    <nav class="gal-tabs" aria-label={A.kicker} style="justify-content:flex-start">
+      {A.sections.map((s) => <a class="gal-tab" href={`#${s.id}`} style="text-decoration:none">{s.kicker}</a>)}
+    </nav>
+  </section>
+
+  <section class="section" style="padding-top:clamp(28px,4vw,48px)">
+    <div class="container">
+      {A.sections.map((s) => { const im = img(s.img, locale, 1200); return (
+        <div class="story" id={s.id} style="scroll-margin-top:90px">
+          <div class="story-img"><img src={im.src} srcset={im.srcset} sizes="(max-width:800px) 100vw, 50vw" alt={im.alt} loading="lazy" width="1200" height="800" /></div>
+          <div class="story-text">
+            <p class="kicker">{s.kicker}</p>
+            <h2>{s.h}</h2>
+            {s.p.map((para) => <p>{para}</p>)}
+          </div>
+        </div>
+      ); })}
+    </div>
+  </section>
+
+  <div class="tile-divider" role="presentation"></div>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head"><h2>{A.practicalTitle}</h2></div>
+      <div class="prac-grid">
+        {A.practical.map((x) => <div class="prac"><h3>{x.t}</h3><p>{x.d}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:#fff">
+    <div class="container">
+      <div class="sec-head">
+        <h2>{A.guidesTitle}</h2>
+        <p class="lede">{A.guidesSub}</p>
+      </div>
+      <div class="guide-grid">
+        {guides.map((g) => { const im = img(g.img, locale, 600); return (
+          <a class="guide-card" href={`/guide/${g.slug}/`} hreflang="en">
+            <span class="gc-img"><img src={im.src} alt={im.alt} loading="lazy" width="600" height="400" /></span>
+            <span class="gc-body"><span class="gc-tag">{g.tag}{enTag}</span><h3>{g.title}</h3><p>{g.blurb}</p></span>
+          </a>
+        ); })}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band section">
+    <img src={ctaImg.src} srcset={ctaImg.srcset} sizes="100vw" alt="" loading="lazy" width="1800" height="1200" />
+    <div class="container">
+      <h2>{A.ctaTitle}</h2>
+      <p style="max-width:56ch;font-size:1.1rem">{A.ctaText}</p>
+      <div style="margin-top:22px"><BookingWidget locale={locale} property={p} mode="hero" uid="bk-aruba-cta" /></div>
+    </div>
+  </section>
+</Base>

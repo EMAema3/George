@@ -1,30 +1,39 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 import BookingWidget from '../components/BookingWidget.astro';
-import { t, urlFor, dateLocaleTag } from '../i18n/index.mjs';
+import Gallery from '../components/Gallery.astro';
+import { t, urlFor, dateLocaleTag, pageContent, occasions } from '../i18n/index.mjs';
 import { flagship as p } from '../data/properties/index.mjs';
 import site from '../data/site.json';
 import { vacationRentalSchema, lodgingBusinessSchema } from '../lib/schema.mjs';
+import { img } from '../lib/img.mjs';
+import { money, moneyWhole } from '../lib/money.mjs';
 
 const { locale = 'en' } = Astro.props;
 const tr = t(locale);
+const H = pageContent(locale, 'home');
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
-const img = (f, s = '') => `${p.images.dir}/${f}${s ? `-${s}w` : ''}.webp`;
-const hero = p.images.gallery[0];
-const alt = (g) => g.alt[locale] ?? g.alt.en;
-const nightly = p.pricing.baseNightly;
+const heroFile = p.images.hero;
+const hero = {
+  src: `${p.images.dir}/${heroFile}.webp`,
+  srcset: `${p.images.dir}/${heroFile}-800w.webp 800w, ${p.images.dir}/${heroFile}-1280w.webp 1280w, ${p.images.dir}/${heroFile}.webp 1535w`,
+  alt: p.images.gallery[0].alt[locale] ?? p.images.gallery[0].alt.en, w: 1535, h: 1024,
+};
 const demoNights = 5;
-const here = nightly * demoNights + p.pricing.cleaningFee;
+const here = p.pricing.baseNightly * demoNights + p.pricing.cleaningFee;
 const platform = Math.round(here * 1.15);
-const fmtMoney = (n) => '$' + n.toLocaleString(dateLocaleTag[locale] || 'en-US');
-const routeCards = [
-  { key: 'routeStay', img: p.images.gallery[4], href: urlFor('apartment', locale) },
-  { key: 'routeWork', img: p.images.gallery[8], href: '/work-from-aruba/' },
-  { key: 'routeCruise', img: p.images.gallery[7], href: '/before-your-cruise/' },
-  { key: 'routeWeddings', img: p.images.gallery[13], href: '/weddings/' },
-  { key: 'routeCarnival', img: p.images.gallery[2], href: '/carnival/' },
-];
-const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${p.geo.lat},${p.geo.lng}`;
+// The five occasions: the stay itself first (big tile), then four segments
+const stayCard = { href: urlFor('apartment', locale), img: img('prop:casa-playa-204-aruba-living-room-balcony-royal-plaza-view', locale, 1200), t: tr('home.routeStay'), d: tr('home.routeStayPromise') };
+const segCards = ['weddings', 'carnival', 'cruise', 'work'].map((k) => {
+  const o = occasions.find((x) => x.key === k);
+  const key = { weddings: 'routeWeddings', carnival: 'routeCarnival', cruise: 'routeCruise', work: 'routeWork' }[k];
+  return { href: urlFor(k, locale), img: img(o.img, locale, 1200), t: tr(`home.${key}`), d: tr(`home.${key}Promise`) };
+});
+const cards = [stayCard, ...segCards];
+const buildingA = img('prop:casa-playa-aruba-royal-plaza-arcade-green-white-tile', locale, 800);
+const buildingB = img('prop:casa-playa-204-aruba-balcony-dutch-colonial-architecture-view', locale, 800);
+const ctaImg = img('aruba-sunset-palapa-sea', locale, 1800);
 const schema = [vacationRentalSchema(p, siteUrl, locale), lodgingBusinessSchema(p, siteUrl, site)];
 const icons = {
   pool: 'M2 17c2 0 2-1.4 4-1.4s2 1.4 4 1.4 2-1.4 4-1.4 2 1.4 4 1.4M2 21c2 0 2-1.4 4-1.4s2 1.4 4 1.4 2-1.4 4-1.4 2 1.4 4 1.4M14 4v9M8 4v9M8 7h6M8 11h6',
@@ -32,93 +41,58 @@ const icons = {
   garage: 'M3 21V8l9-5 9 5v13M7 21v-8h10v8M7 17h10',
   security: 'M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3M9 12l2 2 4-4',
 };
+const factIcons = [
+  'M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z',
+  'M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6',
+  'M2 16l20-6-4-4-6 3-5-2-2 2 4 3-5 2z',
+];
 ---
-<Base locale={locale} pageKey="home" heroPreload={img(hero.file)} schema={schema}>
-  <!-- HERO: the arcade photograph, full bleed, rate + date picker on top -->
-  <section class="hero">
-    <div class="hero-img">
-      <img src={img(hero.file)} srcset={`${img(hero.file, 800)} 800w, ${img(hero.file)} 1535w`} sizes="100vw" alt={alt(hero)} fetchpriority="high" width="1535" height="1024" />
+<Base locale={locale} pageKey="home" heroPreload={hero.src} schema={schema}>
+  <Hero image={hero} kicker={tr('home.heroKicker')} title={tr('home.heroTitle')} sub={tr('home.heroSub')}>
+    <p class="hero-rate">{tr('common.fromLabel')} <strong>{moneyWhole(p.pricing.baseNightly, locale)}</strong> {locale === 'en' && <span class="usd">USD</span>} {tr('common.perNight')}</p>
+    <BookingWidget locale={locale} property={p} mode="hero" />
+    <div class="hero-trust">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffcf96" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>{tr('common.pricesUsd')}</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffcf96" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>{tr('home.compareNote')}</span>
     </div>
-    <div class="hero-scrim"></div>
-    <div class="container hero-content">
-      <p class="kicker">{tr('home.heroKicker')}</p>
-      <h1>{tr('home.heroTitle')}</h1>
-      <p class="hero-sub">{tr('home.heroSub')}</p>
-      <p class="hero-rate">{tr('common.from')} <strong>${nightly}</strong> {tr('common.perNight')}</p>
-      <BookingWidget locale={locale} property={p} mode="hero" />
+  </Hero>
+
+  <!-- The honest beach statement -->
+  <section class="section-tight">
+    <div class="container">
+      <p style="max-width:76ch;font-size:1.1rem;border-left:5px solid var(--terracotta);padding-left:22px;margin:0;color:var(--ink-soft)">{tr('home.beachHonest')}</p>
     </div>
   </section>
 
-  <!-- The honest beach statement — a conversion feature, not a confession -->
-  <section class="section" style="padding-block:40px">
+  <!-- Gallery -->
+  <section class="section" style="padding-top:clamp(24px,4vw,40px)">
     <div class="container">
-      <p style="max-width:70ch;font-size:1.1rem;border-left:5px solid var(--terracotta);padding-left:20px;margin:0">{tr('home.beachHonest')}</p>
+      <div class="sec-head">
+        <p class="kicker">{p.name}</p>
+        <h2>{tr('gallery.title')}</h2>
+      </div>
+      <Gallery locale={locale} property={p} mode="preview" uid="home-gal" />
     </div>
   </section>
 
   <div class="tile-divider" role="presentation"></div>
 
-  <!-- Price comparison strip -->
+  <!-- Five occasions -->
   <section class="section">
     <div class="container">
-      <h2>{tr('home.compareTitle')}</h2>
-      <div class="compare-strip">
-        <div class="compare-cell compare-here">
-          <span>{tr('home.compareHere')} · {demoNights} {tr('common.nights')}</span>
-          <span class="amount">{fmtMoney(here)}</span>
-        </div>
-        <div class="compare-cell compare-them">
-          <span>{tr('home.comparePlatform')}</span>
-          <span class="amount">{fmtMoney(platform)}</span>
-        </div>
+      <div class="sec-head">
+        <p class="kicker">{H.occasionsKicker}</p>
+        <h2>{H.occasionsTitle}</h2>
+        <p class="lede">{H.occasionsSub}</p>
       </div>
-      <p style="color:var(--ink-soft);margin-top:12px;font-size:0.95rem">{tr('home.compareNote')}</p>
-    </div>
-  </section>
-
-  <!-- Proof tiles: resort-without-resort-fees, shown not claimed -->
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <h2>{tr('home.proofTitle')}</h2>
-      <div class="proof-grid">
-        {[['pool', 'proofPool'], ['gym', 'proofGym'], ['garage', 'proofGarage'], ['security', 'proofSecurity']].map(([ic, key]) => (
-          <div class="proof-tile">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[ic]} /></svg>
-            <p>{tr(`home.${key}`)}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <div class="tile-divider" role="presentation"></div>
-
-  <!-- Gallery, eight frames -->
-  <section class="section">
-    <div class="container">
-      <h2>{tr('home.galleryTitle')}</h2>
-      <div class="gallery-grid">
-        {p.images.gallery.slice(1, 9).map((g) => (
-          <a href={img(g.file)} aria-label={alt(g)}>
-            <img src={img(g.file, 800)} alt={alt(g)} loading="lazy" width="800" height="533" />
-          </a>
-        ))}
-      </div>
-      <p style="margin-top:16px"><a class="btn btn-outline" href={urlFor('apartment', locale)}>{tr('common.viewAllPhotos')}</a></p>
-    </div>
-  </section>
-
-  <!-- The five routes -->
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <h2>{tr('home.routesTitle')}</h2>
-      <div class="routes-grid">
-        {routeCards.map((c) => (
-          <a class="card" href={c.href}>
-            <div class="card-top"><img src={img(c.img.file, 480)} alt={alt(c.img)} loading="lazy" width="480" height="320" /></div>
-            <div class="card-body">
-              <h3 style="font-size:1.1rem">{tr(`home.${c.key}`)}</h3>
-              <p class="card-promise">{tr(`home.${c.key}Promise`)}</p>
+      <div class="occ-grid">
+        {cards.map((c, i) => (
+          <a class="occ" href={c.href}>
+            <img src={c.img.src} srcset={c.img.srcset} sizes={i === 0 ? '(max-width:800px) 100vw, 66vw' : '(max-width:800px) 100vw, 33vw'} alt={c.img.alt} loading="lazy" width="1200" height="800" />
+            <div class="occ-body">
+              <h3>{c.t}</h3>
+              <p>{c.d}</p>
+              <span class="occ-go">{H.explore} →</span>
             </div>
           </a>
         ))}
@@ -126,63 +100,131 @@ const icons = {
     </div>
   </section>
 
-  <div class="tile-divider" role="presentation"></div>
-
-  <!-- Three facts most visitors don't know -->
-  <section class="section">
-    <div class="container">
-      <h2>{tr('home.factsTitle')}</h2>
-      <div class="facts">
-        {['fact1', 'fact2', 'fact3'].map((f) => <div class="fact">{tr(`home.${f}`)}</div>)}
+  <!-- Price comparison + proof -->
+  <section class="section" style="background:#fff">
+    <div class="container split" style="align-items:start">
+      <div>
+        <p class="kicker">{tr('common.usd')}</p>
+        <h2>{tr('home.compareTitle')}</h2>
+        <div class="compare-strip" style="margin-top:20px">
+          <div class="compare-cell compare-here"><span>{tr('home.compareHere')} · {demoNights} {tr('common.nights')}</span><span class="amount">{moneyWhole(here, locale)}</span></div>
+          <div class="compare-cell compare-them"><span>{tr('home.comparePlatform')}</span><span class="amount">{moneyWhole(platform, locale)}</span></div>
+        </div>
+        <p style="color:var(--ink-soft);margin-top:12px;font-size:0.95rem">{tr('home.compareNote')}</p>
+      </div>
+      <div>
+        <p class="kicker">Casa Playa</p>
+        <h2>{tr('home.proofTitle')}</h2>
+        <div class="proof-grid" style="grid-template-columns:1fr 1fr;margin-top:20px">
+          {[['pool', 'proofPool'], ['gym', 'proofGym'], ['garage', 'proofGarage'], ['security', 'proofSecurity']].map(([ic, key]) => (
+            <div class="proof-tile">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[ic]} /></svg>
+              <p>{tr(`home.${key}`)}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Reviews, three, real names and months -->
+  <!-- The building -->
+  <section class="section">
+    <div class="container split">
+      <div class="split-imgs">
+        <div class="a"><img src={buildingA.src} srcset={buildingA.srcset} sizes="(max-width:800px) 60vw, 30vw" alt={buildingA.alt} loading="lazy" width="800" height="533" /></div>
+        <div class="b"><img src={buildingB.src} srcset={buildingB.srcset} sizes="(max-width:800px) 40vw, 22vw" alt={buildingB.alt} loading="lazy" width="800" height="533" /></div>
+      </div>
+      <div>
+        <p class="kicker">{H.buildingKicker}</p>
+        <h2>{H.buildingTitle}</h2>
+        <p class="lede">{H.buildingText}</p>
+        <p style="margin-top:22px"><a class="btn btn-outline" href={urlFor('building', locale)}>{H.buildingCta} →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="tile-divider" role="presentation"></div>
+
+  <!-- Aruba -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <p class="kicker">{H.arubaKicker}</p>
+        <h2>{H.arubaTitle}</h2>
+        <p class="lede">{H.arubaSub}</p>
+      </div>
+      <div class="img-cards">
+        {H.arubaCards.map((c) => { const im = img(c.img, locale, 600); return (
+          <a class="img-card" href={urlFor('aruba', locale)}>
+            <img src={im.src} srcset={im.srcset} sizes="(max-width:800px) 50vw, 25vw" alt={im.alt} loading="lazy" width="600" height="400" />
+            <div><strong>{c.t}</strong><span>{c.d}</span></div>
+          </a>
+        ); })}
+      </div>
+      <p style="margin-top:24px"><a class="btn btn-primary" href={urlFor('aruba', locale)}>{H.arubaCta} →</a></p>
+    </div>
+  </section>
+
+  <!-- Three facts -->
   <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>{tr('home.factsTitle')}</h2>
+      <div class="facts">
+        {['fact1', 'fact2', 'fact3'].map((f, i) => (
+          <div class="fact">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={factIcons[i]} /></svg>
+            {tr(`home.${f}`)}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section" style="background:#fff">
     <div class="container">
       <h2>{tr('home.reviewsTitle')}</h2>
       <div class="review-grid">
         {p.reviews.slice(0, 3).map((r) => (
-          <blockquote class="review" style="margin:0">
+          <blockquote class="review">
+            <div class="stars" aria-hidden="true">★★★★★</div>
             <p lang={r.lang}>“{r.text}”</p>
             <footer>{r.name} · {new Date(r.month + '-15').toLocaleDateString(dateLocaleTag[locale] || 'en-US', { month: 'long', year: 'numeric' })} {r.lang !== locale && <span class="lang-tag">({r.lang.toUpperCase()})</span>}</footer>
           </blockquote>
         ))}
       </div>
-      <p style="margin-top:16px"><a href={urlFor('reviews', locale)}>{tr('reviews.title')} →</a></p>
+      <p style="margin-top:18px"><a href={urlFor('reviews', locale)}>{tr('reviews.title')} →</a></p>
     </div>
   </section>
 
-  <div class="tile-divider" role="presentation"></div>
-
-  <!-- Map + walk times -->
+  <!-- Where you are -->
   <section class="section">
-    <div class="container">
-      <h2>{tr('home.mapTitle')}</h2>
-      <p style="max-width:62ch">{tr('location.intro')}</p>
+    <div class="container split" style="align-items:start">
+      <div>
+        <p class="kicker">{p.address.street}</p>
+        <h2>{tr('home.mapTitle')}</h2>
+        <p class="lede">{tr('location.intro')}</p>
+        <p style="margin-top:18px"><a class="btn btn-outline" href={urlFor('location', locale)}>{tr('nav.location')} →</a></p>
+      </div>
       <ul class="dist-list">
         {p.distances.map((d) => (
-          <li>
-            <span>{tr(`location.distances.${d.id}`)}</span>
-            <span class="d-time">{d.walkMin ? `${d.walkMin} ${tr('location.walkMin')}` : `${d.driveMin} ${tr('location.driveMin')}`}</span>
-          </li>
+          <li><span>{tr(`location.distances.${d.id}`)}</span><span class="d-time">{d.walkMin ? `${d.walkMin} ${tr('location.walkMin')}` : `${d.driveMin} ${tr('location.driveMin')}`}</span></li>
         ))}
       </ul>
-      <p style="margin-top:16px"><a class="btn btn-outline" href={mapsUrl} rel="noopener">{tr('location.mapNote')}</a></p>
     </div>
   </section>
 
-  <!-- Lead magnet: the itinerary in exchange for an email -->
-  <section class="section" style="background:var(--tile-green);color:#fff">
-    <div class="container" style="max-width:720px;text-align:center">
-      <h2 style="color:#fff">{tr('home.leadTitle')}</h2>
-      <p style="color:#dcebe2">{tr('home.leadSub')}</p>
-      <form name="itinerary-lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px">
+  <!-- Lead magnet over a sunset -->
+  <section class="cta-band section">
+    <img src={ctaImg.src} srcset={ctaImg.srcset} sizes="100vw" alt="" loading="lazy" width="1800" height="1200" />
+    <div class="container" style="max-width:760px;text-align:center">
+      <h2>{tr('home.leadTitle')}</h2>
+      <p>{tr('home.leadSub')}</p>
+      <form name="itinerary-lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px">
         <input type="hidden" name="form-name" value="itinerary-lead" />
         <p style="display:none"><input name="bot-field" /></p>
         <input type="hidden" name="locale" value={locale} />
-        <input type="email" name="email" required placeholder={tr('booking.emailPlaceholder')} style="flex:1;min-width:240px;max-width:360px;font:inherit;padding:14px 16px;border:none;border-radius:999px" aria-label="Email" />
+        <input type="email" name="email" required placeholder={tr('booking.emailPlaceholder')} style="flex:1;min-width:240px;max-width:360px;font:inherit;padding:15px 18px;border:none;border-radius:999px" aria-label="Email" />
         <button class="btn btn-terracotta" type="submit">{tr('home.leadBtn')}</button>
       </form>
     </div>

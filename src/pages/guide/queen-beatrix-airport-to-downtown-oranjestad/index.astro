@@ -1,0 +1,26 @@
+---
+import GuideArticle from '../../../pageviews/GuideArticle.astro';
+const faq = [
+  { q: 'How much is a taxi from Aruba airport to Oranjestad?', a: 'The official taxi fare from Queen Beatrix Airport to Oranjestad is US$26 for up to four passengers, plus US$5 on Sundays, holidays and between 11 PM and 7 AM. Extra bags beyond one per passenger cost US$3 each. Check taxi.aw for current rates.' },
+  { q: 'How long is the drive from Aruba airport to downtown Oranjestad?', a: 'About 10 minutes. Queen Beatrix International Airport is roughly 5 km from downtown Oranjestad.' },
+  { q: 'Is there Uber in Aruba?', a: 'No. Aruba has no Uber or Lyft. Use the official taxis at the airport rank, a pre-booked private transfer, a rental car or the Arubus public bus.' },
+];
+---
+<GuideArticle slug="queen-beatrix-airport-to-downtown-oranjestad"
+  title="Getting from Queen Beatrix Airport to downtown Oranjestad"
+  metaTitle="Aruba Airport to Oranjestad: Taxi Fare (US$26), Transfers, Bus & Car"
+  description="Queen Beatrix Airport (AUA) is 5 km and 10 minutes from downtown Oranjestad. The official taxi fare, private transfers, the Arubus bus and rental cars compared."
+  kicker="Travel · arriving" faq={faq}>
+  <p>Queen Beatrix International Airport (AUA) is about <strong>5 km from downtown Oranjestad, a 10-minute drive.</strong> Here are your options, with real numbers.</p>
+  <table>
+    <tr><th>Option</th><th>Cost (USD)</th><th>Good for</th></tr>
+    <tr><td>Official taxi</td><td>$26 for up to 4 people (+$5 nights, Sundays & holidays)</td><td>Simplicity: the rank is right outside arrivals</td></tr>
+    <tr><td>Private transfer</td><td>$75 round trip (Casa Playa add-on)</td><td>Being met with your name, no queue</td></tr>
+    <tr><td>Arubus public bus</td><td>A few dollars per ride</td><td>Light luggage, tight budgets</td></tr>
+    <tr><td>Rental car</td><td>Varies by season</td><td>North-coast and Arikok exploring</td></tr>
+  </table>
+  <h2>Taxi details</h2>
+  <p>Aruba's taxis charge fixed official fares, not meters. The fare from the airport to Oranjestad is <strong>US$26</strong> for up to four passengers. A <strong>US$5</strong> surcharge applies on Sundays, official holidays and between 11 PM and 7 AM. Each passenger can bring one standard bag and one carry-on, and extra bags are <strong>US$3</strong> each. The official calculator is at taxi.aw. There's no Uber or Lyft on the island.</p>
+  <h2>Do you need a car?</h2>
+  <p>If you're staying downtown, mostly no. Restaurants, the harbour, Surfside Beach and the bus terminal are all walkable from Casa Playa, and Eagle Beach is a short taxi or bus ride. Rent a car for a day or two if you want the north coast, Arikok National Park or Baby Beach.</p>
+</GuideArticle>

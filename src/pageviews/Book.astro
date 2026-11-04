@@ -16,7 +16,7 @@ const hero = p.images.gallery[0];
       <p style="max-width:58ch;font-size:1.05rem">{tr('booking.sub')}</p>
     </div>
   </section>
-  <section class="container" style="display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:start;padding-bottom:64px">
+  <section class="container" style="display:grid;grid-template-columns:1.9fr 1fr;gap:36px;align-items:start;padding-bottom:64px">
     <BookingWidget locale={locale} property={p} mode="full" />
     <aside>
       <div class="arch-img" style="aspect-ratio:3/4;max-height:380px"><img src={img(hero.file, 800)} alt={hero.alt[locale] ?? hero.alt.en} width="800" height="533" style="height:100%" /></div>

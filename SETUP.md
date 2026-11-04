@@ -41,12 +41,12 @@ Set a notification email: Forms → Settings → Form notifications.
 | Real guest reviews | `src/data/properties/casa-playa-204.json` → `reviews` (the 3 in there now are **placeholders — replace before launch**) |
 | Exact geo coordinates | same file → `geo` (currently centred on L.G. Smith Blvd 94 area) |
 
-## 5. Add-on photos
+## 5. Stock photos (weddings, carnival, cruise, Aruba, add-ons)
 
-Add-ons currently use branded SVG illustrations in `public/images/addons/`.
-To use real stock photos, save them **with the same filenames** (e.g. `airport-transfer.svg` →
-drop in `airport-transfer.jpg` and update the `image` path in the property JSON). Licensed
-stock (Unsplash/Pexels) is fine; per the spec, never use stock beach photos as *property* photos.
+36 licensed Unsplash photos are listed in `src/data/stock.mjs` with SEO filenames and alt text in 5 languages.
+Netlify downloads them **at build time** (brightened and warmed) into `/images/stock/`. If a download ever
+fails, `public/_redirects` serves the same URL from Unsplash, so nothing breaks.
+To swap a photo: replace its `id` in `stock.mjs` (the `photo-…` part of an images.unsplash.com URL).
 
 ## 6. Custom domain
 

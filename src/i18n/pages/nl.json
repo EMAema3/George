@@ -1,0 +1,488 @@
+{
+  "home": {
+    "occasionsKicker": "Waarom mensen komen",
+    "occasionsTitle": "Vijf manieren om in de ansichtkaart te verblijven",
+    "occasionsSub": "Eén adres, vijf heel verschillende reizen. Kies de jouwe.",
+    "explore": "Ontdek",
+    "arubaKicker": "One happy island",
+    "arubaTitle": "Heel Aruba, tien minuten van je voordeur",
+    "arubaSub": "Het witte zand van Eagle Beach, flamingo's, een natuurlijk zwembad in vulkanisch gesteente en de California-vuurtoren liggen allemaal op korte afstand. Het centrum van Oranjestad begint op de stoep voor de deur.",
+    "arubaCta": "Ontdek Aruba",
+    "arubaCards": [
+      {
+        "img": "eagle-beach-aruba-fofoti-tree",
+        "t": "Eagle Beach",
+        "d": "10 min rijden"
+      },
+      {
+        "img": "aruba-flamingos-beach",
+        "t": "Flamingo's",
+        "d": "Renaissance Island"
+      },
+      {
+        "img": "aruba-natural-pool-swimmer",
+        "t": "Natural Pool",
+        "d": "Nationaal park Arikok"
+      },
+      {
+        "img": "aruba-california-lighthouse",
+        "t": "California-vuurtoren",
+        "d": "De noordpunt van het eiland"
+      }
+    ],
+    "buildingKicker": "Het gebouw",
+    "buildingTitle": "Het monument aan de waterkant",
+    "buildingText": "Casa Playa is het voormalige Royal Plaza Mall, het roze Nederlands-koloniale blok dat elke cruisepassagier fotografeert. Nu telt het 62 privéresidenties boven een gewelfde arcade, met een zwembad op de derde verdieping boven de haven, een fitnessruimte, valet parking en beveiliging, dag en nacht.",
+    "buildingCta": "Kijk in het gebouw"
+  },
+  "aruba": {
+    "seo": {
+      "title": "Aruba-reisgids 2027 — stranden, Oranjestad & tips | Casa Playa 204",
+      "desc": "De complete Aruba-gids vanuit Oranjestad: de mooiste stranden, de ruige noordkust, de Natural Pool, flamingo's, eten, het weer, vervoer en handige feiten."
+    },
+    "kicker": "Ontdek Aruba",
+    "title": "One happy island",
+    "sub": "Zo'n dertig kilometer woestijn, koraal en turquoise water, buiten de orkaangordel en vrijwel elke dag van het jaar zonnig. Hier lees je alles wat de moeite waard is, vanaf een adres er middenin.",
+    "hero": "eagle-beach-aruba-divi-tree-turquoise",
+    "facts": [
+      {
+        "n": "28°C",
+        "l": "Gemiddelde temperatuur, het hele jaar (82°F)"
+      },
+      {
+        "n": "0",
+        "l": "Orkaangordel — Aruba ligt erbuiten"
+      },
+      {
+        "n": "US$",
+        "l": "Overal op het eiland geaccepteerd"
+      },
+      {
+        "n": "US",
+        "l": "Amerikaanse douane-preclearance op de luchthaven"
+      }
+    ],
+    "sections": [
+      {
+        "id": "beaches",
+        "kicker": "Stranden",
+        "h": "Wit zand aan de kalme kant",
+        "img": "eagle-beach-aruba-fofoti-tree",
+        "p": [
+          "De west- en zuidkust van Aruba liggen uit de passaatwind, dus het water is daar kalm, helder en turquoise. Eagle Beach, zo'n 10 minuten rijden vanaf Casa Playa, is het strand van de ansichtkaarten: een breed, zacht en rustig strand met de beroemde, door de wind gebogen fofoti-bomen, en een broedplek voor zeeschildpadden.",
+          "Palm Beach, verder naar het noorden, is de levendige resortstrook met watersport en strandbars. Arashi Beach, vlak bij de noordpunt, is rustiger en ideaal om te snorkelen. Helemaal in het zuiden ligt Baby Beach, een ondiepe, beschutte lagune waar je tot ver uit de kant tot je middel in het water staat. Het dichtstbij is Surfside Beach, 15 minuten lopen vanaf de voordeur."
+        ]
+      },
+      {
+        "id": "flamingos",
+        "kicker": "Natuur",
+        "h": "Flamingo's, schildpadden en papegaaivissen",
+        "img": "aruba-flamingos-beach",
+        "p": [
+          "De flamingo's die Aruba beroemd maakten op Instagram wonen op Renaissance Island, een privé-eiland van het Renaissance Resort in Oranjestad. De toegang is beperkt, dus boek ruim op tijd een dagpas als ze op je lijstje staan.",
+          "Lederschildpadden, soepschildpadden en karetschildpadden leggen tussen maart en september hun eieren op Eagle Beach. Onder water zitten de riffen bij Boca Catalina en het wrak van de Antilla, een van de grootste scheepswrakken van het Caribisch gebied, vol papegaaivissen, sergeant-majors en engelvissen — makkelijk bereikbaar met snorkel en duikbril."
+        ]
+      },
+      {
+        "id": "wild",
+        "kicker": "De wilde kant",
+        "h": "Arikok, de Natural Pool en de noordkust",
+        "img": "aruba-natural-pool-swimmer",
+        "p": [
+          "Bijna een vijfde van Aruba is Nationaal park Arikok: cactuswoestijn, kalksteenkliffen en grotten met tekeningen van de Arawak. Daarbinnen ligt de Natural Pool, of Conchi: een ring van vulkanisch gesteente rond een rustig zwemgat, terwijl de Atlantische Oceaan erbuiten tekeergaat. Je komt er te voet, met een 4x4 of tijdens een UTV-tour met gids.",
+          "De noordkust, aan de windzijde, is ruw en prachtig. De California-vuurtoren op de noordwestpunt, vernoemd naar een schip dat hier in 1891 voor de kust verging, heeft het mooiste uitzicht op de zonsondergang van het hele eiland. Halve-dagtours vanuit Oranjestad nemen je mee langs de vuurtoren, de kapel van Alto Vista en de ruïnes van de oude goudmolen bij Bushiribana."
+        ]
+      },
+      {
+        "id": "oranjestad",
+        "kicker": "Oranjestad",
+        "h": "Een hoofdstad die je te voet verkent",
+        "img": "oranjestad-waterfront-pastel-buildings",
+        "p": [
+          "Oranjestad is de hoofdstad van Aruba en de enige echte stad aan de kalme kant van het eiland: pastelkleurige Nederlands-koloniale gevels, een drukke haven en de grootste concentratie restaurants van het eiland. Casa Playa staat aan de boulevard langs het water.",
+          "Binnen een paar minuten lopen vind je Fort Zoutman, het oudste gebouw van het eiland (1798), met de klokkentoren Willem III; de Renaissance Marketplace aan de haven; de tram door het centrum over de met palmen omzoomde Main Street; het wandelpad Linear Park langs de zee; en de cruiseterminal."
+        ]
+      },
+      {
+        "id": "food",
+        "kicker": "Eten",
+        "h": "Wat je eet, en waar",
+        "img": "romantic-beach-dinner-sunset",
+        "p": [
+          "Uit eten gaan is de grootste uitgavepost van bezoekers op Aruba, en het eiland maakt dat waar. Probeer keshi yena (een gevulde, gebakken kaas met gekruide kip), pastechi als ontbijt, verse wahoo of red snapper met pan bati, en een koude Balashi, het lokale bier.",
+          "In het centrum van Oranjestad vind je alles, van visrestaurants aan de haven tot cocktails op een dakterras, allemaal op loopafstand van Casa Playa. Voor die ene onvergetelijke avond reserveer je een tafel in het zand bij zonsondergang; de westkust kijkt er elke avond recht op uit."
+        ]
+      },
+      {
+        "id": "sunsets",
+        "kicker": "Wanneer je gaat",
+        "h": "Zonnig en een frisse bries, bijna elke dag",
+        "img": "aruba-sunset-palapa-sea",
+        "p": [
+          "Aruba is een woestijneiland: het hele jaar rond de 28°C (82°F), verkoeld door een constante passaatwind, met minder dan 500 mm (20 in) regen per jaar. Omdat het buiten de orkaangordel ligt, is een datum die je een jaar vooruit boekt een veilige keuze — en dat telt zwaar bij een bruiloft.",
+          "December tot en met april is het hoogseizoen. September tot en met november is warm en rustig, en de beste deal van het jaar. Carnaval vult januari en februari en eindigt met de Grote Parade door Oranjestad."
+        ]
+      }
+    ],
+    "practicalTitle": "Praktisch om te weten",
+    "practical": [
+      {
+        "t": "Valuta",
+        "d": "De Arubaanse florin is gekoppeld aan de Amerikaanse dollar (ongeveer 1,79 florin per dollar), en dollars en kaarten worden overal geaccepteerd."
+      },
+      {
+        "t": "Terugvliegen",
+        "d": "Luchthaven Queen Beatrix (AUA) heeft US preclearance. Vlieg je naar de VS, dan passeer je de Amerikaanse douane al op Aruba en land je als binnenlandse passagier."
+      },
+      {
+        "t": "Talen",
+        "d": "Papiamento en Nederlands zijn de officiële talen. Engels en Spaans worden bijna overal gesproken."
+      },
+      {
+        "t": "Water en stroom",
+        "d": "Het kraanwater is ontzilt en veilig om te drinken. De netspanning is 110–127 V, met Amerikaanse stekkers — neem een verloopstekker mee."
+      },
+      {
+        "t": "Tijdzone",
+        "d": "Atlantic Standard Time (UTC−4), zonder zomertijd. Dat is in de zomer gelijk aan New York en in de winter een uur later dan daar."
+      },
+      {
+        "t": "Vervoer",
+        "d": "De bussen van Arubus rijden vanuit het centrum van Oranjestad langs de hotelkust. Taxi's rekenen vaste zonetarieven. Huur een auto of 4x4 voor de noordkust."
+      }
+    ],
+    "guidesTitle": "Uitgebreide gidsen",
+    "guidesSub": "Volledige antwoorden, met echte cijfers.",
+    "guidesLang": "",
+    "ctaTitle": "Jouw uitvalsbasis voor alles",
+    "ctaText": "Met Casa Playa 204 ligt Oranjestad voor je deur en de rest van het eiland binnen een paar minuten. Boek direct voor de beste prijs."
+  },
+  "work": {
+    "seo": {
+      "title": "Werken vanuit Aruba — per maand, met snelle wifi | Casa Playa 204",
+      "desc": "Een echt bureau, wifi gemeten op 100+ Mbps, fitness en een zwembad met havenzicht, per maand. Met One Happy Workation werk je tot 90 dagen op Aruba."
+    },
+    "kicker": "Werken vanuit Aruba",
+    "title": "Je kantoor heeft nu uitzicht op de haven",
+    "sub": "Een echt bureau, wifi gemeten op meer dan 100 Mbps, een fitnessruimte beneden en een zwembad boven de haven, in een tijdzone die de hele Amerikaanse werkdag overlapt.",
+    "hero": "remote-work-laptop-pool-terrace",
+    "facts": [
+      {
+        "n": "100+",
+        "l": "Mbps wifi, gemeten"
+      },
+      {
+        "n": "90",
+        "l": "Dagen met het One Happy Workation-programma"
+      },
+      {
+        "n": "UTC−4",
+        "l": "Atlantic time, geen zomertijd"
+      },
+      {
+        "n": "US$139",
+        "l": "Per nacht bij een verblijf van 28+ nachten"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "De werkplek",
+        "h": "Een bureau dat echt een bureau is",
+        "img": "prop:casa-playa-204-aruba-remote-work-desk-nook",
+        "p": [
+          "Je werkt aan een stevig teakhouten bureau met een bureaulamp en een goede stoel, niet aan een hoekje van de eettafel. De wifi is gemeten, niet beloofd: meer dan 100 Mbps, genoeg om de hele dag te videobellen. Twee smart-tv's doen dienst als tweede scherm.",
+          "Zodra de laatste call voorbij is, kijk je vanaf het zwembad op de derde verdieping uit over de haven, zit de fitnessruimte in het gebouw en ligt je diner in elke richting op een paar minuten lopen."
+        ]
+      },
+      {
+        "kicker": "De regels",
+        "h": "Blijf zo lang als je werk het toelaat",
+        "img": "remote-work-poolside-laptops",
+        "p": [
+          "Het One Happy Workation-programma van Aruba is speciaal opgezet voor remote workers: Amerikaanse bezoekers mogen tot 90 dagen blijven en werken, met verlenging tot 180 dagen.",
+          "Aruba rekent in Amerikaanse dollars, ligt buiten de orkaangordel en hanteert Atlantic time: in de zomer gelijk aan New York, in de winter een uur later. September tot en met november is de rustige, warme sweet spot."
+        ]
+      },
+      {
+        "kicker": "Een werkdag hier",
+        "h": "'s Ochtends calls, om vijf uur de zee",
+        "img": "oranjestad-main-street-red-tram",
+        "p": [
+          "Koffie uit het espressoapparaat, twee calls vóór de lunch aan het bureau bij het raam, tussen de meetings door een duik, en zodra de werkdag erop zit een wandeling langs het water naar je diner.",
+          "Er is een wasmachine in het appartement, een complete keuken, valet parking en 24/7 beveiliging. Alles wat gewoon wonen vraagt, is geregeld."
+        ]
+      }
+    ],
+    "listTitle": "Inbegrepen bij elk lang verblijf",
+    "list": [
+      "Wifi, gemeten op 100+ Mbps",
+      "Eigen bureau met bureaulamp",
+      "Zwembad, fitness en bibliotheek in het gebouw",
+      "Wasmachine in het appartement, strijkijzer en -plank",
+      "Complete keuken met espresso- en filterkoffie",
+      "Valet parking en 24/7 beveiliging",
+      "Tussentijdse schoonmaak mogelijk voor US$65"
+    ],
+    "ctaTitle": "Kies je maand",
+    "ctaText": "Bij 28 nachten of langer geldt automatisch het maandtarief."
+  },
+  "cruise": {
+    "seo": {
+      "title": "Vóór je cruise op Aruba: 5 minuten van de terminal | Casa Playa 204",
+      "desc": "Slaap op 400 m van de cruiseterminal in Oranjestad. Compleet appartement, 24/7 beveiliging, laat vertrek bij avondafvaarten en de avond ervoor lopend uit eten."
+    },
+    "kicker": "Vóór je cruise",
+    "title": "Wakker worden, koffie, naar het schip lopen",
+    "sub": "De cruiseterminal van Oranjestad ligt op 400 meter van de voordeur, 5 minuten lopen met bagage. Vanaf de hoek zie je de schepen al liggen.",
+    "hero": "oranjestad-cruise-ship-palm-trees",
+    "facts": [
+      {
+        "n": "400 m",
+        "l": "Naar de cruiseterminal"
+      },
+      {
+        "n": "5 min",
+        "l": "Lopen, met bagage"
+      },
+      {
+        "n": "10 min",
+        "l": "Rijden vanaf de luchthaven"
+      },
+      {
+        "n": "15:00",
+        "l": "Laat vertrek mogelijk"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "De avond ervoor",
+        "h": "Kom een dag eerder, slaap naast je schip",
+        "img": "oranjestad-cruise-terminal-ship-docked",
+        "p": [
+          "Rederijen raden aan een dag vóór vertrek aan te komen, want op een vertraagde vlucht wacht het schip niet. Vanuit Casa Playa is je ochtend een wandeling van 5 minuten. Vanuit de hotels aan Palm Beach is het een taxirit van 20–30 minuten, op de drukste ochtend van de week.",
+          "Breng de avond door in het centrum: diner aan de haven, je schip dat aan het eind van de straat binnenloopt, en een echt bed vóór tien nachten op zee."
+        ]
+      },
+      {
+        "kicker": "Logistiek",
+        "h": "Gemaakt voor de dag van inscheping",
+        "img": "aruba-airport-transfer-luggage-car",
+        "p": [
+          "Boek er een privé-luchthaventransfer bij: we wachten je op bij aankomst en rijden je in 10 minuten naar de deur. De meeste cruises vanaf Aruba schepen 's middags in, dus met laat vertrek tot 15:00 (US$45) overbrug je de tijd moeiteloos.",
+          "De avond vóór een cruise wint een compleet appartement het van een hotelkamer. Je pakt opnieuw in op een echte vloer, draait nog een was in je eigen wasmachine en je bagage staat veilig achter de 24/7 beveiliging van het gebouw."
+        ]
+      },
+      {
+        "kicker": "Terug naar huis",
+        "h": "De makkelijkste vlucht naar huis in het Caribisch gebied",
+        "img": "caribbean-cruise-port-aerial",
+        "p": [
+          "Eindigt je cruise op Aruba? Plak er een nacht of twee aan vast en zie het eiland zoals het hoort. Vlieg je door naar de VS, dan passeer je dankzij de US preclearance van luchthaven Queen Beatrix de Amerikaanse douane al op Aruba en land je als binnenlandse passagier, zonder rij bij aankomst."
+        ]
+      }
+    ],
+    "listTitle": "Checklist voor je cruisedag",
+    "list": [
+      "5 minuten lopen naar de terminal, de hele weg vlakke stoep",
+      "Laat vertrek tot 15:00 voor US$45",
+      "Privé-luchthaventransfer, heen en terug",
+      "Wasmachine in het appartement voor een laatste was vóór vertrek",
+      "Welkomstpakket met boodschappen voor een late aankomst",
+      "Tientallen restaurants binnen 10 minuten lopen"
+    ],
+    "ctaTitle": "Check je vertrekdatum",
+    "ctaText": "Kies de nacht vóór inscheping en zie direct het volledige totaal, inclusief heffingen."
+  },
+  "weddings": {
+    "seo": {
+      "title": "Trouwen op Aruba — logeren in Oranjestad | Casa Playa 204",
+      "desc": "Waar je bruiloftsgasten op Aruba logeren: een compleet appartement in het monument van Oranjestad. Buiten de orkaangordel, in US$, homohuwelijk sinds 2024."
+    },
+    "kicker": "Bruiloften & gasten",
+    "title": "Zeg ja op Aruba",
+    "sub": "Zon zo goed als gegarandeerd, geen orkaanseizoen om rekening mee te houden, en een iconisch adres in Oranjestad voor het bruidspaar, de ouders of de getuigen.",
+    "hero": "aruba-beach-wedding-ceremony-guests",
+    "facts": [
+      {
+        "n": "0",
+        "l": "Orkaangordel — een datum een jaar vooruit is veilig"
+      },
+      {
+        "n": "US$",
+        "l": "Geen valutaverrassingen voor je gasten"
+      },
+      {
+        "n": "2024",
+        "l": "Homohuwelijk erkend sinds juli"
+      },
+      {
+        "n": "10 min",
+        "l": "Naar ceremonies op Eagle Beach"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "Waarom Aruba",
+        "h": "De veiligste datum van het Caribisch gebied",
+        "img": "aruba-beach-wedding-flower-arch",
+        "p": [
+          "Een bruiloft boek je 8 tot 12 maanden vooruit, en precies dan maakt het orkaanseizoen het grootste deel van het Caribisch gebied tot een gok. Aruba ligt buiten de orkaangordel. Het is bovendien een van de droogste en zonnigste eilanden van de regio, en de constante passaatwind houdt een ceremonie in de buitenlucht aangenaam.",
+          "Ook niet-ingezetenen kunnen op Aruba wettig trouwen, en het huwelijk tussen partners van hetzelfde geslacht wordt sinds juli 2024 erkend. Alles is geprijsd in Amerikaanse dollars, en dankzij US preclearance is de terugvlucht naar de VS voor Amerikaanse gasten extra makkelijk."
+        ]
+      },
+      {
+        "kicker": "Voor je gasten",
+        "h": "De plek waar jouw mensen logeren",
+        "img": "aruba-wedding-party-celebration-beach",
+        "p": [
+          "Als het resortblok vol zit, of als ouders liever een keuken, een wasmachine en een rustig balkon hebben dan een kamer in een hoogbouwhotel, is Casa Playa 204 het verblijf waarvoor ze je dankbaar zijn. Er is een slaapkamer met kingsize bed, een slaapbank en ruimte voor de jurk en de pakken.",
+          "Iedereen loopt zo naar het diner, het repetitiediner en de haven, en het strand voor de ceremonie is 10 minuten rijden. We beantwoorden gasten in het Engels, Spaans, Nederlands, Portugees en Duits."
+        ]
+      },
+      {
+        "kicker": "De extra's",
+        "h": "Maak van de aankomst al een feest",
+        "img": "celebration-champagne-pouring",
+        "p": [
+          "Voeg ons feestpakket toe (gekoelde prosecco, verse bloemen en een charcuterieplank), of een privéontbijt op het balkon op de ochtend erna. Geef ons de datum door en we zetten alles klaar."
+        ]
+      }
+    ],
+    "listTitle": "Checklist voor de planning",
+    "list": [
+      "Boek je accommodatie 8–12 maanden vooruit",
+      "Aruba ligt buiten de orkaangordel",
+      "Niet-ingezetenen kunnen op Aruba wettig trouwen",
+      "Homohuwelijk erkend sinds juli 2024",
+      "Prijzen in Amerikaanse dollars voor elke gast",
+      "US preclearance op de terugweg naar de VS"
+    ],
+    "ctaTitle": "Leg je trouwdata vast",
+    "ctaText": "Bekijk de live beschikbaarheid en de volledige prijs, inclusief heffingen."
+  },
+  "carnival": {
+    "seo": {
+      "title": "Carnaval op Aruba 2027 — logeer aan de paraderoute | Casa Playa 204",
+      "desc": "Carnaval op Aruba 2027 loopt van januari tot de finale vóór Aswoensdag, 10 februari 2027. Logeer aan de L.G. Smith Boulevard. Boek tussen november en januari."
+    },
+    "kicker": "Carnaval 2027",
+    "title": "Carnaval, vanaf de boulevard",
+    "sub": "Veren, steelbands en wekenlang optochten, met als afsluiter de Grote Parade door Oranjestad. De traditionele paraderoute loopt over de boulevard langs het water, precies waar Casa Playa staat.",
+    "hero": "aruba-carnival-costume-feathers-ocean",
+    "facts": [
+      {
+        "n": "jan–feb",
+        "l": "Het carnavalsseizoen 2027"
+      },
+      {
+        "n": "10 feb",
+        "l": "Aswoensdag 2027, de finale"
+      },
+      {
+        "n": "8–10",
+        "l": "Weken: zo lang loopt het boekingsvenster"
+      },
+      {
+        "n": "US$289",
+        "l": "Per nacht, carnavalsseizoen"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "Het seizoen",
+        "h": "Geen weekend. Een seizoen.",
+        "img": "aruba-carnival-purple-feather-costume",
+        "p": [
+          "Het carnaval van Aruba is een van de langste en uitbundigste van het Caribisch gebied. Jump-ups, wedstrijden in steelpan en tumba, de Lighting Parade na zonsondergang, kinderoptochten en de Grote Parades in San Nicolas en daarna Oranjestad vullen de weken van begin januari tot de zondag vóór Aswoensdag.",
+          "De carnavalsorganisatie publiceert elk jaar in januari de officiële kalender en paraderoutes, en wij zetten de route van 2027 online zodra die bevestigd is."
+        ]
+      },
+      {
+        "kicker": "Waar je kijkt",
+        "h": "De beste plek is je eigen plek",
+        "img": "aruba-carnival-street-parade",
+        "p": [
+          "Langs de route in het centrum staat het publiek al uren vóór de eerste praalwagen schouder aan schouder. Logeer je aan de boulevard, dan wordt een lange middag in de zon een makkelijke. Kijken, even terug de airco in, de koelbox bijvullen en weer naar buiten.",
+          "Als de laatste band voorbij is, ben je al thuis. Geen rij voor de taxi, geen afgesloten wegen en geen rit terug naar de hotelstrook."
+        ]
+      },
+      {
+        "kicker": "Boek op tijd",
+        "h": "Het venster is kort",
+        "img": "aruba-carnival-gold-sequin-costume",
+        "p": [
+          "Accommodatie bij de route is binnen acht tot tien weken weg nadat de data van het seizoen in november bekend worden. Vluchten vanuit de VS en Argentinië, de snelst groeiende markt voor carnaval, pieken op hetzelfde moment, dus boek je vlucht en verblijf het liefst samen."
+        ]
+      }
+    ],
+    "listTitle": "Alles voor je carnavalsverblijf",
+    "list": [
+      "Aan de boulevard langs het water, midden in Oranjestad",
+      "Appartement met airco om tussen de optochten in bij te komen",
+      "Complete keuken en een koelkast voor de koelbox",
+      "Plek voor 4: kingsize bed plus slaapbank",
+      "24/7 beveiliging in het gebouw tijdens paradenachten",
+      "Feestpakket mogelijk bij aankomst"
+    ],
+    "ctaTitle": "Claim je carnavalsdata",
+    "ctaText": "Live beschikbaarheid voor januari en februari 2027."
+  },
+  "monthly": {
+    "seo": {
+      "title": "Een maand op Aruba — 28-nachtentarief, all-in prijs | Casa Playa 204",
+      "desc": "Een maand Oranjestad voor {rate} per nacht bij 28+ nachten: {total} all-in, incl. 12,5% toeristenheffing en milieuheffing. Zwembad, fitness en 100 Mbps wifi."
+    },
+    "kicker": "Lange verblijven",
+    "title": "Een maand in Oranjestad",
+    "sub": "Bij 28 nachten of langer geldt automatisch het maandtarief. Je krijgt het complete appartement, met nutsvoorzieningen, wifi, zwembad, fitness en parkeren inbegrepen.",
+    "hero": "oranjestad-shopping-street-palms",
+    "facts": [
+      {
+        "n": "US$139",
+        "l": "Per nacht, 28+ nachten"
+      },
+      {
+        "n": "28",
+        "l": "Nachten minimaal voor het maandtarief"
+      },
+      {
+        "n": "100+",
+        "l": "Mbps wifi"
+      },
+      {
+        "n": "US$65",
+        "l": "Tussentijdse schoonmaak en schone lakens"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "Wat een maand kost",
+        "h": "De all-in prijs, zonder kleine lettertjes",
+        "img": "prop:casa-playa-204-aruba-open-plan-living-room-green-kitchen",
+        "p": [
+          "28 nachten à {rate} komen uit op {acc}, plus {cleaning} schoonmaakkosten. Over beide geldt de Arubaanse toeristenheffing van 12,5% ({levy}), en de milieuheffing is US$3 per nacht ({env}). Het totaal is {total} all-in, inclusief nutsvoorzieningen, wifi, zwembad, fitness en valet parking.",
+          "De boekingskalender rekent het voor elke verblijfsduur voor je uit, en je ziet elke regel voordat je betaalt."
+        ]
+      },
+      {
+        "kicker": "Hier wonen",
+        "h": "Een buurt, geen resort",
+        "img": "oranjestad-colorful-dutch-colonial-houses",
+        "p": [
+          "Na een week voelt Oranjestad niet meer als een bestemming, maar als thuis: een vaste koffieplek, een ochtendwandeling langs het water en je favoriete tafel voor het diner. De supermarkt, de fitness en het busstation liggen allemaal op loopafstand."
+        ]
+      }
+    ],
+    "listTitle": "Inbegrepen",
+    "list": [
+      "Nutsvoorzieningen en wifi van 100+ Mbps",
+      "Zwembad, fitness en bibliotheek",
+      "Valet parking en 24/7 beveiliging",
+      "Wasmachine in het appartement",
+      "Complete keuken",
+      "Tussentijdse schoonmaak mogelijk voor US$65"
+    ],
+    "ctaTitle": "Kies je maand",
+    "ctaText": "Kies 28+ nachten en het maandtarief geldt automatisch."
+  }
+}

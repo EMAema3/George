@@ -1,5 +1,16 @@
 {
-  "nav": { "home": "Home", "apartment": "The Apartment", "building": "The Building", "location": "Location", "reviews": "Reviews", "faq": "FAQ", "book": "Book", "guide": "Aruba Guide" },
+  "nav": {
+    "home": "Home",
+    "apartment": "Apartment",
+    "building": "Building",
+    "location": "Location",
+    "reviews": "Reviews",
+    "faq": "FAQ",
+    "book": "Book",
+    "guide": "Aruba Guide",
+    "occasions": "Occasions",
+    "aruba": "Aruba"
+  },
   "common": {
     "bookNow": "Book now",
     "checkDates": "Check dates",
@@ -21,7 +32,12 @@
     "instantConfirmation": "Instant confirmation. No account needed.",
     "securePayment": "Secure card payment by Stripe",
     "minStay": "Minimum stay: {n} nights",
-    "backHome": "Back to the homepage"
+    "backHome": "Back to the homepage",
+    "dates": "Dates",
+    "addDates": "Add dates",
+    "usd": "USD",
+    "pricesUsd": "All prices in US dollars",
+    "fromLabel": "from"
   },
   "booking": {
     "title": "Book your stay",
@@ -29,7 +45,7 @@
     "accommodation": "Accommodation",
     "cleaningFee": "Cleaning fee",
     "touristLevy": "Aruba tourist levy (12.5%)",
-    "envLevy": "Environmental levy ($3 × night)",
+    "envLevy": "Environmental levy (US$3 × night)",
     "total": "Total",
     "totalNote": "The total you see is the total you pay. Levies are itemised above — never a surprise at the last step.",
     "payNow": "Continue to secure payment",
@@ -46,7 +62,10 @@
     "selectDatesFirst": "Pick your dates to see the exact total",
     "perPerson": "per person",
     "eachWay": "each way",
-    "payRedirect": "Taking you to secure checkout…"
+    "payRedirect": "Taking you to secure checkout…",
+    "inclLevies": "incl. levies & cleaning",
+    "add": "Add",
+    "added": "Added"
   },
   "confirmed": {
     "title": "You're booked.",
@@ -147,16 +166,46 @@
   "faq": {
     "title": "Questions, answered completely",
     "items": [
-      { "q": "What taxes and levies will I pay?", "a": "Aruba charges a 12.5% tourist levy on vacation rentals, calculated on your total including the cleaning fee, plus a US$3 per night environmental levy. Both are itemised in your total before you pay — the price you see at checkout is final." },
-      { "q": "When can I check in and out?", "a": "Check-in from 3:00 PM to 10:00 PM, checkout by 11:00 AM. Early check-in or late checkout can be added for $45 when the calendar allows — ideal before a cruise." },
-      { "q": "Is there parking?", "a": "Yes — valet parking under the building, included with your stay. The entrance is on the back street, off the boulevard." },
-      { "q": "How fast is the Wi-Fi, really?", "a": "Measured at 100+ Mbps down. There's a dedicated desk in the living room. Remote workers regularly stay a month." },
-      { "q": "Can you walk to a beach?", "a": "Honestly: this is a city stay, not beachfront. Surfside Beach is about 15 minutes on foot along the waterfront; Eagle Beach — one of the Caribbean's best — is a 10-minute drive or short bus ride. If you want to step from your room onto sand, a Palm Beach resort will suit you better; if you want to walk to dinner, you're in the right place." },
-      { "q": "How far is the cruise terminal?", "a": "About 400 metres — a 5-minute walk with luggage. You can see ships in port from the corner of the building. Many guests stay the night before embarkation." },
-      { "q": "What's the cancellation policy?", "a": "Full refund up to 14 days before check-in, 50% up to 7 days before. It's also shown on the booking page before you pay." },
-      { "q": "Is the apartment accessible?", "a": "The building has an elevator from the garage and street level to the second floor, and the apartment is step-free inside. The shower is a walk-in with a low threshold. Tell us what you need and we'll answer precisely." },
-      { "q": "Do I need to pay in florin?", "a": "No. Aruba prices in US dollars everywhere, and so do we. Cards are accepted island-wide." },
-      { "q": "Can groceries be in the fridge when I arrive?", "a": "Yes — add grocery pre-stocking at booking or up to 3 days before arrival, from $75. Tell us preferences and allergies; we shop that morning." }
+      {
+        "q": "What taxes and levies will I pay?",
+        "a": "Aruba charges a 12.5% tourist levy on vacation rentals, calculated on your total including the cleaning fee, plus a US$3 per night environmental levy. Both are itemised in your total before you pay — the price you see at checkout is final."
+      },
+      {
+        "q": "When can I check in and out?",
+        "a": "Check-in from 3:00 PM to 10:00 PM, checkout by 11:00 AM. Early check-in (from 11 AM) or late checkout (until 3 PM) is $45 USD when the calendar allows — ideal before a cruise."
+      },
+      {
+        "q": "Is there parking?",
+        "a": "Yes — valet parking under the building, included with your stay. The entrance is on the back street, off the boulevard."
+      },
+      {
+        "q": "How fast is the Wi-Fi, really?",
+        "a": "Measured at 100+ Mbps down. There's a dedicated desk in the living room. Remote workers regularly stay a month."
+      },
+      {
+        "q": "Can you walk to a beach?",
+        "a": "Honestly: this is a city stay, not beachfront. Surfside Beach is about 15 minutes on foot along the waterfront; Eagle Beach — one of the Caribbean's best — is a 10-minute drive or short bus ride. If you want to step from your room onto sand, a Palm Beach resort will suit you better; if you want to walk to dinner, you're in the right place."
+      },
+      {
+        "q": "How far is the cruise terminal?",
+        "a": "About 400 metres — a 5-minute walk with luggage. You can see ships in port from the corner of the building. Many guests stay the night before embarkation."
+      },
+      {
+        "q": "What's the cancellation policy?",
+        "a": "Full refund up to 14 days before check-in, 50% up to 7 days before. It's also shown on the booking page before you pay."
+      },
+      {
+        "q": "Is the apartment accessible?",
+        "a": "The building has an elevator from the garage and street level to the second floor, and the apartment is step-free inside. The shower is a walk-in with a low threshold. Tell us what you need and we'll answer precisely."
+      },
+      {
+        "q": "Do I need to pay in florin?",
+        "a": "No. Aruba prices in US dollars everywhere, and so do we. Cards are accepted island-wide."
+      },
+      {
+        "q": "Can groceries be in the fridge when I arrive?",
+        "a": "Yes — add the welcome grocery pack ($85 USD) when you book: coffee, milk, eggs, fresh bread, seasonal fruit and 12 bottles of water, waiting in the fridge."
+      }
     ]
   },
   "footer": {
@@ -169,23 +218,110 @@
     "regNumber": "Aruba registration no."
   },
   "seo": {
-    "home": { "title": "Casa Playa 204 — Vacation Rental in the Royal Plaza Landmark, Oranjestad, Aruba", "desc": "Stay inside Oranjestad's most photographed building. 1-bedroom residence with pool, gym and 24/7 security. 5 min walk to the cruise port. Book direct — no platform fees." },
-    "apartment": { "title": "The Apartment — Casa Playa 204, Oranjestad | King Bed, Balcony, Full Kitchen", "desc": "65 m², king bedroom, rainfall shower, full kitchen, balcony over the Royal Plaza courtyard, 100 Mbps Wi-Fi. See every room and what's included." },
-    "building": { "title": "The Building — Casa Playa, the Former Royal Plaza Mall, Aruba", "desc": "The pastel Dutch-colonial landmark on the Oranjestad waterfront: 62 residences, harbour-view pool, gym, valet parking, 24/7 security." },
-    "location": { "title": "Location — Casa Playa 204, L.G. Smith Boulevard 94, Oranjestad, Aruba", "desc": "5 min walk to the cruise terminal, 15 to Surfside Beach, 10 min drive to Eagle Beach and the airport. Every distance measured from the door." },
-    "reviews": { "title": "Guest Reviews — Casa Playa 204, Oranjestad, Aruba", "desc": "What recent guests say about staying in the Royal Plaza landmark — unedited, first name and month, from every channel." },
-    "faq": { "title": "FAQ — Levies, Check-in, Parking, Wi-Fi | Casa Playa 204 Aruba", "desc": "Aruba's 12.5% tourist levy and $3/night environmental levy explained, check-in times, valet parking, measured Wi-Fi speed, cancellation policy." },
-    "book": { "title": "Book Casa Playa 204 — Live Availability, Total with Levies, Instant Confirmation", "desc": "Pick dates, see the full total with Aruba levies itemised, pay by card. Instant confirmation, no account, no platform fees." },
-    "confirmed": { "title": "Booking Confirmed — Casa Playa 204", "desc": "Your stay at Casa Playa 204 is confirmed." }
+    "home": {
+      "title": "Casa Playa 204 — Vacation Rental in the Royal Plaza Landmark, Oranjestad, Aruba",
+      "desc": "Stay inside Oranjestad's most photographed building. 1-bedroom residence with pool, gym and 24/7 security. 5 min walk to the cruise port. Book direct — no platform fees."
+    },
+    "apartment": {
+      "title": "The Apartment — Casa Playa 204, Oranjestad | King Bed, Balcony, Full Kitchen",
+      "desc": "65 m², king bedroom, rainfall shower, full kitchen, balcony over the Royal Plaza courtyard, 100 Mbps Wi-Fi. See every room and what's included."
+    },
+    "building": {
+      "title": "The Building — Casa Playa, the Former Royal Plaza Mall, Aruba",
+      "desc": "The pastel Dutch-colonial landmark on the Oranjestad waterfront: 62 residences, harbour-view pool, gym, valet parking, 24/7 security."
+    },
+    "location": {
+      "title": "Location — Casa Playa 204, L.G. Smith Boulevard 94, Oranjestad, Aruba",
+      "desc": "5 min walk to the cruise terminal, 15 to Surfside Beach, 10 min drive to Eagle Beach and the airport. Every distance measured from the door."
+    },
+    "reviews": {
+      "title": "Guest Reviews — Casa Playa 204, Oranjestad, Aruba",
+      "desc": "What recent guests say about staying in the Royal Plaza landmark — unedited, first name and month, from every channel."
+    },
+    "faq": {
+      "title": "FAQ — Levies, Check-in, Parking, Wi-Fi | Casa Playa 204 Aruba",
+      "desc": "Aruba's 12.5% tourist levy and $3/night environmental levy explained, check-in times, valet parking, measured Wi-Fi speed, cancellation policy."
+    },
+    "book": {
+      "title": "Book Casa Playa 204 — Live Availability, Total with Levies, Instant Confirmation",
+      "desc": "Pick dates, see the full total with Aruba levies itemised, pay by card. Instant confirmation, no account, no platform fees."
+    },
+    "confirmed": {
+      "title": "Booking Confirmed — Casa Playa 204",
+      "desc": "Your stay at Casa Playa 204 is confirmed."
+    }
   },
   "addons": {
-    "airport-transfer": { "name": "Airport transfer", "desc": "Met at arrivals, 10 minutes to the door. Add each way." },
-    "grocery-stock": { "name": "Grocery pre-stock", "desc": "Fridge stocked before you land. Coffee, breakfast, fruit, wine — tell us your list." },
-    "celebration": { "name": "Celebration package", "desc": "Prosecco on ice, flowers and charcuterie waiting in the room." },
-    "balcony-breakfast": { "name": "Private balcony breakfast", "desc": "Served on your balcony over the courtyard." },
-    "balcony-dinner": { "name": "Dinner under the stars", "desc": "A private dinner for two on the balcony." },
-    "midstay-clean": { "name": "Mid-stay clean & linen", "desc": "Full clean and fresh linen, ideal for stays over a week." },
-    "early-checkin": { "name": "Early check-in", "desc": "In the room from 11 AM when the calendar allows." },
-    "late-checkout": { "name": "Late checkout", "desc": "Keep the room until 3 PM when the calendar allows." }
+    "airport-transfer": {
+      "name": "Airport transfer",
+      "desc": "Private car, round trip. Met at arrivals with your name, 10 minutes to the door."
+    },
+    "grocery-stock": {
+      "name": "Welcome grocery pack",
+      "desc": "Waiting in the fridge: coffee, milk, eggs, fresh bread, seasonal fruit and 12 bottles of water."
+    },
+    "celebration": {
+      "name": "Celebration package",
+      "desc": "Chilled prosecco, fresh flowers and a charcuterie board, set up before you arrive."
+    },
+    "balcony-breakfast": {
+      "name": "Balcony breakfast",
+      "desc": "Croissants, fresh fruit, juice and coffee, served on your balcony."
+    },
+    "midstay-clean": {
+      "name": "Mid-stay clean",
+      "desc": "Full clean with fresh sheets and towels. Recommended for stays of a week or more."
+    },
+    "late-checkout": {
+      "name": "Late checkout",
+      "desc": "Keep the apartment until 3 PM. Perfect before an evening flight or sailing."
+    },
+    "early-checkin": {
+      "name": "Early check-in",
+      "desc": "In the apartment from 11 AM when the calendar allows."
+    },
+    "balcony-dinner": {
+      "name": "Dinner under the stars",
+      "desc": "A private dinner for two on the balcony."
+    }
+  },
+  "cal": {
+    "selectCheckin": "Select your check-in date",
+    "selectCheckout": "Now select your check-out date",
+    "nightsSelected": "{n} nights selected",
+    "clear": "Clear dates",
+    "done": "Done",
+    "close": "Close",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "unavailable": "Unavailable",
+    "minStayShort": "{n}-night minimum"
+  },
+  "gallery": {
+    "all": "All",
+    "living": "Living",
+    "kitchen": "Kitchen & dining",
+    "bedroom": "Bedroom",
+    "bathroom": "Bathroom",
+    "balcony": "Balcony",
+    "building": "The building",
+    "close": "Close gallery",
+    "prev": "Previous photo",
+    "next": "Next photo",
+    "of": "of",
+    "viewAll": "View all {n} photos",
+    "title": "Every room, every view"
+  },
+  "errors": {
+    "generic": "Something went wrong. Try again, or message us on WhatsApp.",
+    "notConfigured": "Online payment is being set up. Message us on WhatsApp and we'll confirm your dates."
+  },
+  "stripe": {
+    "nights": "nights",
+    "guests": "guests",
+    "cleaning": "Cleaning fee",
+    "levy": "Aruba tourist levy (12.5%)",
+    "env": "Environmental levy ($3 × {n} nights)",
+    "addon": "Add-on"
   }
 }

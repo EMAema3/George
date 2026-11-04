@@ -3,3 +3,4 @@ dist/
 .netlify/
 .astro/
 .env
+public/images/stock/*.webp

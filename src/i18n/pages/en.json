@@ -1,0 +1,488 @@
+{
+  "home": {
+    "occasionsKicker": "Why people come",
+    "occasionsTitle": "Five ways to stay in the postcard",
+    "occasionsSub": "One address, five very different trips. Pick yours.",
+    "explore": "Explore",
+    "arubaKicker": "One happy island",
+    "arubaTitle": "Everything Aruba, ten minutes from your door",
+    "arubaSub": "White-sand Eagle Beach, flamingos, a volcanic natural pool and the California Lighthouse are all a short drive away. Downtown Oranjestad starts on the pavement outside.",
+    "arubaCta": "Discover Aruba",
+    "arubaCards": [
+      {
+        "img": "eagle-beach-aruba-fofoti-tree",
+        "t": "Eagle Beach",
+        "d": "10 min by car"
+      },
+      {
+        "img": "aruba-flamingos-beach",
+        "t": "Flamingos",
+        "d": "Renaissance Island"
+      },
+      {
+        "img": "aruba-natural-pool-swimmer",
+        "t": "Natural Pool",
+        "d": "Arikok National Park"
+      },
+      {
+        "img": "aruba-california-lighthouse",
+        "t": "California Lighthouse",
+        "d": "The island’s north tip"
+      }
+    ],
+    "buildingKicker": "The building",
+    "buildingTitle": "The landmark on the waterfront",
+    "buildingText": "Casa Playa is the former Royal Plaza Mall, the pink Dutch-colonial block every cruise passenger photographs. Today it holds 62 private residences above a vaulted arcade, with a third-floor pool over the harbour, a gym, valet parking and security around the clock.",
+    "buildingCta": "Inside the building"
+  },
+  "aruba": {
+    "seo": {
+      "title": "Aruba Travel Guide 2027 — Beaches, Oranjestad, Weather & Tips | Casa Playa 204",
+      "desc": "The complete guide to Aruba from a front door in Oranjestad: the best beaches, the wild north coast, the natural pool, flamingos, food, the weather, getting around and the facts most visitors don’t know."
+    },
+    "kicker": "Discover Aruba",
+    "title": "One happy island",
+    "sub": "Twenty miles of desert, coral and turquoise water, outside the hurricane belt and sunny almost every day of the year. Here’s everything worth knowing, from an address in the middle of it.",
+    "hero": "eagle-beach-aruba-divi-tree-turquoise",
+    "facts": [
+      {
+        "n": "28°C",
+        "l": "Average temperature, all year (82°F)"
+      },
+      {
+        "n": "0",
+        "l": "Hurricane belt — Aruba sits outside it"
+      },
+      {
+        "n": "US$",
+        "l": "Accepted everywhere on the island"
+      },
+      {
+        "n": "US",
+        "l": "Customs preclearance at the airport"
+      }
+    ],
+    "sections": [
+      {
+        "id": "beaches",
+        "kicker": "Beaches",
+        "h": "White sand on the calm side",
+        "img": "eagle-beach-aruba-fofoti-tree",
+        "p": [
+          "Aruba’s west and south coasts face away from the trade winds, so the water is calm, clear and turquoise. Eagle Beach, about 10 minutes from Casa Playa by car, is the one on the postcards: a wide, soft, uncrowded strip shaded by the famous windswept fofoti trees, and a nesting beach for sea turtles.",
+          "Palm Beach, further north, is the lively resort strip with water sports and beach bars. Arashi Beach, near the island’s tip, is quieter and good for snorkelling. In the far south, Baby Beach is a shallow, sheltered lagoon where the water stays waist-deep a long way out. Closest of all is Surfside Beach, a 15-minute walk from the front door."
+        ]
+      },
+      {
+        "id": "flamingos",
+        "kicker": "Wildlife",
+        "h": "Flamingos, turtles and parrotfish",
+        "img": "aruba-flamingos-beach",
+        "p": [
+          "The flamingos that made Aruba famous on Instagram live on Renaissance Island, a private island that belongs to the Renaissance Resort in Oranjestad. Access is limited, so book a day pass well in advance if they are on your list.",
+          "Leatherback, green and hawksbill turtles nest on Eagle Beach between March and September. Below the water, the reefs off Boca Catalina and the Antilla wreck, one of the largest shipwrecks in the Caribbean, are full of parrotfish, sergeant majors and angelfish within easy snorkelling range."
+        ]
+      },
+      {
+        "id": "wild",
+        "kicker": "The wild side",
+        "h": "Arikok, the natural pool and the north coast",
+        "img": "aruba-natural-pool-swimmer",
+        "p": [
+          "Almost a fifth of Aruba is Arikok National Park: cactus desert, limestone cliffs and caves with Arawak drawings. Inside it, the Natural Pool, or Conchi, is a ring of volcanic rock that holds a calm swimming hole while the Atlantic crashes outside. You reach it on foot, by 4x4 or on a guided UTV tour.",
+          "The windward north coast is raw and beautiful. The California Lighthouse at the island’s northwest tip, named for a ship wrecked offshore in 1891, has the best sunset view on the island. Half-day tours from Oranjestad cover the lighthouse, the Alto Vista chapel and the old gold-mill ruins at Bushiribana."
+        ]
+      },
+      {
+        "id": "oranjestad",
+        "kicker": "Oranjestad",
+        "h": "A capital you can walk",
+        "img": "oranjestad-waterfront-pastel-buildings",
+        "p": [
+          "Oranjestad is Aruba’s capital and the only real town on the island’s calm side: pastel Dutch-colonial gables, a busy harbour and the densest cluster of restaurants on the island. Casa Playa sits on its waterfront boulevard.",
+          "Within a few minutes on foot you have Fort Zoutman, the island’s oldest building (1798), and its Willem III clock tower; the Renaissance Marketplace on the harbour; the downtown streetcar on palm-lined Main Street; the seafront Linear Park path; and the cruise terminal."
+        ]
+      },
+      {
+        "id": "food",
+        "kicker": "Food",
+        "h": "What to eat, and where",
+        "img": "romantic-beach-dinner-sunset",
+        "p": [
+          "Dining is the biggest thing visitors spend money on in Aruba, and the island earns it. Try keshi yena (a baked cheese stuffed with spiced chicken), pastechi pastries for breakfast, fresh wahoo or red snapper with pan bati, and a cold Balashi, the local beer.",
+          "Downtown Oranjestad has everything from harbourside seafood to rooftop cocktails, all walkable from Casa Playa. For a once-in-a-trip evening, book a table on the sand at sunset; the west coast faces it every night."
+        ]
+      },
+      {
+        "id": "sunsets",
+        "kicker": "When to come",
+        "h": "Sunny, breezy, almost every day",
+        "img": "aruba-sunset-palapa-sea",
+        "p": [
+          "Aruba is a desert island: about 28°C (82°F) year-round, cooled by steady trade winds, with less than 500 mm (20 in) of rain a year. Because it sits outside the hurricane belt, a date booked a year ahead is a safe bet, which matters a lot for weddings.",
+          "December to April is high season. September to November is warm, quiet and the best value of the year. Carnival fills January and February, ending with the Grand Parade through Oranjestad."
+        ]
+      }
+    ],
+    "practicalTitle": "The practical facts",
+    "practical": [
+      {
+        "t": "Currency",
+        "d": "The Aruban florin is pegged to the US dollar (about 1.79 florins per dollar), and dollars and cards are accepted everywhere."
+      },
+      {
+        "t": "Flying home",
+        "d": "Queen Beatrix Airport (AUA) has US preclearance. You clear US customs in Aruba and land home as a domestic passenger."
+      },
+      {
+        "t": "Languages",
+        "d": "Papiamento and Dutch are official. English and Spanish are spoken almost everywhere."
+      },
+      {
+        "t": "Water and power",
+        "d": "Tap water is desalinated and safe to drink. Power is 110–127 V with US-style plugs."
+      },
+      {
+        "t": "Time zone",
+        "d": "Atlantic Standard Time (UTC−4), with no daylight saving. That matches New York in summer and is one hour ahead in winter."
+      },
+      {
+        "t": "Getting around",
+        "d": "Arubus public buses run from downtown Oranjestad along the hotel coast. Taxis charge fixed zone fares. Rent a car or 4x4 for the north coast."
+      }
+    ],
+    "guidesTitle": "In-depth guides",
+    "guidesSub": "Complete answers with real numbers.",
+    "guidesLang": "",
+    "ctaTitle": "Your base for all of it",
+    "ctaText": "Casa Playa 204 puts Oranjestad on your doorstep and the rest of the island within minutes. Book direct for the best rate."
+  },
+  "work": {
+    "seo": {
+      "title": "Work From Aruba — Monthly Stays with Fast Wi-Fi | Casa Playa 204, Oranjestad",
+      "desc": "A real desk, Wi-Fi measured at 100+ Mbps, a gym and a harbour-view pool, by the month. Aruba’s One Happy Workation program welcomes remote workers for up to 90 days."
+    },
+    "kicker": "Work from Aruba",
+    "title": "Your office has a harbour view now",
+    "sub": "A real desk, Wi-Fi measured at over 100 Mbps, a gym downstairs and a pool over the harbour, in a time zone that overlaps the whole US working day.",
+    "hero": "remote-work-laptop-pool-terrace",
+    "facts": [
+      {
+        "n": "100+",
+        "l": "Mbps Wi-Fi, measured"
+      },
+      {
+        "n": "90",
+        "l": "Days under the One Happy Workation program"
+      },
+      {
+        "n": "UTC−4",
+        "l": "Atlantic time, no daylight saving"
+      },
+      {
+        "n": "$139",
+        "l": "Per night on stays of 28+ nights"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "The setup",
+        "h": "A desk that is a desk",
+        "img": "prop:casa-playa-204-aruba-remote-work-desk-nook",
+        "p": [
+          "There’s a solid teak desk with a task lamp and a proper chair, not a corner of the dining table. The Wi-Fi is measured, not promised, at over 100 Mbps, enough for video calls all day. Two smart TVs double as second screens.",
+          "When the calls end, the third-floor pool looks over the harbour, the gym is in the building and dinner is a short walk in any direction."
+        ]
+      },
+      {
+        "kicker": "The rules",
+        "h": "Stay as long as the work allows",
+        "img": "remote-work-poolside-laptops",
+        "p": [
+          "Aruba’s One Happy Workation program was created for remote workers: US visitors can stay and work for up to 90 days, and stays can be extended up to 180 days.",
+          "Aruba prices in US dollars, sits outside the hurricane belt and is on Atlantic time, the same as New York in summer and one hour ahead in winter. September to November is the quiet, warm sweet spot."
+        ]
+      },
+      {
+        "kicker": "A workday here",
+        "h": "Calls in the morning, the sea at five",
+        "img": "oranjestad-main-street-red-tram",
+        "p": [
+          "Coffee from the espresso machine, two calls before lunch at the window desk, a swim between meetings, then a walk along the waterfront to dinner when the US day ends.",
+          "There’s an in-unit washer, a full kitchen, valet parking and 24/7 security. Everything ordinary about living somewhere is taken care of."
+        ]
+      }
+    ],
+    "listTitle": "Included on every long stay",
+    "list": [
+      "Wi-Fi measured at 100+ Mbps",
+      "Dedicated desk and task lamp",
+      "Pool, gym and library in the building",
+      "In-unit washer, iron and board",
+      "Full kitchen with espresso and drip coffee",
+      "Valet parking and 24/7 security",
+      "Mid-stay clean available for $65 USD"
+    ],
+    "ctaTitle": "Pick your month",
+    "ctaText": "Stays of 28 nights or more switch to the monthly rate automatically."
+  },
+  "cruise": {
+    "seo": {
+      "title": "Where to Stay Before an Aruba Cruise — 5 Minutes from the Terminal | Casa Playa 204",
+      "desc": "Sleep 400 m from the Oranjestad cruise terminal. Full apartment, 24/7 security, late checkout for evening sailings and dinner on foot the night before."
+    },
+    "kicker": "Before your cruise",
+    "title": "Wake up, have coffee, walk to the ship",
+    "sub": "The Oranjestad cruise terminal is 400 metres from the front door, a 5-minute walk with luggage. You can see the ships from the corner.",
+    "hero": "oranjestad-cruise-ship-palm-trees",
+    "facts": [
+      {
+        "n": "400 m",
+        "l": "To the cruise terminal"
+      },
+      {
+        "n": "5 min",
+        "l": "Walk, with luggage"
+      },
+      {
+        "n": "10 min",
+        "l": "From the airport by car"
+      },
+      {
+        "n": "3 PM",
+        "l": "Late checkout available"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "The night before",
+        "h": "Arrive the day before, sleep next to the ship",
+        "img": "oranjestad-cruise-terminal-ship-docked",
+        "p": [
+          "Cruise lines recommend arriving the day before you sail, because a delayed flight is the one thing the ship won’t wait for. From Casa Playa your morning is a 5-minute walk. From the Palm Beach hotels it is a 20–30 minute taxi ride on the busiest morning of the week.",
+          "Spend the evening downtown: dinner on the harbour, your ship coming into port at the end of the street, and a real bed before ten nights at sea."
+        ]
+      },
+      {
+        "kicker": "Logistics",
+        "h": "Built for embarkation day",
+        "img": "aruba-airport-transfer-luggage-car",
+        "p": [
+          "Add a private airport transfer when you book and you’ll be met at arrivals and driven 10 minutes to the door. Most Aruba sailings board in the afternoon, so late checkout until 3 PM ($45 USD) bridges the gap completely.",
+          "A full apartment beats a hotel room the night before a cruise. You can repack on a real floor, run a load in the in-unit washer and store your luggage under 24/7 building security."
+        ]
+      },
+      {
+        "kicker": "Coming home",
+        "h": "The easiest flight home in the Caribbean",
+        "img": "caribbean-cruise-port-aerial",
+        "p": [
+          "Ending your cruise in Aruba? Add a night or two and see the island properly. When you fly home, Queen Beatrix Airport’s US preclearance means you clear US customs in Aruba and land as a domestic passenger, with no arrival queue."
+        ]
+      }
+    ],
+    "listTitle": "Cruise-day checklist",
+    "list": [
+      "5-minute walk to the terminal, flat pavement all the way",
+      "Late checkout until 3 PM for $45 USD",
+      "Private airport transfer, round trip",
+      "In-unit washer for a last load before sailing",
+      "Welcome grocery pack for a late arrival",
+      "Dozens of restaurants within a 10-minute walk"
+    ],
+    "ctaTitle": "Check your sailing date",
+    "ctaText": "Pick the night before embarkation and see the full total, levies included."
+  },
+  "weddings": {
+    "seo": {
+      "title": "Aruba Destination Wedding Accommodation — Walkable Oranjestad Stay | Casa Playa 204",
+      "desc": "Where your wedding guests stay in Aruba: a full apartment in Oranjestad’s landmark building. Aruba is outside the hurricane belt, prices in US dollars and has recognised same-sex marriage since 2024."
+    },
+    "kicker": "Weddings & guests",
+    "title": "Say yes in Aruba",
+    "sub": "Sunshine almost guaranteed, no hurricane season to plan around, and a landmark address in Oranjestad for the couple, the parents or the bridal party.",
+    "hero": "aruba-beach-wedding-ceremony-guests",
+    "facts": [
+      {
+        "n": "0",
+        "l": "Hurricane belt — a date a year out is safe"
+      },
+      {
+        "n": "US$",
+        "l": "No currency surprises for guests"
+      },
+      {
+        "n": "2024",
+        "l": "Same-sex marriage recognised since July"
+      },
+      {
+        "n": "10 min",
+        "l": "To Eagle Beach ceremonies"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "Why Aruba",
+        "h": "The safest date in the Caribbean",
+        "img": "aruba-beach-wedding-flower-arch",
+        "p": [
+          "Weddings are booked 8 to 12 months ahead, and that’s exactly when hurricane season makes most of the Caribbean a gamble. Aruba sits outside the hurricane belt. It is also one of the driest, sunniest islands in the region, with constant trade winds keeping outdoor ceremonies comfortable.",
+          "Non-residents can legally marry in Aruba, and same-sex marriage has been recognised since July 2024. Everything prices in US dollars, and US preclearance makes the flight home easy for every guest."
+        ]
+      },
+      {
+        "kicker": "For your guests",
+        "h": "The room your people stay in",
+        "img": "aruba-wedding-party-celebration-beach",
+        "p": [
+          "When the resort block fills up, or when parents would rather have a kitchen, a washer and a quiet balcony than a high-rise room, Casa Playa 204 is the stay they’ll thank you for. It has a king bedroom, a sofa bed and space for the dress and the suits.",
+          "Everyone is walkable to dinner, the rehearsal and the harbour, and 10 minutes from the beach ceremony. We answer guests in English, Spanish, Dutch, Portuguese and German."
+        ]
+      },
+      {
+        "kicker": "The extras",
+        "h": "Make the arrival part of the celebration",
+        "img": "celebration-champagne-pouring",
+        "p": [
+          "Add our celebration package (chilled prosecco, fresh flowers and a charcuterie board), or a private breakfast on the balcony the morning after. Tell us the date and we’ll make it ready."
+        ]
+      }
+    ],
+    "listTitle": "Planning checklist",
+    "list": [
+      "Book accommodation 8–12 months ahead",
+      "Aruba is outside the hurricane belt",
+      "Non-residents can marry legally in Aruba",
+      "Same-sex marriage recognised since July 2024",
+      "Prices in US dollars for every guest",
+      "US customs preclearance on the way home"
+    ],
+    "ctaTitle": "Hold your wedding dates",
+    "ctaText": "See live availability and the full price, levies included."
+  },
+  "carnival": {
+    "seo": {
+      "title": "Aruba Carnival 2027 — Stay on the Parade Route in Oranjestad | Casa Playa 204",
+      "desc": "Aruba Carnival 2027 runs January to the pre-Lent finale (Ash Wednesday is 10 February 2027). Stay on L.G. Smith Boulevard in Oranjestad. Carnival dates sell between November and January."
+    },
+    "kicker": "Carnival 2027",
+    "title": "Carnival, from the boulevard",
+    "sub": "Feathers, steel bands and weeks of parades, ending with the Grand Parade through Oranjestad. The parade tradition runs along the waterfront boulevard where Casa Playa stands.",
+    "hero": "aruba-carnival-costume-feathers-ocean",
+    "facts": [
+      {
+        "n": "Jan–Feb",
+        "l": "The 2027 Carnival season"
+      },
+      {
+        "n": "10 Feb",
+        "l": "Ash Wednesday 2027, the finale"
+      },
+      {
+        "n": "8–10",
+        "l": "Weeks: the booking window"
+      },
+      {
+        "n": "$289",
+        "l": "Per night, Carnival season"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "The season",
+        "h": "Not a weekend. A season.",
+        "img": "aruba-carnival-purple-feather-costume",
+        "p": [
+          "Aruba’s Carnival is one of the longest and most elaborate in the Caribbean. Jump-ups, steel-pan and tumba competitions, the after-dark Lighting Parade, children’s parades and the Grand Parades in San Nicolas and then Oranjestad fill the weeks from early January until the Sunday before Ash Wednesday.",
+          "The official calendar and parade routes are published each January by the Carnival organisation, and we post the 2027 route as soon as it is confirmed."
+        ]
+      },
+      {
+        "kicker": "Where to watch",
+        "h": "The best seat is your own",
+        "img": "aruba-carnival-street-parade",
+        "p": [
+          "The downtown route is lined shoulder to shoulder hours before the first float. Staying on the boulevard turns a long afternoon in the sun into an easy one. Watch, retreat to the air conditioning, refill the cooler and go back out.",
+          "When the last band passes, you’re already home. There’s no taxi queue, no road closures to beat and no drive back to the hotel strip."
+        ]
+      },
+      {
+        "kicker": "Book early",
+        "h": "The window is short",
+        "img": "aruba-carnival-gold-sequin-costume",
+        "p": [
+          "Carnival accommodation near the route sells in the eight to ten weeks after the season’s dates are confirmed in November. Flights from the US and Argentina, Carnival’s fastest-growing market, peak at the same time, so book both together."
+        ]
+      }
+    ],
+    "listTitle": "Carnival stay essentials",
+    "list": [
+      "On the waterfront boulevard in central Oranjestad",
+      "Air-conditioned apartment to retreat to between parades",
+      "Full kitchen and a fridge for the cooler",
+      "Sleeps 4: king bed plus sofa bed",
+      "24/7 building security on parade nights",
+      "Celebration package available on arrival"
+    ],
+    "ctaTitle": "Claim your Carnival dates",
+    "ctaText": "Live availability for January and February 2027."
+  },
+  "monthly": {
+    "seo": {
+      "title": "Monthly Stays in Aruba — 28-Night Rate, All-In Price | Casa Playa 204, Oranjestad",
+      "desc": "A month in Oranjestad at {rate} a night for 28+ nights: {total} all-in, including Aruba’s 12.5% levy and environmental levy. Full apartment, pool, gym and 100 Mbps Wi-Fi."
+    },
+    "kicker": "Long stays",
+    "title": "A month in Oranjestad",
+    "sub": "Stays of 28 nights or longer switch to the monthly rate automatically. You get the full apartment, with utilities, Wi-Fi, pool, gym and parking included.",
+    "hero": "oranjestad-shopping-street-palms",
+    "facts": [
+      {
+        "n": "$139",
+        "l": "Per night, 28+ nights"
+      },
+      {
+        "n": "28",
+        "l": "Nights minimum for the monthly rate"
+      },
+      {
+        "n": "100+",
+        "l": "Mbps Wi-Fi"
+      },
+      {
+        "n": "$65",
+        "l": "Mid-stay clean and fresh linen"
+      }
+    ],
+    "sections": [
+      {
+        "kicker": "What a month costs",
+        "h": "The all-in price, stated plainly",
+        "img": "prop:casa-playa-204-aruba-open-plan-living-room-green-kitchen",
+        "p": [
+          "28 nights at {rate} come to {acc}, plus a {cleaning} cleaning fee. Aruba’s 12.5% tourist levy applies to both ({levy}), and the environmental levy is $3 a night ({env}). The all-in total is {total}, including utilities, Wi-Fi, the pool, the gym and valet parking.",
+          "The booking calendar works it out for any length of stay, and you see every line before you pay."
+        ]
+      },
+      {
+        "kicker": "Living here",
+        "h": "A neighbourhood, not a resort",
+        "img": "oranjestad-colorful-dutch-colonial-houses",
+        "p": [
+          "After a week, Oranjestad stops feeling like a destination and starts feeling like home: a regular coffee spot, a morning walk on the waterfront and a favourite table for dinner. The supermarket, the gym and the bus terminal are all within walking distance."
+        ]
+      }
+    ],
+    "listTitle": "Included",
+    "list": [
+      "Utilities and 100+ Mbps Wi-Fi",
+      "Pool, gym and library",
+      "Valet parking and 24/7 security",
+      "In-unit washer",
+      "Full kitchen",
+      "Mid-stay clean available for $65 USD"
+    ],
+    "ctaTitle": "Pick your month",
+    "ctaText": "Choose 28+ nights and the monthly rate applies automatically."
+  }
+}

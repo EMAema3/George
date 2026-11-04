@@ -1,0 +1,179 @@
+---
+/**
+ * Gallery + fullscreen lightbox. Photos never navigate away from the page:
+ * tap → viewer opens in place. Arrows / swipe / keyboard / thumbnails to move.
+ * Browser Back closes the viewer (history state), so nobody gets "lost".
+ *
+ * mode="full"    → category filter tabs + every photo
+ * mode="preview" → 1 large + 4 tiles + "View all N photos" (homepage)
+ */
+import { t } from '../i18n/index.mjs';
+const { locale = 'en', property: p, mode = 'full', uid = 'gal' } = Astro.props;
+const tr = t(locale);
+const dir = p.images.dir;
+const items = p.images.gallery.map((g) => ({
+  full: `${dir}/${g.file}.webp`,
+  thumb: `${dir}/${g.file}-480w.webp`,
+  mid: `${dir}/${g.file}-800w.webp`,
+  alt: g.alt[locale] ?? g.alt.en,
+  cat: g.cat ?? 'living',
+}));
+const catOrder = ['living', 'kitchen', 'bedroom', 'bathroom', 'balcony', 'building'];
+const cats = catOrder.filter((c) => items.some((i) => i.cat === c));
+const preview = items.slice(0, 5);
+const labels = {
+  close: tr('gallery.close'), prev: tr('gallery.prev'), next: tr('gallery.next'), of: tr('gallery.of'),
+};
+---
+<div class="gal" id={uid} data-mode={mode}>
+  {mode === 'full' && (
+    <div class="gal-tabs" role="tablist" aria-label={tr('gallery.title')}>
+      <button type="button" class="gal-tab is-on" data-cat="all" role="tab" aria-selected="true">{tr('gallery.all')} <span>{items.length}</span></button>
+      {cats.map((c) => (
+        <button type="button" class="gal-tab" data-cat={c} role="tab" aria-selected="false">{tr(`gallery.${c}`)} <span>{items.filter((i) => i.cat === c).length}</span></button>
+      ))}
+    </div>
+  )}
+
+  {mode === 'full' ? (
+    <div class="gal-grid">
+      {items.map((it, i) => (
+        <button type="button" class="gal-item" data-i={i} data-cat={it.cat} aria-label={it.alt}>
+          <img src={it.mid} alt={it.alt} loading={i < 3 ? 'eager' : 'lazy'} width="800" height="533" />
+        </button>
+      ))}
+    </div>
+  ) : (
+    <div class="gal-mosaic">
+      {preview.map((it, i) => (
+        <button type="button" class="gal-item" data-i={i} aria-label={it.alt}>
+          <img src={i === 0 ? it.mid : it.thumb} alt={it.alt} loading="lazy" width={i === 0 ? 800 : 480} height={i === 0 ? 533 : 320} />
+        </button>
+      ))}
+      <button type="button" class="gal-all" data-i="0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        {tr('gallery.viewAll').replace('{n}', String(items.length))}
+      </button>
+    </div>
+  )}
+</div>
+
+<div class="lb" id={`${uid}-lb`} role="dialog" aria-modal="true" aria-label={tr('gallery.title')} hidden>
+  <div class="lb-top">
+    <span class="lb-count" aria-live="polite"></span>
+    <button type="button" class="lb-btn lb-close" aria-label={labels.close}>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="lb-stage">
+    <button type="button" class="lb-btn lb-nav lb-prev" aria-label={labels.prev}>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="lb-track"><img class="lb-img" alt="" decoding="async" /></div>
+    <button type="button" class="lb-btn lb-nav lb-next" aria-label={labels.next}>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <p class="lb-cap"></p>
+  <div class="lb-thumbs">
+    {items.map((it, i) => (
+      <button type="button" class="lb-thumb" data-i={i} aria-label={it.alt}><img src={it.thumb} alt="" loading="lazy" width="96" height="64" /></button>
+    ))}
+  </div>
+</div>
+
+<script define:vars={{ uid, items, labels }}>
+(() => {
+  const root = document.getElementById(uid);
+  const lb = document.getElementById(uid + '-lb');
+  if (!root || !lb) return;
+  const img = lb.querySelector('.lb-img');
+  const track = lb.querySelector('.lb-track');
+  const count = lb.querySelector('.lb-count');
+  const cap = lb.querySelector('.lb-cap');
+  const thumbs = [...lb.querySelectorAll('.lb-thumb')];
+  let list = items.map((_, i) => i);   // indices currently browsable (respects the filter)
+  let pos = 0;
+  let lastFocus = null;
+  const preload = (i) => { const im = new Image(); im.src = items[i].full; };
+
+  function show(newPos, dir = 0) {
+    pos = (newPos + list.length) % list.length;
+    const i = list[pos];
+    img.classList.remove('in-l', 'in-r');
+    void img.offsetWidth;
+    if (dir) img.classList.add(dir > 0 ? 'in-r' : 'in-l');
+    img.src = items[i].full;
+    img.alt = items[i].alt;
+    cap.textContent = items[i].alt;
+    count.textContent = `${pos + 1} ${labels.of} ${list.length}`;
+    thumbs.forEach((t, ti) => {
+      const visible = list.includes(ti);
+      t.hidden = !visible;
+      t.classList.toggle('is-on', ti === i);
+    });
+    thumbs[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    preload(list[(pos + 1) % list.length]);
+    preload(list[(pos - 1 + list.length) % list.length]);
+  }
+  function open(i) {
+    lastFocus = document.activeElement;
+    const at = list.indexOf(i);
+    lb.hidden = false;
+    document.documentElement.classList.add('lb-open');
+    show(at >= 0 ? at : 0);
+    lb.querySelector('.lb-close').focus();
+    history.pushState({ lightbox: uid }, '');
+  }
+  function close(fromHistory = false) {
+    if (lb.hidden) return;
+    lb.hidden = true;
+    document.documentElement.classList.remove('lb-open');
+    if (!fromHistory && history.state && history.state.lightbox === uid) history.back();
+    lastFocus?.focus?.();
+  }
+  const next = () => show(pos + 1, 1);
+  const prev = () => show(pos - 1, -1);
+
+  root.querySelectorAll('.gal-item, .gal-all').forEach((b) => b.addEventListener('click', () => open(Number(b.dataset.i))));
+  lb.querySelector('.lb-close').addEventListener('click', () => close());
+  lb.querySelector('.lb-next').addEventListener('click', next);
+  lb.querySelector('.lb-prev').addEventListener('click', prev);
+  thumbs.forEach((t) => t.addEventListener('click', () => { const at = list.indexOf(Number(t.dataset.i)); if (at >= 0) show(at, at > pos ? 1 : -1); }));
+  window.addEventListener('popstate', () => close(true));
+  lb.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    else if (e.key === 'Escape') { e.preventDefault(); close(); }
+    else if (e.key === 'Tab') {   // focus trap
+      const f = [...lb.querySelectorAll('button:not([hidden])')].filter((b) => !b.closest('[hidden]'));
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  // Click on the dark area around the photo closes; clicks on the photo do not
+  lb.querySelector('.lb-stage').addEventListener('click', (e) => { if (e.target.classList.contains('lb-stage') || e.target === track) close(); });
+
+  // Swipe (touch + mouse drag)
+  let x0 = null, dx = 0;
+  track.addEventListener('pointerdown', (e) => { x0 = e.clientX; dx = 0; track.setPointerCapture(e.pointerId); img.style.transition = 'none'; });
+  track.addEventListener('pointermove', (e) => { if (x0 === null) return; dx = e.clientX - x0; img.style.transform = `translateX(${dx}px)`; });
+  const end = () => {
+    if (x0 === null) return;
+    img.style.transition = ''; img.style.transform = '';
+    if (dx < -50) next(); else if (dx > 50) prev();
+    x0 = null;
+  };
+  track.addEventListener('pointerup', end);
+  track.addEventListener('pointercancel', end);
+
+  // Category filter (full mode)
+  root.querySelectorAll('.gal-tab').forEach((tab) => tab.addEventListener('click', () => {
+    const c = tab.dataset.cat;
+    root.querySelectorAll('.gal-tab').forEach((x) => { x.classList.toggle('is-on', x === tab); x.setAttribute('aria-selected', String(x === tab)); });
+    root.querySelectorAll('.gal-grid .gal-item').forEach((it) => { it.hidden = !(c === 'all' || it.dataset.cat === c); });
+    list = items.map((it, i) => ({ it, i })).filter(({ it }) => c === 'all' || it.cat === c).map(({ i }) => i);
+  }));
+})();
+</script>
